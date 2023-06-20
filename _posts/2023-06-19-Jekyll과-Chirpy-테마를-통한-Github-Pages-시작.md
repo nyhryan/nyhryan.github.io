@@ -59,3 +59,14 @@ _이미지 캡션_
 ```
 
 이후 이미지를 삽입할 때 전체 경로를 생략하고 `assets/img/posts/포스트-이름`{: .filepath} 내에 있는 이미지 이름만 `( )`안에 넣어주면 문제없이 삽입된다. 추가적으로 `{: w="너비 px" h="높이 px"}`를 달아줘서 이미지의 크기도 지정해준다. 추가적인 서식은 [여기](https://chirpy.cotes.page/posts/write-a-new-post/#images){:target="_blank"}를 참고하자. 
+
+## 포스트에 prompt (callout) 넣기
+
+> 정보글입니다.
+{: .prompt-info}
+
+```md
+> 정보글입니다.
+{: .prompt-info}
+```
+위와 같이 블록인용 아래에 `{: .prompt-info / tip / warning / danger}` 4가지 종류의 prompt를 삽입할 수 있다.
