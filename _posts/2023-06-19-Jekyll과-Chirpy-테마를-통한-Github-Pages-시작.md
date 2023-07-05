@@ -9,7 +9,7 @@ img_path: /assets/img/posts/2023-06-19-Jekyll%EA%B3%BC-Chirpy-%ED%85%8C%EB%A7%88
 ![Chirpy theme](chirpy.png){: w="250" h="250"}
 _This is chirpy._
 
-## 📝 수행 사항
+## 📝 먼저 읽어보고 따라하기
 1. [Jekyll 설치](https://jekyllrb.com/docs/installation/){:target="_blank"}
 2. [Chirpy 테마 설치](https://chirpy.cotes.page/posts/getting-started/){:target="_blank"}
 3. [jekyll-compose 추가](https://github.com/jekyll/jekyll-compose){:target="_blank"}
