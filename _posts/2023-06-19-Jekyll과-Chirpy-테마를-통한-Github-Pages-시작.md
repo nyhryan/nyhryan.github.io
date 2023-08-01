@@ -28,6 +28,18 @@ $ bundle exec jekyll s
 ```
 깃허브에 push 하지 않고도 로컬(`http://127.0.0.1:4000/`)에서 바로 확인 가능. 변경사항이 저장될 때마다 바로 반영된다.
 
+```scss
+---
+---
+
+@import '{{ site.theme }}';
+
+/* append your custom style below */
+```
+{: file="assets/css/style.scss"}
+
+`블로그의-루트-폴더/assets`에 `css`폴더를 만들어 그 안에 `style.scss` 스타일시트 파일(`*style* . scss`이다! `styles`가 아니다! 이거때문에 30분을 헤맸다...) 을 만들어 위 내용을 적어준다. 이후 주석으로 처리된 부분 아래로 `scss` 코드를 적으면 기본으로 적용된 Chirpy 스타일을 오버라이드 할 수 있다. `css` 문법과 크게 다르지 않으니 쉽게 작성할 수 있다.
+
 ## 🎨 포스트에 이미지 넣는 방법
 ```
 .
@@ -60,7 +72,7 @@ _이미지 캡션_
 
 이후 이미지를 삽입할 때 전체 경로를 생략하고 `assets/img/posts/포스트-이름`{: .filepath} 내에 있는 이미지 이름만 `( )`안에 넣어주면 문제없이 삽입된다. 추가적으로 `{: w="너비 px" h="높이 px"}`를 달아줘서 이미지의 크기도 지정해준다. 추가적인 서식은 [여기](https://chirpy.cotes.page/posts/write-a-new-post/#images){:target="_blank"}를 참고하자. 
 
-## 포스트에 prompt (callout) 넣기
+## 🚩 포스트에 prompt (callout) 넣기
 
 > 정보글입니다.
 {: .prompt-info}

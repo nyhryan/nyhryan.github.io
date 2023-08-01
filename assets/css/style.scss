@@ -1,0 +1,15 @@
+---
+---
+
+@import '{{ site.theme }}';
+
+/* append your custom style below */
+
+p {
+    em {
+        color: #C45AC5;
+    }
+    strong {
+        color: #4AAD4F;
+    }
+}
