@@ -30,6 +30,7 @@ order: 4
 - Studied basics of game programming using C++ and SDL2 [(Game Programming in C++: Creating 3D Games (Game Design) by Sanjay Madhav)](https://www.amazon.com/Game-Programming-Creating-Games-Design/dp/0134597206){: target="_blank"}
 - Personalized `.dotfiles` of `git, neovim, vim` using `stow` for Linux/Unix systems : [Github](https://github.com/nyhryan/ATAI-Dotfiles){: target="_blank"}
 - Basic tetris game with `C++ & SDL2` : [Github](https://github.com/nyhryan/Tetris-SDL2){: target="_blank"}
+    - Unedited live stream of coding this : [Youtube Playlist](https://www.youtube.com/playlist?list=PLzsmEy2tivB7JIjN0vIaIoXGTX2uT_sqd){: target="_blank"}
 - Pathfinding algorithm visualization with `HTML & Typescript & CSS` : [Github](https://github.com/nyhryan/Simple-Pathfinding-Visualization){: target="_blank"}
 
 ### Fall ~ Winter semester 📚
