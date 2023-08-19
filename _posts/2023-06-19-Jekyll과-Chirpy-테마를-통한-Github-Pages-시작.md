@@ -26,7 +26,7 @@ $ bundle exec jekyll compose "My New Post" --post
 ```console
 $ bundle exec jekyll s
 ```
-깃허브에 push 하지 않고도 로컬(`http://127.0.0.1:4000/`)에서 바로 확인 가능. 변경사항이 저장될 때마다 바로 반영된다.
+깃허브에 push 하지 않고도 로컬(`http://127.0.0.1:4000/`)에서 브라우저를 통해 바로 블로그를 확인할 수 있게 해준다. 변경사항이 저장될 때마다 바로 반영된다.
 
 ```scss
 ---
