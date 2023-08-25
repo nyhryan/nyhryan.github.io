@@ -19,6 +19,7 @@ order: 4
 
 ### Winter Break ⛄
 - [Tried making simple bot for Discord using discord.js](https://github.com/nyhryan/ATAI_BOT2){: target="_blank"}. I stopped working on it because I wasn't familiar with asynchronous programming and using `typescript`. I will look into this again soon...
+- University Winter Coding Camp: [Notes uploaded to Github](https://github.com/nyhryan/coding-camp-2022){: target="_blank"}
 
 ## 2023
 
