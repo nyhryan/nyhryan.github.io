@@ -11,7 +11,7 @@ _This is chirpy._
 
 ## 📝 먼저 읽어보고 따라하기
 1. [Jekyll 설치](https://jekyllrb.com/docs/installation/){:target="_blank"}
-2. [Chirpy 테마 설치](https://chirpy.cotes.page/posts/getting-started/){:target="_blank"}
+2. [Chirpy 테마 설치 - Chirpy Starter 사용](https://chirpy.cotes.page/posts/getting-started/){:target="_blank"}
 3. [jekyll-compose 추가](https://github.com/jekyll/jekyll-compose){:target="_blank"}
 4. [구글 애널리틱스 4 + Chirpy 설정](https://aouledissa.com/posts/Jekyll-Google-Analytics-4-Integration-With-Chirpy-Theme/){:target="_blank"}
 5. [Chirpy 테마에서 favicon 설정 방법](https://chirpy.cotes.page/posts/customize-the-favicon/){:target="_blank"}
@@ -19,22 +19,60 @@ _This is chirpy._
 
 ## ⚡ 각종 명령
 ```console
+$ bundle update jekyll-theme-chirpy
+```
+
+> 참고: [jekyll-theme-chirpy/wiki/Upgrade-Guide](https://github.com/cotes2020/jekyll-theme-chirpy/wiki/Upgrade-Guide)  
+
+어느날 사용하다가 문제가 생긴 경우 `jekyll-theme-chirpy`를 업데이트해보자. 
+
+```console
 $ bundle exec jekyll compose "My New Post" --post
 ```
 `yyyy-mm-dd-My-New-Post.md`{: .filepath} 포스트를 `_posts/`{: .filepath}에 새로 생성한다. (위에서 추가한 `jekyll-compose`를 사용)
+
+```console
+$ bundle exec jekyll compose "My New Post" --collection "posts/_posts/내부의/서브디렉터리"
+$ bundle exec jekyll compose "자료구조 - 그래프" --collection "posts/data-structure"
+```
+> 두번째 줄: `_posts/data-structure` 안에 *"자료구조 - 그래프"* 라는 제목의 게시글을 생성한다.
+
+`_posts` 폴더 내부에 카테고리 폴더를 만들어 게시글들을 정리한 경우에는 `--collection` 옵션을 주어 원하는 폴더 안에 게시글 문서를 바로 만들 수 있다.
+
 
 ```console
 $ bundle exec jekyll s
 ```
 깃허브에 push 하지 않고도 로컬(`http://127.0.0.1:4000/`)에서 브라우저를 통해 바로 블로그를 확인할 수 있게 해준다. 변경사항이 저장될 때마다 바로 반영된다.
 
+## 🎨 커스텀 CSS 작성하기
+
 ```scss
 ---
 ---
 
-@import '{{ site.theme }}';
+@import 'main';
 
 /* append your custom style below */
+
+/* 이탤릭 체, 볼드 체의 색상을 변경 */
+p {
+  em {
+    color: #c45ac5;
+  }
+  strong {
+    color: #4aad4f;
+  }
+}
+
+li {
+  em {
+    color: #c45ac5;
+  }
+  strong {
+    color: #4aad4f;
+  }
+}
 ```
 {: file="assets/css/style.scss"}
 
