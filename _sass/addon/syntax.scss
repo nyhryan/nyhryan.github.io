@@ -2,8 +2,8 @@
 * The syntax highlight.
 */
 
-@import 'colors/syntax-light';
-@import 'colors/syntax-dark';
+@import '../colors/syntax-light';
+@import '../colors/catppuccin-syntax-dark';
 
 html {
   @media (prefers-color-scheme: light) {
@@ -30,6 +30,10 @@ html {
 }
 
 /* -- code snippets -- */
+
+pre {
+  font-family: 'JetBrains Mono NL', monospace;
+}
 
 %code-snippet-bg {
   background-color: var(--highlight-bg-color);

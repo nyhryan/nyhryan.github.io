@@ -1,0 +1,174 @@
+/*
+ * The syntax dark mode styles.
+ */
+
+@use "../catppuccin/frappe" as *;
+@use "sass:color";
+
+@mixin dark-syntax {
+  --language-border-color: #{$surface1}; // #2d2d2d;
+  --highlight-bg-color: #{$crust}; // #151515;
+  --highlighter-rouge-color: #{$lavender}; // #c9def1;
+  --highlight-lineno-color: #{$overlay1}; // #808080;
+  --inline-code-bg: #{$crust}; // #323238;
+  --code-color: #{$text}; // #b0b0b0;
+  --code-header-text-color: #{$text}; // #6a6a6a;
+  --code-header-muted-color: #{$surface1}; //  #353535;
+  --code-header-icon-color: #{$subtext0}; // #565656;
+  --clipboard-checked-color: #2bcc2b;
+  --filepath-text-color: #{$sapphire}; // #cacaca;
+
+
+
+  // prompt token
+  .highlight .gp {
+    color: #{$blue}; // #87939d;
+  }
+
+  /* --- Syntax highlight theme from `rougify style base16.dark` --- */
+
+  .highlight table td {
+    padding: 5px;
+  }
+
+  .highlight table pre {
+    margin: 0;
+  }
+
+  .highlight,
+  .highlight .w {
+    color: var(--code-color);
+    background-color: #{$mantle};
+  }
+
+  .highlight .err {
+    color: #151515;
+    background-color: #ac4142;
+  }
+
+  // comments
+  .highlight .c,
+  .highlight .ch,
+  .highlight .cd,
+  .highlight .cm,
+  .highlight .c1,
+  .highlight .cs {
+    color: #{$subtext0}; // #848484;
+  }
+
+  // comment preprocessor
+  .highlight .cp {
+    color: #{$green}; // #f4bf75;
+  }
+
+  // comment preprocessor file
+  .highlight .cpf {
+    color: #{$teal};
+  }
+
+  // name tag
+  .highlight .nt {
+    color: #{$peach}; // #f4bf75;
+  }
+
+  // operator
+  .highlight .o,
+  .highlight .ow {
+    color: #{$blue}; // #d0d0d0;
+  }
+
+  .highlight .p,
+  .highlight .pi {
+    color: #d0d0d0;
+  }
+
+  .highlight .gi {
+    color: #90a959;
+  }
+
+  .highlight .gd {
+    color: #f08a8b;
+    background-color: #320000;
+  }
+
+  .highlight .gh {
+    color: #6a9fb5;
+    background-color: #151515;
+    font-weight: bold;
+  }
+
+  // keyword
+  .highlight .k,
+  .highlight .kn,
+  .highlight .kp,
+  .highlight .kr,
+  .highlight .kv {
+    color: #{$mauve}; // #aa759f;
+  }
+
+  // keyword constant
+  .highlight .kc {
+    color: #{$peach}; // #d28445;
+  }
+
+  // keyword type
+  .highlight .kt,
+  .highlight .kd {
+    color: #{$yellow}; // #d28445;
+  }
+
+  // string
+  .highlight .s,
+  .highlight .sb,
+  .highlight .sc,
+  .highlight .dl,
+  .highlight .sd,
+  .highlight .s2,
+  .highlight .sh,
+  .highlight .sx,
+  .highlight .s1 {
+    color: #{$green}; // #90a959;
+  }
+
+  // string affix
+  .highlight .sa {
+    color: #{$teal}; // #aa759f;
+  }
+
+  // string regex
+  .highlight .sr {
+    color: #{$teal}; // #75b5aa;
+  }
+
+  // string escape
+  .highlight .se {
+    color: #{$maroon}; // #b76d45;
+  }
+
+  // builtin names, namespace name
+  .highlight .nb,
+  .highlight .nn {
+    color: #{$yellow};
+  }
+
+  // name class
+  .highlight .nc {
+    color: #{$peach}; //  #f4bf75;
+  }
+
+  .highlight .na {
+    color: #{$sky}; // #6a9fb5;
+  }
+
+  // Literal numbers
+  .highlight .m,
+  .highlight .mb,
+  .highlight .mf,
+  .highlight .mh,
+  .highlight .mi,
+  .highlight .il,
+  .highlight .mo,
+  .highlight .mx {
+    color: #{$peach}; // #90a959;
+  }
+}
