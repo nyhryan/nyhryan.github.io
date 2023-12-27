@@ -5,6 +5,10 @@
 
 /* append your custom style below */
 
+#topbar-wrapper {
+    border-radius: 15px;
+}
+
 blockquote {
     &.prompt-tip {
         background-color: var(--prompt-tip-bg);
@@ -36,4 +40,8 @@ li {
     strong {
         color: var(--bold-color);
     }
+}
+
+.content a.popup+em {
+    color: var(--text-color);
 }
