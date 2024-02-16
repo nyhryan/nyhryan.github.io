@@ -27,7 +27,7 @@ order: 4
 - Studied `Computer Architecture, Data structure, Understanding of Programming Languages, C++, Linear Algebra with numpy, sympy (python), Calculus 1`
 
 ### Summmer Break 🍹
-- [Personal blog with Github Pages & Jekyll & Chirpy theme.]({% post_url /2023-06-19-Jekyll과-Chirpy-테마를-통한-Github-Pages-시작 %}){: target="_blank"} *This blog you're watching! 👀*
+- [Personal blog with Github Pages & Jekyll & Chirpy theme.]({% post_url /2023-06-19-github-pages-with-jekyll-chirpy-theme %}){: target="_blank"} *This blog you're watching! 👀*
 - Studied basics of game programming using C++ and SDL2 [(Game Programming in C++: Creating 3D Games (Game Design) by Sanjay Madhav)](https://www.amazon.com/Game-Programming-Creating-Games-Design/dp/0134597206){: target="_blank"}
 - Personalized `.dotfiles` of `git, neovim, vim` using `stow` for Linux/Unix systems : [Github](https://github.com/nyhryan/ATAI-Dotfiles){: target="_blank"}
 - Basic tetris game with `C++ & SDL2` : [Github](https://github.com/nyhryan/Tetris-SDL2){: target="_blank"}

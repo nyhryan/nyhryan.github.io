@@ -6,10 +6,8 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-06-26-동적-크기-스택/"
+img_path: "/assets/img/posts/data-structure/2023-06-26-dynamic-stack/"
 ---
-> - 이전 포스트 : [[스택] 스택의 기초와 고정 크기 스택]({% post_url /data-structure/2023-06-20-스택의-기초와-고정-크기-스택-구현 %})
-> - 다음 포스트 : [[스택] 스택의 응용 - 후위표기식]({% post_url /data-structure/2023-07-05-스택의-응용-후위표기식 %})
 
 ## 🔎 동적 크기 스택?
 지난 포스트에서는 고정된 크기의 배열을 사용하는 스택 자료구조를 구현했다. 배열의 크기가 고정되어 있는 만큼 불편함도 따른다. 이번 포스트에서는 `<stdlib.h>` 헤더 내의 `malloc()`, `realloc()` 함수를 활용하여 배열의 크기를 조정하면서 사용하는 동적 크기 스택에 대해 알아본다.

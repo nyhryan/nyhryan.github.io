@@ -6,11 +6,8 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-07-05-스택의-응용-후위표기식/"
+img_path: "/assets/img/posts/data-structure/2023-07-05-stack-and-postfix/"
 ---
-
-> - 이전 포스트 : [[스택] 동적 크기 스택]({% post_url /data-structure/2023-06-26-동적-크기-스택 %})
-> - 다음 포스트 : [[스택] 큐의 기초와 선형 큐 구현]({% post_url /data-structure/2023-07-12-큐의-기초와-선형-큐-구현 %})
 
 ## 🔎 후위표기식?
 ![Infix vs Postfix](postfix01.png){: w="600" h="70"}

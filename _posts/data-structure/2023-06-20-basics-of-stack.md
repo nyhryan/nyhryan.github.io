@@ -6,9 +6,8 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-06-20-스택의-기초와-고정-크기-스택/"
+img_path: "/assets/img/posts/data-structure/2023-06-20-basic-stack/"
 ---
-> 다음 포스트 : [[스택] 동적 크기 스택]({% post_url /data-structure/2023-06-26-동적-크기-스택 %})
 
 ## 📚 스택이란?
 ![Stack of Books](stack-of-books.png){: w="400" h="400"}
@@ -46,7 +45,7 @@ _스택의 구조_
 
 ## 💡 C언어에서 스택의 구현 방법
 - 배열을 사용한 고정 크기 스택 (현재 포스트)
-- [`realloc()` 함수를 통해 배열의 크기를 동적으로 변형하여 쓰는 스택]({% post_url /data-structure/2023-06-26-동적-크기-스택 %})
+- [`realloc()` 함수를 통해 배열의 크기를 동적으로 변형하여 쓰는 스택]({% post_url /data-structure/2023-06-26-dynamic-stack %})
 - 연결리스트를 사용해 크기를 신경쓰지 않아도 되는 스택 (작성 예정)
 
 C언어에서 스택을 구현할 수 있는 방법에는 몇가지가 있다. 이 글에서는 첫번째 방법, 고정 크기 스택 구현방법에 대해 알아본다.

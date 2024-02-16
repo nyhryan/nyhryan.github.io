@@ -7,11 +7,8 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-08-01-리스트의-기초와-단순-연결-리스트/"
+img_path: "/assets/img/posts/data-structure/2023-08-01-basic-of-list-and-simply-linked-list/"
 ---
-
-> - 이전 포스트 : [[큐] 덱 (Deque - Double Ended Queue) 구현]({% post_url /data-structure/2023-07-25-덱-구현 %})
-> - 다음 포스트 : [[리스트] 원형 연결 리스트의 구현]({% post_url /data-structure/2023-08-08-원형-연결-리스트의-구현 %})
 
 ![to do](todo.gif){: w="216", h="480"}
 _iOS의 미리알림 앱_

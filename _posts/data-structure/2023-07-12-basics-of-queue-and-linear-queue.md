@@ -7,11 +7,8 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-07-12-큐의-기초와-선형-큐-구현/"
+img_path: "/assets/img/posts/data-structure/2023-07-12-basics-of-queue-and-linear-queue/"
 ---
-> - 이전 포스트 : [[스택] 스택의 응용 - 후위표기식"크기 스택]({% post_url /data-structure/2023-07-05-스택의-응용-후위표기식 %})
-> - 다음 포스트 : [[큐] 원형 큐 구현]({%post_url /data-structure/2023-07-19-원형-큐-구현 %})
-
 
 ![Queue image](queue1.jpeg){: w="500" h=700"}
 _사람들이 줄을 서있는 사진_

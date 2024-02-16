@@ -7,10 +7,8 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-08-22-연결리스트-응용---스택과-큐/"
+img_path: "/assets/img/posts/data-structure/2023-08-22-stack-and-queue-made-with-linked-list/"
 ---
-> - 이전 포스트 : [[리스트] 이중 연결 리스트의 구현]({% post_url /data-structure/2023-08-15-이중-연결-리스트의-구현 %})
-> - 다음 포스트 : [[트리] 트리의 기초]({% post_url /data-structure/2023-09-03-트리-트리의-기초 %})
 
 ## 🎯 연결리스트로 스택과 큐 만들기
 이번 시간에는 여태까지 배운 연결리스트를 통해 스택과 큐 자료구조를 만들어 볼 것이다. 기존 스택과 큐는 배열을 사용하여 크기로부터 자유롭지 못했다. 최대 용량을 넘어서면 용량을 늘려 배열을 다시 동적할당 받는 방법을 사용하긴했지만 어찌됐든 크기를 처음에 지정하긴 해야한다.

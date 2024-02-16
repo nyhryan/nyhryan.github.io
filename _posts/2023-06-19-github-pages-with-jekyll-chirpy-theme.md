@@ -3,7 +3,7 @@ title: Jekyll과 Chirpy 테마를 통한 Github Pages 시작
 date: 2023-06-19 12:30 +0900
 categories: [Jekyll]
 tags: [jekyll]
-img_path: /assets/img/posts/2023-06-19-Jekyll과-Chirpy-테마를-통한-Github-Pages-시작/
+img_path: /assets/img/posts/2023-06-19-github-pages-with-jekyll-chirpy-theme/
 ---
 
 ![Chirpy theme](chirpy.png){: w="250" h="250"}

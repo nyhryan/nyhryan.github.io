@@ -8,11 +8,8 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-09-03-트리-트리의-기초/"
+img_path: "/assets/img/posts/data-structure/2023-09-03-basics-of-tree/"
 ---
-
-> - 이전 포스트 : [[리스트] 연결리스트 응용 - 스택과 큐]({% post_url /data-structure/2023-08-22-연결리스트-응용---스택과-큐 %})
-> - 다음 포스트 : 
 
 ## 🔍 트리(Tree) 자료구조란?
 ![트리](tree.png){: h="1000"}
