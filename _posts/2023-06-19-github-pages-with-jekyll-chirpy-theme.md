@@ -41,13 +41,8 @@ $ bundle exec jekyll compose "My New Post" --post
 ```
 `yyyy-mm-dd-My-New-Post.md` 포스트를 `_posts/`{: .filepath}에 새로 생성한다. (위에서 추가한 `jekyll-compose`를 사용)
 
-```console
-$ bundle exec jekyll compose "My New Post" --collection "posts/_posts/내부의/서브디렉터리"
-$ bundle exec jekyll compose "자료구조 - 그래프" --collection "posts/data-structure"
-```
-> 두번째 줄: `_posts/data-structure` 안에 *"자료구조 - 그래프"* 라는 제목의 게시글을 생성한다.
+카테고리 폴더로 정리했다면 새로 생긴 파일을 해당 폴더로 직접 이동시켜주면 된다. Frontmatter에 `categories, tags` 속성을 추가하는 것을 잊지말자.
 
-`_posts`{: .filepath} 폴더 내부에 카테고리 폴더를 만들어 게시글들을 정리한 경우에는 `--collection` 옵션을 주어 원하는 폴더 안에 게시글 문서를 바로 만들 수 있다.
 
 ## 🎨 SCSS 변수 오버라이딩하기
 jekyll-theme-chirpy 저장소의 [파일(`_sass/addon/variables.scss`)](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/_sass/addon/variables.scss)을 보면 테마에 사용되는 SCSS 변수들이 있다. 이를 내 마음대로 오버라이드 할 수 있다.
