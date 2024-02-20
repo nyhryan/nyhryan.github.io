@@ -9,7 +9,6 @@ tags: [portfolio]
 
 ## 🎮 Dodge game with `C & WIN32 API`
 {% include embed/youtube.html id='AA6-qNoaQVM' %}
-~~I HATE MY VOICE~~
 
 [VS 2019? project on Github, archived.](https://github.com/nyhryan/Term-project-Dodge-game){: target="_blank"}
 

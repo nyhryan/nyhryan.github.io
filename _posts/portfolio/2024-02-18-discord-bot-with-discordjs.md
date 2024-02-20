@@ -23,7 +23,7 @@ Initially I started this project with JavaScript, however I did not like loosely
 
 ## ⭐&#xFE0F; Features
 - Sends back enlarged emoji as embedded image when user sends an emoji to the chat.
-    - Saves enlarged emoji image as cache(File IO), saves image conversion time when the user sends the same emoji later again.
+    - Saves enlarged emoji image as cache(File IO), this saves image conversion time when the user sends the same emoji later again.
 - Check ping in miliseconds.
 - Change bot's user status with command.
 - Check server/user info with command.
