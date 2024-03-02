@@ -3,7 +3,7 @@ layout: post
 title: "[큐] 원형 큐 구현"
 date: 2023-07-19 16:03 +0900
 categories:
-- C언어로 쉽게 풀어쓴 자료구조
+- Data structure with C
 tags:
 - c
 - data structure

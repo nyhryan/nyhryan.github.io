@@ -2,7 +2,7 @@
 title: "[스택] 동적 크기 스택"
 date: 2023-06-26 20:02 +0900
 categories:
-- C언어로 쉽게 풀어쓴 자료구조
+- Data structure with C
 tags:
 - c
 - data structure

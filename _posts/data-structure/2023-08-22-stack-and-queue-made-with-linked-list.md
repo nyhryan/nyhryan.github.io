@@ -3,7 +3,7 @@ layout: post
 title: "[리스트] 연결리스트 응용 - 스택과 큐"
 date: 2023-08-22 14:19 +0900
 categories:
-- C언어로 쉽게 풀어쓴 자료구조
+- Data structure with C
 tags:
 - c
 - data structure

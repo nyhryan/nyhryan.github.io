@@ -2,7 +2,7 @@
 title: "[스택] 스택의 기초와 고정 크기 스택 구현"
 date: 2023-06-20 15:48 +0900
 categories:
-- C언어로 쉽게 풀어쓴 자료구조
+- Data structure with C
 tags:
 - c
 - data structure

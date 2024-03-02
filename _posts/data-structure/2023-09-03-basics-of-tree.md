@@ -4,7 +4,7 @@ title: "[트리] 트리의 기초"
 date: 2023-09-03 15:47 +0900
 math: true
 categories:
-- C언어로 쉽게 풀어쓴 자료구조
+- Data structure with C
 tags:
 - c
 - data structure
