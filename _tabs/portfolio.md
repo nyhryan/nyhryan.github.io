@@ -52,7 +52,7 @@ This was final project of Programming Lab course. It was first time making a gam
 | Calculus 1 | - |
 
 ### Summmer Break 🍹
-- Personal blog with [GitHub Pages & Jekyll & Chirpy theme]({% post_url /2023-06-19-github-pages-with-jekyll-chirpy-theme %}){: target="_blank"}. *This blog you're watching! 👀*
+- Personal blog with [GitHub Pages & Jekyll & Chirpy theme]({% post_url jekyll/2023-06-19-github-pages-with-jekyll-chirpy-theme %}){: target="_blank"}. *This blog you're watching! 👀*
 - Studied *basics of game programming* using C++ and SDL2 [(Book by Sanjay Madhav)](https://www.amazon.com/Game-Programming-Creating-Games-Design/dp/0134597206){: target="_blank"}
     - Basic tetris game with `C++ & SDL2` [(GitHub)](https://github.com/nyhryan/Tetris-SDL2){: target="_blank"}
     - Unedited live stream of coding this : [Youtube Playlist](https://www.youtube.com/playlist?list=PLzsmEy2tivB7JIjN0vIaIoXGTX2uT_sqd){: target="_blank"}
