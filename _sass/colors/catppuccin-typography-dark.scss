@@ -160,4 +160,20 @@
   #disqus_thread {
     color-scheme: none;
   }
+
+  div.table-wrapper {
+    table {
+        tbody tr {
+            td:first-child {
+                border-right: solid 2px rgba(210, 215, 217, 0.75);
+            }
+            &:nth-child(even) {
+                background-color: #45475a;
+            }
+            &:nth-child(odd) {
+                background-color: #313244;
+            }
+        }
+    }
+  }
 } /* dark-scheme */
