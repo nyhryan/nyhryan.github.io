@@ -190,6 +190,7 @@ exclude:
   - LICENSE
   - rollup.config.js
   - package*.json
+  - .vscode
 
 jekyll-archives:
   enabled: [categories, tags]
