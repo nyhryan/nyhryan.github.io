@@ -56,7 +56,7 @@ google_analytics:
   id: G-NEWY7VWJQX # fill in your Google Analytics ID
 
 goatcounter:
-id: # fill in your Goatcounter ID
+  id: ataidevlab # fill in your Goatcounter ID
 
 
 # Prefer color scheme setting.
