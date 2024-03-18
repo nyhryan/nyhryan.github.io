@@ -11,9 +11,16 @@ jobs:
   check-and-submit:
     runs-on: ubuntu-latest
     steps:
-      - name: indexnow-action
+      - name: indexnow-action-bing
         uses: bojieyang/indexnow-action@v2
         with:
           sitemap-location: 'https://nyhryan.github.io/sitemap.xml'
           key: ${{ secrets.INDEXNOW_KEY }}
           endpoint: 'api.indexnow.org'
+      - name: indexnow-action-bing
+        uses: bojieyang/indexnow-action@v2
+        with:
+          sitemap-location: 'https://nyhryan.github.io/sitemap.xml'
+          key: ${{ secrets.INDEXNOW_KEY }}
+          endpoint: 'searchadvisor.naver.com/indexnow'
+
