@@ -22,5 +22,5 @@ jobs:
         with:
           sitemap-location: 'https://nyhryan.github.io/sitemap.xml'
           key: ${{ secrets.INDEXNOW_KEY }}
-          endpoint: 'searchadvisor.naver.com'
+          endpoint: 'https://searchadvisor.naver.com/indexnow'
 
