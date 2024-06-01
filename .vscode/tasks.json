@@ -1,0 +1,51 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Locally serve blog",
+            "type": "shell",
+            "command": "bundle exec jekyll serve",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "New post",
+            "type": "shell",
+            "command": "bundle",
+            "args": [
+                "exec",
+                "jekyll",
+                "post",
+                "${input:postName}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Create new image folder",
+            "type": "shell",
+            "command": "mkdir",
+            "args": [
+                "${workspaceFolder}/assets/img/posts/${fileDirnameBasename}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "type": "promptString",
+            "id": "postName",
+            "description": "Enter name of new md file:",
+            "default": "my-new-post"
+        }
+    ]
+}
