@@ -6,7 +6,7 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-07-05-stack-and-postfix/"
+media_subpath: "/assets/img/posts/data-structure/2023-07-05-stack-and-postfix/"
 ---
 
 ## 🔎 후위표기식?

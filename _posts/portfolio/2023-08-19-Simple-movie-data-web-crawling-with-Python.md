@@ -4,7 +4,7 @@ title: "Simple movie data web crawling with Python"
 date: 2023-08-19 14:35 +0900
 categories: [Portfolio]
 tags: [portfolio]
-img_path: /assets/img/posts/portfolio/2023-08-19-Simple-movie-data-web-crawling-with-Python
+media_subpath: /assets/img/posts/portfolio/2023-08-19-Simple-movie-data-web-crawling-with-Python
 ---
 
 ## 🎬 Simple movie data web crawling with Python

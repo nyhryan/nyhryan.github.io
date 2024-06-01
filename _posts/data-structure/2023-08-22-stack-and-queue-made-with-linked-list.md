@@ -7,7 +7,7 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-08-22-stack-and-queue-made-with-linked-list/"
+media_subpath: "/assets/img/posts/data-structure/2023-08-22-stack-and-queue-made-with-linked-list/"
 ---
 
 ## 🎯 연결리스트로 스택과 큐 만들기

@@ -6,7 +6,7 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-06-26-dynamic-stack/"
+media_subpath: "/assets/img/posts/data-structure/2023-06-26-dynamic-stack/"
 ---
 
 ## 🔎 동적 크기 스택?

@@ -4,7 +4,7 @@ description: IndexNow API를 사용하여 검색엔진에 제출하는 포스트
 categories: [Jekyll]
 tags: [jekyll]
 date: 2024-03-17 17:02 +0900
-img_path: /assets/img/posts/jekyll/2024-03-17-how-to-indexnow-with-bing
+media_subpath: /assets/img/posts/jekyll/2024-03-17-how-to-indexnow-with-bing
 ---
 
 ## 🔎&#xFE0F; IndexNow란?

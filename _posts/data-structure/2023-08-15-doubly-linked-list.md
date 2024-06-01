@@ -7,7 +7,7 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-08-15-doubly-linked-list/"
+media_subpath: "/assets/img/posts/data-structure/2023-08-15-doubly-linked-list/"
 ---
 
 ## 🔍 이중 연결리스트(Doubly Linkedlist)란?

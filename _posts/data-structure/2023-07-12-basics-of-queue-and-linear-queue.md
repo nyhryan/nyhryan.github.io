@@ -7,7 +7,7 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-07-12-basics-of-queue-and-linear-queue/"
+media_subpath: "/assets/img/posts/data-structure/2023-07-12-basics-of-queue-and-linear-queue/"
 ---
 
 ![Queue image](queue1.jpeg){: w="500" h=700"}

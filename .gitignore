@@ -5,6 +5,7 @@ Gemfile.lock
 
 # Jekyll cache
 .jekyll-cache
+.jekyll-metadata
 _site
 
 # RubyGems
@@ -15,7 +16,9 @@ node_modules
 package-lock.json
 
 # Misc
+_sass/dist
 assets/js/dist
+
 _posts/.obsidian
 code_pad/
 .clang-format

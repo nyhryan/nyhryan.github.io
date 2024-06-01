@@ -8,7 +8,7 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-09-03-basics-of-tree/"
+media_subpath: "/assets/img/posts/data-structure/2023-09-03-basics-of-tree/"
 ---
 
 ## 🔍 트리(Tree) 자료구조란?

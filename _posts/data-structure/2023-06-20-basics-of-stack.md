@@ -6,7 +6,7 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-06-20-basic-stack/"
+media_subpath: "/assets/img/posts/data-structure/2023-06-20-basic-stack/"
 ---
 
 ## 📚 스택이란?

@@ -4,7 +4,7 @@ title: Simple Discord bot with Discord.js
 date: 2024-02-18 23:45 +0900
 categories: [Portfolio]
 tags: [portfolio]
-img_path: /assets/img/posts/portfolio/2024-02-18-discord-bot-with-discordjs
+media_subpath: /assets/img/posts/portfolio/2024-02-18-discord-bot-with-discordjs
 
 ---
 

@@ -7,7 +7,7 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-08-01-basic-of-list-and-simply-linked-list/"
+media_subpath: "/assets/img/posts/data-structure/2023-08-01-basic-of-list-and-simply-linked-list/"
 ---
 
 ![to do](todo.gif){: w="216", h="480"}

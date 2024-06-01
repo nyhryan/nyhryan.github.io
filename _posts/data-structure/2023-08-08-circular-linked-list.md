@@ -7,7 +7,7 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-08-08-circular-linked-list/"
+media_subpath: "/assets/img/posts/data-structure/2023-08-08-circular-linked-list/"
 ---
 
 ## 🔍 원형 연결리스트(Circular linkedlist)란?

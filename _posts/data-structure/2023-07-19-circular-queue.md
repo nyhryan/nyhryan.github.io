@@ -7,7 +7,7 @@ categories:
 tags:
 - c
 - data structure
-img_path: "/assets/img/posts/data-structure/2023-07-19-circular-queue/"
+media_subpath: "/assets/img/posts/data-structure/2023-07-19-circular-queue/"
 ---
 
 > 그림의 글씨가 이쁘지 않은 점 양해 부탁드립니다. 아이패드로 글씨쓰면 뭔가 안 이쁨..
