@@ -2,8 +2,8 @@
 * The syntax highlight.
 */
 
-@import '../colors/syntax-light';
-@import '../colors/catppuccin-syntax-dark';
+@import '../colors/latte-syntax-light';
+@import '../colors/frappe-syntax-dark';
 
 html {
   @media (prefers-color-scheme: light) {
@@ -266,7 +266,7 @@ div {
     .content > & {
       @include ml-mr(0);
 
-      border-radius: $base-radius;
+      border-radius: $radius-lg;
     }
 
     .code-header {
