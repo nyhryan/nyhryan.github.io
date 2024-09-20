@@ -8,9 +8,9 @@
   /* --- custom light colors --- */
   --language-border-color: #{$surface1}; // #2d2d2d;
   --highlight-bg-color: #{$crust}; // #151515;
-  --highlighter-rouge-color: #{$lavender}; // #c9def1;
+  --highlighter-rouge-color: #{$sky}; // #c9def1;
   --highlight-lineno-color: #{$overlay1}; // #808080;
-  --inline-code-bg: #{$mantle}; // #323238;
+  --inline-code-bg: #{$base}; // #323238;
   --code-color: #{$text}; // #b0b0b0;
   --code-header-text-color: #{$text}; // #6a6a6a;
   --code-header-muted-color: #{$surface1}; //  #353535;
@@ -40,7 +40,7 @@
     &,
     .w {
       color: var(--code-color);
-      background-color: #{$mantle};
+      background-color: #{$base};
     }
 
     .err {
