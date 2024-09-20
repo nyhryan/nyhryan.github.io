@@ -3,9 +3,7 @@ title: "[스택] 스택의 응용 - 후위표기식"
 date: 2023-07-05 19:26 +0900
 categories:
 - Data structure with C
-tags:
-- c
-- data structure
+tags: [c, data-structure]
 media_subpath: "/assets/img/posts/data-structure/2023-07-05-stack-and-postfix/"
 ---
 

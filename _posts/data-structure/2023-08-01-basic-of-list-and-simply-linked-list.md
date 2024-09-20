@@ -4,9 +4,7 @@ title: "[리스트] 리스트의 기초와 단순 연결 리스트"
 date: 2023-08-01 14:25 +0900
 categories:
 - Data structure with C
-tags:
-- c
-- data structure
+tags: [c, data-structure]
 media_subpath: "/assets/img/posts/data-structure/2023-08-01-basic-of-list-and-simply-linked-list/"
 ---
 

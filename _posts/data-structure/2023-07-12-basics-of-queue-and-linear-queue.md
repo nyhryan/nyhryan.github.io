@@ -4,9 +4,7 @@ title: "[큐] 큐의 기초와 선형 큐 구현"
 date: 2023-07-12 17:31 +0900
 categories:
 - Data structure with C
-tags:
-- c
-- data structure
+tags: [c, data-structure]
 media_subpath: "/assets/img/posts/data-structure/2023-07-12-basics-of-queue-and-linear-queue/"
 ---
 

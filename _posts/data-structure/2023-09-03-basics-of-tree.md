@@ -5,9 +5,7 @@ date: 2023-09-03 15:47 +0900
 math: true
 categories:
 - Data structure with C
-tags:
-- c
-- data structure
+tags: [c, data-structure]
 media_subpath: "/assets/img/posts/data-structure/2023-09-03-basics-of-tree/"
 ---
 

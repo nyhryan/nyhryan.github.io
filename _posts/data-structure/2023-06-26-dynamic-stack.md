@@ -3,9 +3,7 @@ title: "[스택] 동적 크기 스택"
 date: 2023-06-26 20:02 +0900
 categories:
 - Data structure with C
-tags:
-- c
-- data structure
+tags: [c, data-structure]
 media_subpath: "/assets/img/posts/data-structure/2023-06-26-dynamic-stack/"
 ---
 

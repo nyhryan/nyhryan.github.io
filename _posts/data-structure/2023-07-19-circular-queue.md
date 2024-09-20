@@ -4,9 +4,7 @@ title: "[큐] 원형 큐 구현"
 date: 2023-07-19 16:03 +0900
 categories:
 - Data structure with C
-tags:
-- c
-- data structure
+tags: [c, data-structure]
 media_subpath: "/assets/img/posts/data-structure/2023-07-19-circular-queue/"
 ---
 

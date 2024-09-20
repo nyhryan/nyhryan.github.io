@@ -4,9 +4,7 @@ title: "[리스트] 연결리스트 응용 - 스택과 큐"
 date: 2023-08-22 14:19 +0900
 categories:
 - Data structure with C
-tags:
-- c
-- data structure
+tags: [c, data-structure]
 media_subpath: "/assets/img/posts/data-structure/2023-08-22-stack-and-queue-made-with-linked-list/"
 ---
 

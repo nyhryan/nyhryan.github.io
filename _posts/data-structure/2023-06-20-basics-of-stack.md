@@ -3,9 +3,7 @@ title: "[스택] 스택의 기초와 고정 크기 스택 구현"
 date: 2023-06-20 15:48 +0900
 categories:
 - Data structure with C
-tags:
-- c
-- data structure
+tags: [c, data-structure]
 media_subpath: "/assets/img/posts/data-structure/2023-06-20-basic-stack/"
 ---
 
