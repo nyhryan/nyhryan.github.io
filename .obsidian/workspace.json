@@ -1,0 +1,187 @@
+{
+  "main": {
+    "id": "d2d279c138e9d9ef",
+    "type": "split",
+    "children": [
+      {
+        "id": "34823d90389cb9df",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f0e15694db46c1aa",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/C++/2024-09-20-Build C++ project with CMake.md",
+                "mode": "preview",
+                "source": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c71bb1badfbbaf73",
+    "type": "split",
+    "children": [
+      {
+        "id": "0db422843ff75579",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1cfd5ea0a648bf13",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "aed27a2d64b44acc",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "1f3206777daa7a44",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      },
+      {
+        "id": "3e5b3a9cb98bcfeb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "10b7cd673659f2da",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "_posts/C++/2024-09-20-Build C++ project with CMake.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 272.5
+  },
+  "right": {
+    "id": "83d5fb1dcf24af3c",
+    "type": "split",
+    "children": [
+      {
+        "id": "0763838b0a7267de",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d24f719521f5b050",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "_posts/C++/2024-09-20-Build C++ project with CMake.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "66e826976c7c66a3",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "_posts/C++/2024-09-20-Build C++ project with CMake.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "d5c2d3d94e9c0b8f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "command-palette:Open command palette": false,
+      "templater-obsidian:Templater": false,
+      "hide-folders:Show hidden folders": false
+    }
+  },
+  "active": "f0e15694db46c1aa",
+  "lastOpenFiles": [
+    "_site/tags/cpp/index.html",
+    "_site/tags/cpp",
+    "_site/assets/img/attachments/Pasted image 20240814233135.png",
+    "_site/assets/img/attachments/Pasted image 20240814233101.png",
+    "_site/assets/img/attachments/Pasted image 20240814231106.png",
+    "_site/assets/img/attachments/Pasted image 20240814231055.png",
+    "_site/assets/img/attachments/Pasted image 20240814201612.png",
+    "_site/posts/Build-C++-project-with-CMake/index.html",
+    "_site/posts/Build-C++-project-with-CMake",
+    "_site/assets/img/attachments/Pasted image 20240814201525.png",
+    "_site/assets/img/attachments/Pasted image 20240814200545.png",
+    "_site/assets/img/attachments/Pasted image 20240814193920.png",
+    "_site/assets/img/attachments/Pasted image 20240814193731.png",
+    "_site/assets/img/attachments/Pasted image 20240814193332.png",
+    "_site/categories/c/index.html",
+    "_site/categories/c",
+    "_site/tags/c-c/index.html",
+    "_site/tags/c-c",
+    "_posts/C++",
+    "_posts/data-structure/2023-06-20-basics-of-stack.md",
+    "_posts/baekjoon/2024-05-28-baekjoon-2839.md",
+    "_posts/C++/2024-09-20-Build C++ project with CMake.md",
+    "_site/assets/img/attachments",
+    "templates/chirpyPostTemplate.md",
+    "_site/posts/TITLE/index.html",
+    "_site/templates/chirpyPostTemplate.md",
+    "templates/_create post.md"
+  ]
+}

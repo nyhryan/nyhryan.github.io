@@ -213,6 +213,8 @@ exclude:
   - "*.config.js"
   - package*.json
   - .vscode
+  - .obsidian # Obsidian notes
+  - templates # Obsidian templater templates
 
 jekyll-archives:
   enabled: [categories, tags]
