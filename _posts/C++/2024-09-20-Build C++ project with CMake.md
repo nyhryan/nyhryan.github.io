@@ -25,8 +25,7 @@ tags:
 
 > CMake is a tool to manage building of source code. Originally, CMake was designed as a generator for various dialects of `Makefile`, today CMake generates modern buildsystems such as `Ninja` as well as project files for IDEs such as Visual Studio and Xcode.
 
-![](assets/img/attachments/Pasted%20image%2020240814193920.png)
-{: w="700" }
+![](assets/img/attachments/Pasted%20image%2020240814193920.png){: w="700" }
 
 Basically, **CMake** is a platform independant meta-build system that generates build script such as `GNU Make, Ninja` or even Visual Studio project for Windows users.
 
@@ -61,8 +60,7 @@ Create an empty folder and open Visual Studio Code from that directory.
 
 ### 1.5 ⚙&#xFE0F; Configure CMake Extension
 
-![](assets/img/attachments/Pasted%20image%2020240814200545.png)
-{: w="500" }
+![](assets/img/attachments/Pasted%20image%2020240814200545.png){: w="500" }
 
 In VS Code settings, search `generator` and use `Ninja` for `Cmake:Generator`. We are going to generate Ninja build script for our C++ project. You can use other build systems if you want. 
 
@@ -86,21 +84,17 @@ project("My First Project")
 > According to [cmake 3.30 - project(...)](https://cmake.org/cmake/help/latest/command/project.html#project), you can specify more options inside `project()`.
 {: .prompt-info}
 
-![](assets/img/attachments/Pasted%20image%2020240814193126.png)
-{: w="300" }
+![](assets/img/attachments/Pasted%20image%2020240814193126.png){: w="300" }
 
 After creating `CMakeLists.txt`, check the sidebar. If you don't see CMake extension icon, try closing VS Code and reopen it. 
 
-![](assets/img/attachments/Pasted%20image%2020240814193332.png)
-{: w="300" }
+![](assets/img/attachments/Pasted%20image%2020240814193332.png){: w="300" }
 
-![](assets/img/attachments/Pasted%20image%2020240814193309.png)
-{: w="600" }
+![](assets/img/attachments/Pasted%20image%2020240814193309.png){: w="600" }
 
 Clicking ✏ Icon next to `Configure - [No Kit Selected]` will show list of tookits in your pc. For me, I have `gcc, clang, cl`. We are going to choose `Visual Studio Community 2022 Release - amd64`. This one means we are going to build `from: x64 PC - compile for: x64 PC`.
 
-![](assets/img/attachments/Pasted%20image%2020240814193731.png)
-{: w="700"}
+![](assets/img/attachments/Pasted%20image%2020240814193731.png){: w="700"}
 
 Configuration log will appear at Output window. By default, build scripts will be generated in `build/` directory. You can configure this in VS Code's CMake extension setting.
 
@@ -133,12 +127,11 @@ When you hit save, VS Code will automatically re-configure the CMake project.
 
 ### 4. 🚀 Let's build!
 
-![](assets/img/attachments/Pasted%20image%2020240814201525.png)
-{: w="400" }
+![](assets/img/attachments/Pasted%20image%2020240814201525.png){: w="400" }
+
 Then you can either launch or just build by pressing those buttons in CMake sidebar.
 
-![](assets/img/attachments/Pasted%20image%2020240814201612.png)
-{: w="400" }
+![](assets/img/attachments/Pasted%20image%2020240814201612.png){: w="400" }
 
 Inside `build/` directory, our build output `main.exe` will be built. Then try running it. There you go! We have created our first CMake project!
 
@@ -150,11 +143,9 @@ Inside `build/` directory, our build output `main.exe` will be built. Then try r
 
 If your Intellisense stops working, such as autocompletion being totally broken, check the configuration.
 
-![](assets/img/attachments/Pasted%20image%2020240814231055.png)
-{: w="600" }
+![](assets/img/attachments/Pasted%20image%2020240814231055.png){: w="600" }
 
-![](assets/img/attachments/Pasted%20image%2020240814231106.png)
-{: w="300"}
+![](assets/img/attachments/Pasted%20image%2020240814231106.png){: w="300"}
 
 To configure Intellisense(Autocompletion), press `Win32` button at the right bottom corner of VS Code. Then open JSON configuration. It will generate `.vscode/c_cpp_properties.json` in your project directory. Then you can configure intellisense settings here.
 
@@ -206,12 +197,10 @@ add_executable(main main.cpp)
 
 Then in your project's `CMakeLists.txt`, add `set(CMAKE_EXPORT_COMPILE_COMMANDS 1)`. Now you are ready to use `clangd` as your main IntelliSense!
 
-![](assets/img/attachments/Pasted%20image%2020240814233101.png)
-{: w="500"}
+![](assets/img/attachments/Pasted%20image%2020240814233101.png){: w="500"}
 
 This is the default C/C++ extension's IntelliSense, hovered onto `cout` object.
 
-![](assets/img/attachments/Pasted%20image%2020240814233135.png)
-{: w="600"}
+![](assets/img/attachments/Pasted%20image%2020240814233135.png){: w="600"}
 
 This is `clangd` IntelliSense, hovered onto the same `cout` object.
