@@ -14,6 +14,6 @@ jobs:
       - name: indexnow-action-bing
         uses: bojieyang/indexnow-action@v2
         with:
-          sitemap-location: 'https://nyhryan.github.io/sitemap.xml'
+          sitemap-location: 'https://ataidev.cc/sitemap.xml'
           key: ${{ secrets.INDEXNOW_KEY }}
           endpoint: 'api.indexnow.org'
