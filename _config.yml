@@ -22,7 +22,7 @@ description: >- # used by seo meta and the atom feed
   컴퓨터를 좋아하는 ATAI의 블로그
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: "https://ataidev.cc"
+url: "https://www.ataidev.cc"
 
 github:
   username: nyhryan # change to your github username
