@@ -17,5 +17,3 @@ jobs:
           sitemap-location: 'https://www.ataidev.cc/sitemap.xml'
           key: ${{ secrets.INDEXNOW_KEY }}
           endpoint: 'api.indexnow.org'
-          since: 3
-          since-unit: year
