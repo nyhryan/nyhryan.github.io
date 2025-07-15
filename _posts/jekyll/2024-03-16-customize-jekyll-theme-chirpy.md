@@ -7,88 +7,84 @@ date: 2024-03-16 22:13 +0900
 media_subpath: /assets/img/posts/jekyll/2024-03-16-customize-jekyll-theme-chirpy
 ---
 
+이번 포스트에서는 Jekyll 테마 중 하나인 Chirpy 테마를 커스터마이징하는 방법에 대해 소개합니다.
+
+설명에서는 [chirpy-starter](https://github.com/cotes2020/chirpy-starter)를 사용한다고 가정합니다.
+
 ## 📜 폰트 변경하기
 
-```scss
-/* fonts */
+### 1. 폰트 선택하기
 
-$font-family-base: 'Source Sans Pro', 'Microsoft Yahei', sans-serif !default;
-$font-family-heading: Lato, 'Microsoft Yahei', sans-serif !default;
-```
-{: file="_sass/addon/variables.scss"}
+Chirpy의 기본 폰트는 `Source Sans Pro`와 `Lato`(헤딩 폰트)로 구성되어있습니다.
 
-
-jekyll-theme-chirpy 저장소의 [`_sass/addon/variables.scss`](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/_sass/addon/variables.scss){: target="_blank"}을 보면 테마에 사용되는 SCSS 변수들이 있고, 잘 보면 폰트를 정의하는 변수도 있다.
-
-`variables.scss`에 있는 변수들은 `variables-hook.scss`파일을 만들어 오버라이드할 수 있게 해준다. 과정은 아래와 같다.
-> 참고: [Customizing Stylesheet](https://chirpy.cotes.page/posts/getting-started/#customizing-stylesheet)
-
-1. jekyll-theme-chirpy 저장소나 패키지가 설치된 곳의 [`main.scss`](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/_sass/main.scss){: target="_blank"}를 `_sass/`{: .filepath} 안에 둔다.
-3. `_sass/`{: .filepath} 안에 `variables-hook.scss`의 파일을 만든다.
-4. `variables-hook.scss` 파일에다가 `variables.scss`에 적혀있는 변수들을 마음대로 재정의하면 된다.
-
-`variables-hook.scss`파일을 만들어 아래 두줄을 추가해주었다. 원하는 폰트를 구글 폰트로부터 찾아서 이름을 넣어주면 된다.
-
-```scss
-$font-family-base: 'IBM Plex Sans KR', 'Microsoft Yahei', sans-serif;
-$font-family-heading: 'IBM Plex Sans KR', 'Microsoft Yahei', sans-serif;
-```
-{: file="_sass/variables-hook.scss"}
-
-우선 블로그 전체의 폰트를 한글 폰트를 적용할 수 있게 IBM Plex Sans KR로 했다.
+한글 폰트로 바꾸기 위해서 우선 Google Fonts에서 원하는 폰트를 찾습니다.
 
 ```html
-<!-- ... -->
-
-<link
-  rel="stylesheet"
-  href="{%raw%}{{ site.data.origin[type].webfonts | relative_url }}{%endraw%}"
-/>  
-
-<!-- ... -->
+...
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 ```
-{: file="_includes/head.html"}
+{: .nolineno}
 
-`_includes/head.html`을 보면 `href="{%raw%}{{ site.data.origin[type].webfonts | relative_url }}{%endraw%}"` 작성된 부분이 있다. 사이트 빌드 후 이 템플릿 부분에 구글 폰트 URL이 들어간다.
+저는 IBM Plex Sans KR를 선택하였습니다. Google Fonts에서 위와 같이 `<link>` 임베딩 태그를 제공하는 부분을 메모해둡니다.
 
-`_data/origin/`{: .filepath}의 `cors.yml` 파일을 아래와 같이 수정한다.
+### 2. 필요한 파일 준비
 
-> 없다면 경로와 파일을 jekyll-theme-chirpy 패키지에서 있는 경로, 파일을 동일하게 해서 블로그 프로젝트 안에도 만들어 주면 된다.
-> 
-> 참고: [로컬에 설치된 jekyll-theme-chirpy Gem 패키지 찾기]({% post_url jekyll/2023-06-19-github-pages-with-jekyll-chirpy-theme %}#로컬에-설치된-jekyll-theme-chirpy-패키지-폴더-찾기){: target="_blank"}
-{: .prompt-tip}
+Chirpy Starter에서 폰트를 변경하기 위해서는 원본 Chirpy 테마 폴더로부터 파일을 복사해와야합니다.
 
-```yaml
-# fonts
-webfonts: https://fonts.googleapis.com/...
+```shell
+☁  nyhryan.github.io [main] bundle info --path jekyll-theme-chirpy
+/home/atai-wsl/gems/gems/jekyll-theme-chirpy-7.3.0
 ```
-{: file="_data/origin/cors.yml"}
+{: .nolineno}
 
-여기에 `webfonts:`에 대한 URL 값은 아래의 스크린샷을 참조하여 [Google Font](https://fonts.google.com/)로부터 링크를 가져오면 된다.
+위의 명령어를 통해서 Chirpy 테마가 설치된 폴더로의 경로를 알 수 있습니다. 해당 경로에서 `_data/origin/cors.yml`{: .filepath} 파일을 똑같이 복사해옵니다. `origin`{: .filepath} 폴더가 없다면 똑같이 만들어줍니다.
 
-![font1](font1.png){: w="1000" h=""}
-_원하는 폰트들을 담고 위의 장바구니 버튼을 누른다._
+`_sass`{: .filepath} 폴더와 그 안에 있는 내용물도 똑같이 복사해옵니다.
 
-![font2](font2.png){: w="300" h=""}
-_URL 링크를 복사해오면 된다._
+### 3. 디폴트 설정 편집
+
+```yml
+# Web Fonts
+webfonts: https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap
+```
+{: .nolineno file="_data/origin/cors.yml"}
+
+`_data/origin/cors.yml`{: .filepath} 파일을 보면 Web Fonts를 지정하는 부분이 있습니다. 여기에 Google Fonts에서 찾은 폰트들의 임베딩 URL을 작성하면 됩니다.
+
+```scss
+// 디폴트 폰트
+// $font-family-base: 'Source Sans Pro', 'Microsoft Yahei', sans-serif !default;
+// $font-family-heading: Lato, 'Microsoft Yahei', sans-serif !default;
+
+// 👉 새 폰트!
+$font-family-base: 'IBM Plex Sans KR', 'Microsoft Yahei', sans-serif !default;
+$font-family-heading: 'IBM Plex Sans KR', 'Microsoft Yahei', sans-serif !default;
+```
+{: .nolineno file="_sass/abstracts/_variables.scss"}
+
+이후 `_sass/abstracts/_variables.scss`{: .filepath}에 기존 폰트를 변경해주면 됩니다.
 
 ### 코드 블럭의 고정폭 폰트 바꾸기
 
-코드 블럭에 사용되는 고정폭 폰트도 변경할 수 있다.
+코드 블럭에 사용되는 고정폭 폰트도 변경할 수 있습니다.
 
-우선 `cors.yml`의 `webfonts:`에 원하는 고정폭 폰트를 넣어준다. 위에서 구글 폰트에서 블로그 전체에 적용할 글꼴과 함께 장바구니에 담아서 URL을 한번에 가져와 넣으면 된다.
+고정폭 폰트도 Google Fonts에서 찾아서 `cors.yml`에 추가합니다.
 
 ```scss
-pre,
-code {
-  font-family: 'JetBrains Mono NL', monospace;
+/* Code block fonts */
+.highlighter-rouge {
+  font-family: 'JetBrains Mono', monospace;
+  font-optical-sizing: auto;
 }
 ```
-{: file="_sass/addon/syntax.scss"}
+{: file="assets/css/jekyll-theme-chirpy.scss" .nolineno}
 
-`_sass/addon/`{: .filepath}의 `syntax.scss`를 보면 `font-family`를 정의하는 부분이 있다. 이곳에 구글 폰트로부터 가져온 고정폭 글꼴의 이름을 넣어주면 된다.
+`assets/css/jekyll-theme-chirpy.scss`{: .filepath} 파일에 `highlighter-rouge` class의 `font-family` 속성을 위에서 `cors.yml`에 추가한 폰트로 지정해주면 됩니다.
 
 ## 🎨 커스텀 CSS 적용하기
+
+> 이하 내용은 현재 버젼의 Chirpy(2025/07/15 기준 `v7.3.0`)와 더 이상 호환되지 않는 내용입니다!!
+{: .prompt-danger}
 
 Chirpy 테마의 CSS를 수정하는 방법에는 두가지가 있다.
 
