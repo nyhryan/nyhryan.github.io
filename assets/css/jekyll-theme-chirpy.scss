@@ -9,59 +9,8 @@
 
 /* append your custom style below */
 
-#topbar-wrapper {
-    border-radius: 15px;
+/* Code block fonts */
+.highlighter-rouge {
+  font-family: 'JetBrains Mono', monospace;
+  font-optical-sizing: auto;
 }
-
-blockquote {
-    &.prompt-tip {
-        background-color: var(--prompt-tip-bg);
-        border: 2px solid var(--prompt-tip-icon-color);
-    }
-
-    &.prompt-info {
-        background-color: var(--prompt-info-bg);
-        border: 2px solid var(--prompt-info-icon-color);
-    }
-
-    &.prompt-warning {
-        background-color: var(--prompt-warning-bg);
-        border: 2px solid var(--prompt-warning-icon-color);
-    }
-
-    &.prompt-danger {
-        background-color: var(--prompt-danger-bg);
-        border: 2px solid var(--prompt-danger-icon-color);
-    }
-}
-
-p,
-li {
-    em {
-        color: var(--italic-color);
-    }
-
-    strong {
-        color: var(--bold-color);
-    }
-}
-
-.content a.popup + em {
-    color: var(--text-color);
-}
-
-// div.table-wrapper {
-//     table {
-//         tbody tr {
-//             td:first-child {
-//                 border-right: solid 2px rgba(210, 215, 217, 0.75);
-//             }
-//             &:nth-child(even) {
-//                 background-color: #45475a;
-//             }
-//             &:nth-child(odd) {
-//                 background-color: #313244;
-//             }
-//         }
-//     }
-// }
