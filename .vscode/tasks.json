@@ -1,51 +1,72 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Locally serve blog",
-            "type": "shell",
-            "command": "bundle exec jekyll serve",
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "New post",
-            "type": "shell",
-            "command": "bundle",
-            "args": [
-                "exec",
-                "jekyll",
-                "post",
-                "${input:postName}"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "Create new image folder",
-            "type": "shell",
-            "command": "mkdir",
-            "args": [
-                "${workspaceFolder}/assets/img/posts/${fileDirnameBasename}/${fileBasenameNoExtension}"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": []
-        }
-    ],
-    "inputs": [
-        {
-            "type": "promptString",
-            "id": "postName",
-            "description": "Enter name of new md file:",
-            "default": "my-new-post"
-        }
-    ]
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Locally serve blog",
+      "type": "shell",
+      "command": "bundle exec jekyll serve",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "New post",
+      "type": "shell",
+      "command": "bundle",
+      "args": [
+        "exec",
+        "jekyll",
+        "post",
+        "${input:postName}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Create new image folder",
+      "type": "shell",
+      "command": "mkdir",
+      "args": [
+        "${workspaceFolder}/assets/img/posts/${fileDirnameBasename}/${fileBasenameNoExtension}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Jekyll Server",
+      "type": "shell",
+      "command": "./tools/run.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "detail": "Runs the Jekyll server with live reload."
+    },
+    {
+      "label": "Build Jekyll Site",
+      "type": "shell",
+      "command": "./tools/test.sh",
+      "group": {
+        "kind": "build"
+      },
+      "problemMatcher": [],
+      "detail": "Build the Jekyll site for production."
+    }
+  ],
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "postName",
+      "description": "Enter name of new md file:",
+      "default": "my-new-post"
+    }
+  ]
 }
