@@ -1,0 +1,27 @@
+{
+  "name": "mig-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/rss": "^4.0.15",
+    "@astrojs/sitemap": "^3.7.0",
+    "astro": "^5.17.1",
+    "mdast": "^3.0.0",
+    "mdast-util-to-string": "^4.0.0",
+    "reading-time": "^1.5.0",
+    "rehype-external-links": "^3.0.0",
+    "remark-validate-links": "^13.1.0",
+    "sharp": "^0.34.3",
+    "typescript": "^5.9.3",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.1.0"
+  }
+}
