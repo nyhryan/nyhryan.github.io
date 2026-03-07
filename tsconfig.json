@@ -5,7 +5,8 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "paths": {
-      "@attachments/*": ["./src/content/blog/attachments/*"],
+      "@attachments/*": ["./src/content/attachments/*"],
+      "@components/*": ["./src/components/*"],
     }
   }
 }

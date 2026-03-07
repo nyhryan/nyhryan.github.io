@@ -10,7 +10,7 @@ const isExternal = (url: string): boolean => {
 
 const normalizeSlashes = (url: string): string => url.replace(/\\/g, "/");
 
-const cleanupImage: RemarkPlugin<any[]> = () => (root: Root) => {
+const remarkCleanupImage: RemarkPlugin<any[]> = () => (root: Root) => {
     visit(root, "image", (node) => {
         const url = normalizeSlashes(node.url);
 
@@ -23,7 +23,7 @@ const cleanupImage: RemarkPlugin<any[]> = () => (root: Root) => {
 };
 
 
-const cleanupLink: RemarkPlugin<any[]> = () => (root: Root) => {
+const remarkCleanupLink: RemarkPlugin<any[]> = () => (root: Root) => {
     // Link to other content collection's Markdown
     // need to be in absolute format with starting at the content collection's directory 
     visit(root, "link", (node) => {
@@ -61,4 +61,4 @@ const cleanupLink: RemarkPlugin<any[]> = () => (root: Root) => {
     });
 };
 
-export { cleanupImage, cleanupLink };
+export { remarkCleanupImage, remarkCleanupLink };

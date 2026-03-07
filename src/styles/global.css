@@ -100,6 +100,12 @@ input {
 table {
 	width: 100%;
 }
+/* Center image */
+p:has(img:only-child) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 img {
 	max-width: 100%;
 	height: auto;
