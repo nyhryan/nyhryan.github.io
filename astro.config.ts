@@ -11,6 +11,7 @@ import remarkGfmStrikethroughCjkFriendly from "remark-cjk-friendly-gfm-strikethr
 import rehypeMathJaxChtml from "rehype-mathjax/chtml";
 import rehypeExternalLinks from "rehype-external-links";
 import { remarkObsidianLink } from "./src/libs/remarkObsidianLink";
+import mdx from "@astrojs/mdx";
 
 export default defineConfig({
   site: "https://blog.ataidev.cc",
@@ -23,7 +24,12 @@ export default defineConfig({
         pluginCollapsible({ previewLines: 16 }),
       ],
     }),
-    sitemap()
+    sitemap({
+      filter: (page) => (
+        /https:\/\/blog\.ataidev\.cc\/blog\/.+/.test(page)
+      ),
+    }),
+    mdx(),
   ],
 
   markdown: {
