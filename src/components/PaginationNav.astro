@@ -1,0 +1,44 @@
+---
+import type { Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  pages?: Page<CollectionEntry<"blog">>;
+}
+
+const { pages } = Astro.props;
+const isFirstPage = pages?.currentPage === 1;
+const isLastPage = pages?.currentPage === pages?.lastPage;
+---
+
+{
+  pages && (
+    <nav class="flex flex-row gap-2 h-8 justify-center items-center mx-[33%]">
+      <a href={pages.url.first} class=`cursor-pointer select-none ${isFirstPage ? "bg-ctp-surface0 pointer-events-none" : "bg-inherit pointer-events-auto"} hover:bg-ctp-lavender/20 flex justify-center items-center w-[2rem] h-full p-1 rounded-sm`>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-[1rem]" viewBox="0 0 16 16" style={{
+          fill: `${isFirstPage ? "var(--catppuccin-color-overlay0)" : "var(--catppuccin-color-text"}`,
+        }}>
+          <path fill-rule="evenodd" d="M11.854 3.646a.5.5 0 0 1 0 .708L8.207 8l3.647 3.646a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708 0M4.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5"/>
+        </svg>
+      </a>
+      <a href={pages.url.prev} class="cursor-pointer select-none hover:bg-ctp-lavender/20 flex justify-center items-center w-[2rem] h-full p-1 rounded-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-[1rem] fill-ctp-text" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+        </svg>
+      </a>
+      <span class="cursor-default p-1 text-center w-[2rem] h-full rounded-sm">{pages.currentPage}/{pages.lastPage}</span>
+      <a href={pages.url.next} class="cursor-pointer select-none hover:bg-ctp-lavender/20 flex justify-center items-center w-[2rem] h-full p-1 rounded-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-[1rem] fill-ctp-text" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+        </svg>
+      </a>
+      <a href={pages.url.last} class=`cursor-pointer select-none ${isLastPage ? "bg-ctp-surface0 pointer-events-none" : "bg-inherit pointer-events-auto"} hover:bg-ctp-lavender/20 flex justify-center items-center w-[2rem] h-full p-1 rounded-sm`>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-[1rem]" viewBox="0 0 16 16" style={{
+          fill: `${isLastPage ? "var(--catppuccin-color-overlay0)" : "var(--catppuccin-color-text"}`,
+        }}>
+          <path fill-rule="evenodd" d="M4.146 3.646a.5.5 0 0 0 0 .708L7.793 8l-3.647 3.646a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708 0M11.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5"/>
+        </svg>
+      </a>
+    </nav>
+  )
+}

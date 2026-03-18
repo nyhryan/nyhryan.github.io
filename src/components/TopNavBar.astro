@@ -1,0 +1,54 @@
+---
+import DarkModeSwitch from "@components/DarkModeSwitch.astro";
+---
+
+<nav class="bg-ctp-mantle flex justify-around items-center font-chiron font-bold text-3xl py-3 rounded-b-(--card-radius)">
+  <a href="/">
+    <span class="sr-only">ATAI Dev blog</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-[30px] fill-ctp-text transition duration-300 hover:scale-110 hover:-rotate-12 hover:fill-ctp-lavender" viewBox="0 0 16 16">
+      <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+    </svg>
+  </a>
+  <ul class="min-w-[18rem] flex justify-around gap-4">
+    <li>
+      <a href="/" class="inline-block relative text-ctp-text text-shadow-md">Home</a>
+    </li>
+    <li>
+      <a href="#" class="inline-block relative text-ctp-text text-shadow-md">About</a>
+    </li>
+  </ul>
+  <DarkModeSwitch />
+</nav>
+
+<style>
+  @reference "@styles/global.css";
+
+  ul a {
+    & {
+      transform: scale(1.0);
+      transition: transform 0.1s ease-out;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:hover, &:focus-visible {
+      @apply text-ctp-lavender;
+    }
+
+    /* Hover underline animation */
+    &::after {
+      content: "";
+      @apply absolute w-full h-[2px] bg-ctp-lavender bottom-0 left-0;
+      transform: scaleX(0);
+      transform-origin: bottom center;
+      transition: transform 0.1s ease-out;
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom center;
+    }
+  }
+</style>

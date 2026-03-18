@@ -1,0 +1,16 @@
+---
+import PostCardItem from "@components/PostCardItem.astro";
+import { getCollection } from "astro:content";
+import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate - a.data.pubDate);
+---
+
+<BaseBlogLayout>
+  {
+    posts.map(post => (
+      <PostCardItem {...post} />
+    ))
+  }
+</BaseBlogLayout>

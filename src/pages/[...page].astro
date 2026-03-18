@@ -1,0 +1,22 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
+import PostCardItem from "@components/PostCardItem.astro";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection("blog"))
+    .sort((a, b) => b.data.pubDate - a.data.pubDate);
+  return paginate(posts, { pageSize: 5 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<BaseBlogLayout pages={page}>
+  {
+    page.data.map(post => (
+      <PostCardItem {...post} />
+    ))
+  }
+</BaseBlogLayout>

@@ -1,7 +1,9 @@
 @import "tailwindcss";
-@import "@catppuccin/tailwindcss/mocha.css";
-
+@import "@catppuccin/tailwindcss/frappe.css";
 @import "./fonts.css";
+@import "./prose-blog.css";
+
+@plugin "@tailwindcss/typography";
 
 @theme {
   --font-sans:
@@ -11,10 +13,18 @@
     sans-serif;
   --font-mono: "Cascadia Code", Menlo, Monaco, "Courier New", monospace;
   --font-chiron: "Chiron GoRound TC", sans-serif;
+
+  --page-width: 75rem;
+  --sidebar-width: 17.5rem;
+  --banner-height: 32rem;
+  --card-radius: var(--radius-xl);
 }
 
 @layer base {
+  html {
+    @apply scheme-light dark:scheme-dark latte:scheme-light;
+  }
   body {
-    @apply text-ctp-text bg-ctp-mantle;
+    @apply text-lg lg:text-base text-ctp-text bg-ctp-crust;
   }
 }

@@ -1,0 +1,79 @@
+---
+import BaseHTMLLayout from "@layouts/BaseHTMLLayout.astro";
+import TopNavBar from "@components/TopNavBar.astro";
+import SideBar from "@components/SideBar.astro";
+import HomeBanner from "@components/HomeBanner.astro";
+import Footer from "@components/Footer.astro";
+import PaginationNav from "@components/PaginationNav.astro";
+import type {Page} from "astro";
+import type {CollectionEntry} from "astro:content";
+
+interface Props {
+  currentCategory?: string;
+  pages?: Page<CollectionEntry<"blog">>;
+}
+
+const { currentCategory, pages = null } = Astro.props;
+---
+
+<BaseHTMLLayout>
+  <div class="blog-container max-w-full min-h-screen mx-2 lg:mx-[calc((100vw-64rem)/2)] grid gap-y-4 lg:gap-x-4">
+    <div class="blog-header">
+      <div class="sticky top-0 z-50">
+        <TopNavBar />
+      </div>
+      <div class="absolute inset-0 z-10 h-[24rem]">
+        <div class="relative h-[24rem]">
+          <HomeBanner />
+        </div>
+      </div>
+    </div>
+    <div class="blog-aside min-w-[18rem] lg:h-[60vh] lg:sticky lg:top-4">
+      <SideBar currentCategory = { currentCategory } />
+    </div>
+    <div class="blog-content overflow-hidden max-w-screen flex flex-col gap-y-4">
+      <slot />
+      <PaginationNav pages={pages} />
+    </div>
+    <div class="blog-footer w-full">
+      <Footer />
+    </div>
+  </div>
+</BaseHTMLLayout>
+
+<style>
+  @reference "@styles/global.css";
+  .blog-container {
+    grid-template-areas:
+      "header"
+      "aside"
+      "content"
+      "footer";
+    grid-template-rows: 24rem auto 1fr auto;
+
+    @media (width >= 64rem) {
+      grid-template-areas:
+      "header header"
+      "aside content"
+      "footer footer";
+      grid-template-columns: calc(18rem) 1fr;
+      grid-template-rows: 24rem 1fr auto;
+    }
+  }
+
+  .blog-header {
+    grid-area: header;
+  }
+
+  .blog-aside {
+    grid-area: aside;
+  }
+
+  .blog-content {
+    grid-area: content;
+  }
+
+  .blog-footer {
+    grid-area: footer;
+  }
+</style>

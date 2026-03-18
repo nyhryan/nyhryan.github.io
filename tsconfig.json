@@ -1,12 +1,10 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "public"],
+  "exclude": ["dist", "public", ".obsidian"],
   "compilerOptions": {
     "plugins": [
-      {
-        "name": "@astrojs/ts-plugin"
-      }
+      { "name": "@astrojs/ts-plugin" },
     ],
     "paths": {
       "@components/*": ["./src/components/*"],

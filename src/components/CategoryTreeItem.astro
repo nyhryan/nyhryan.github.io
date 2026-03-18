@@ -1,0 +1,67 @@
+---
+import type { CategoryNode } from "../utils/categoryTree";
+
+interface Props {
+  node: CategoryNode;
+  depth?: number;
+  currentCategory?: string;
+}
+
+const { node, depth = 0, currentCategory } = Astro.props;
+const hasChildren = Object.keys(node.children).length > 0;
+// paddingLeft: `${depth * 12 + 4}px`
+---
+
+<li class="relative cat-item">
+  <div style={{ paddingLeft: `${depth * 15*0 + 5}px` }}>
+    <a href={`/category/${node.fullPath}`}
+      class="hover:underline! hover:decoration-ctp-lavender! hover:text-ctp-lavender!"
+      style={{
+        color: `${currentCategory === node.name ? "var(--catppuccin-color-lavender)" : "var(--catppuccin-color-text)"}`,
+        fontWeight: `${currentCategory === node.name ? "bold" : "normal"}`,
+        textDecoration: `${currentCategory === node.name ? "underline" : "none"}`,
+        textDecorationColor: "var(--catppuccin-color-lavender)",
+      }}>
+      <span class="z-3 relative">
+        <svg xmlns='http://www.w3.org/2000/svg' class='inline w-[16px] h-[16px] fill-ctp-text' viewBox='0 0 16 16'>  <path d='M9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.825a2 2 0 0 1-1.991-1.819l-.637-7a2 2 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3m-8.322.12q.322-.119.684-.12h5.396l-.707-.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981z'/></svg>
+      </span>
+      {node.name} ({node.postCount})
+    </a>
+  </div>
+</li>
+{
+  hasChildren && (
+    <li class="relative cat-recursive-item">
+      <ul class="pl-[15px] flex flex-col">
+        {
+          Object.values(node.children).map(child => (
+            <Astro.self node={child} depth={depth + 1} {currentCategory} />
+          ))
+        }
+      </ul>
+    </li>
+  )
+}
+
+<style>
+  @reference "@styles/global.css";
+
+  .cat-item::before {
+    @apply absolute z-1 -top-[9px] left-[-5px] w-[15px] h-full border-l-1 border-l-ctp-overlay2 border-b-1 border-b-ctp-overlay2;
+    content: "";
+  }
+
+  li:not(.cat-item) {
+    &::before {
+      @apply absolute z-1 -top-[9px] left-[-5px] w-[15px] h-full border-l-1 border-l-ctp-overlay2;
+      content: "";
+    }
+  }
+
+  .cat-recursive-item .cat-recursive-item:not(+.cat-item) {
+    &::before {
+      @apply absolute z-1 border-none;
+      content: "";
+    }
+  }
+</style>

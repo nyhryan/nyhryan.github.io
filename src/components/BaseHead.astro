@@ -1,6 +1,7 @@
 ---
 import type { ImageMetadata } from "astro";
-import FallbackImage from "@attachments/fallback.jpg";
+import FallbackImage from "../assets/fallback.jpg";
+import ClientRouter from "astro/components/ClientRouter.astro";
 
 interface Props {
   title: string;
@@ -14,7 +15,7 @@ const { title = "My blog", description = "Welcome to ataidev!", image = Fallback
 
 <!-- Global Metadata -->
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="icon" type="image/png" href="/favicon.png"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <link rel="sitemap" href="/sitemap-index.xml"/>
@@ -53,9 +54,51 @@ const { title = "My blog", description = "Welcome to ataidev!", image = Fallback
 <meta property="twitter:image" content={new URL(image.src, Astro.url)}/>
 
 <script>
-  document.documentElement.classList.toggle(
-    "latte",
-    localStorage.getItem("theme") === "latte"
-    || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: light)").matches)
-  );
+  function sendMessage<T>(message: T): void {
+    const iframe = document.querySelector<HTMLIFrameElement>("iframe.giscus-frame");
+    if (!iframe) return;
+    iframe.contentWindow?.postMessage({ giscus: message }, "https://giscus.app");
+  }
+  function changeGiscusTheme(): void {
+    const theme = getSavedTheme();
+    const dataTheme = theme === "light" ? "catppuccin_latte" : "catppuccin_frappe";
+    sendMessage({
+      setConfig: {
+        theme: `https://giscus.app/themes/${dataTheme}.css`,
+      },
+    });
+  }
+  function getSavedTheme(): string {
+    return localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+  }
+  function loadLightDarkMode(): void {
+    const savedTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    document.documentElement.classList.toggle(
+      "latte",
+      savedTheme === "light"
+    );
+  }
+  function toggleDarkMode(): void {
+    const currentTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    const isLightAdded = document.documentElement.classList.toggle(
+      "latte",
+      currentTheme === "dark"
+    );
+    localStorage.setItem("theme", isLightAdded ? "light" : "dark");
+    changeGiscusTheme();
+  }
+
+  document.addEventListener("astro:after-swap", () => {
+    loadLightDarkMode();
+    changeGiscusTheme();
+  });
+
+  document.addEventListener("astro:page-load", () => {
+    loadLightDarkMode();
+    changeGiscusTheme();
+    const toggleButton = document.querySelector<HTMLButtonElement>("#darkmode-switch");
+    toggleButton?.addEventListener("click", toggleDarkMode);
+  });
 </script>
+
+<ClientRouter />
