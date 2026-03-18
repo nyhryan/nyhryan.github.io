@@ -90,12 +90,12 @@ const { title = "My blog", description = "Welcome to ataidev!", image = Fallback
 
   document.addEventListener("astro:after-swap", () => {
     loadLightDarkMode();
-    changeGiscusTheme();
+    setTimeout(() => changeGiscusTheme(), 300);
   });
 
   document.addEventListener("astro:page-load", () => {
     loadLightDarkMode();
-    changeGiscusTheme();
+    setTimeout(() => changeGiscusTheme(), 300);
     const toggleButton = document.querySelector<HTMLButtonElement>("#darkmode-switch");
     toggleButton?.addEventListener("click", toggleDarkMode);
   });
