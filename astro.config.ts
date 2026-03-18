@@ -13,7 +13,7 @@ import rehypeExternalLinks from "rehype-external-links";
 import { remarkObsidianLink } from "./src/libs/remarkObsidianLink";
 
 export default defineConfig({
-  site: "https://example.com",
+  site: "https://ataidev.cc",
   // trailingSlash: "always",
   integrations: [
     astroExpressiveCode({
