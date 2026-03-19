@@ -12,5 +12,5 @@ jobs:
       - name: indexnow-action
         uses: bojieyang/indexnow-action@v2
         with:
-          sitemap-location: 'https://blog.ataidev.cc/sitemap-index.xml'
+          sitemap-location: 'https://blog.ataidev.cc/sitemap-0.xml'
           key: ${{ secrets.INDEXNOW_KEY }}
