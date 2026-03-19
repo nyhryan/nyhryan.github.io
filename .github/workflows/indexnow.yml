@@ -1,0 +1,18 @@
+name: 'Bing IndexNow'
+on:
+  schedule:
+    # Set the schedule time
+    - cron: '0 6 * * 1'
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  check-and-submit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: indexnow-action
+        uses: bojieyang/indexnow-action@v2
+        with:
+          sitemap-location: 'https://blog.ataidev.cc/sitemap-index.xml'
+          key: ${{ secrets.INDEXNOW_KEY }}
