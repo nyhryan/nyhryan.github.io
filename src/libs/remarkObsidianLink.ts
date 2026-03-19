@@ -8,12 +8,10 @@ export function isExternalLink(inputUrl: string): boolean {
   try {
     new URL(inputUrl);
     return true;
-  }
-  catch (err) {
+  } catch (err) {
     if (err instanceof TypeError) {
       return false;
-    }
-    else {
+    } else {
       throw err;
     }
   }
@@ -32,8 +30,7 @@ export const remarkObsidianLink: Plugin<[], Root> = () => (tree, file) => {
     const hashIndex = ext.indexOf("#");
     if (hashIndex === -1) {
       node.url = `/${postPath}/${name}`;
-    }
-    else {
+    } else {
       const headingName = ext.slice(hashIndex + 1);
       node.url = `/${postPath}/${name}#${slug(decodeURIComponent(headingName))}`;
     }

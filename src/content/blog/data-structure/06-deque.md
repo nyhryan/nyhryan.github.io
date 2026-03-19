@@ -16,29 +16,29 @@ _덱의 기능들_
 
 ```yaml
 변수:
-    - 크기가 고정된 배열
-    - 큐의 맨 앞을 가르키는 변수
-    - 큐의 맨 뒤를 가르키는 변수
+  - 크기가 고정된 배열
+  - 큐의 맨 앞을 가르키는 변수
+  - 큐의 맨 뒤를 가르키는 변수
 
 연산:
-    - 뒤에 삽입 (Enqueue와 동일)
-    - 앞에 제거 (Dequeue와 동일)
-    - 뒤에 제거
-        - rear자리에 있는 값을 리턴;
-        - rear를 앞으로 한칸 땡긴다.
-        - rear = (rear - 1 + 배열 크기) % 배열 크기;
-    - 앞에 삽입
-        - front자리에 값을 삽입;
-        - front를 앞으로 한칸 땡긴다.
-        - front = (front - 1 + 배열 크기) % 배열 크기;
+  - 뒤에 삽입 (Enqueue와 동일)
+  - 앞에 제거 (Dequeue와 동일)
+  - 뒤에 제거
+    - rear자리에 있는 값을 리턴;
+    - rear를 앞으로 한칸 땡긴다.
+    - rear = (rear - 1 + 배열 크기) % 배열 크기;
+  - 앞에 삽입
+    - front자리에 값을 삽입;
+    - front를 앞으로 한칸 땡긴다.
+    - front = (front - 1 + 배열 크기) % 배열 크기;
 
 기타연산:
-    - 출력
-    - rear 엿보기 (peek 연산)
-    - front 엿보기 (peek 연산)
+  - 출력
+  - rear 엿보기 (peek 연산)
+  - front 엿보기 (peek 연산)
 ```
 
-뒤에 삽입하는 `insert_rear()`연산은 삽입하고 `rear`를 하나 뒤로 땡겨야한다. 따라서 공식은 `rear = (rear + 1) % MAX_QUEUE_SIZE`이다. (`MAX_QUEUE_SIZE`는 배열의 크기) 
+뒤에 삽입하는 `insert_rear()`연산은 삽입하고 `rear`를 하나 뒤로 땡겨야한다. 따라서 공식은 `rear = (rear + 1) % MAX_QUEUE_SIZE`이다. (`MAX_QUEUE_SIZE`는 배열의 크기)
 
 마찬가지로 앞을 제거하는 `remove_front()` 연산은 하나 제거하고 `front`를 뒤로 땡겨야한다. 따라서 공식은 `front = (front + 1) % MAX_QUEUE_SIZE`이다.
 
@@ -46,7 +46,7 @@ _덱의 기능들_
 
 마찬가지로 앞에 삽입하는 `insert_front()`연산을 생각해보자. `front`자리에 새 요소를 저장하고, `front`를 앞으로 한칸 땡겨야한다. 위에 설명한 `remove_rear()`의 경우와 똑같이, `front = (front - 1 + MAX_QUEUE_SIZE) % MAX_QUEUE_SIZE`를 해서 땡겨주면 된다.
 
-##  💡 덱의 구현
+## 💡 덱의 구현
 
 ```c title="main.c"
 void Deque_InsertFront(Deque* dq, element e)
@@ -94,7 +94,9 @@ _실행결과_
 _숫자는 실행 순서를 말한다._
 
 ⭐정리
+
 - 큐를 개선한 덱 자료구조에 대해 알아보았다.
 
 ---
+
 참고서적 : C언어로 쉽게 풀어쓴 자료구조 (개정 3판), 천인국·공용해·하상호, 생능출판 - [Yes24바로가기](https://www.yes24.com/Product/Goods/69750539)

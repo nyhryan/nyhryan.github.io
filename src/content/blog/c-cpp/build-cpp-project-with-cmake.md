@@ -10,14 +10,15 @@ tags:
   - cpp
 ---
 
->  ## Prequisites
+> ## Prequisites
+>
 > - Install [CMake](https://cmake.org/download/)
 > - Install [Visual Studio](https://visualstudio.microsoft.com/) for Windows
-> 	- Needed for Microsoft C++ toolset, not the IDE. CMake will generate build scripts that uses `cl.exe` compiler.
+>   - Needed for Microsoft C++ toolset, not the IDE. CMake will generate build scripts that uses `cl.exe` compiler.
 > - Install [Ninja](https://ninja-build.org/)
-> 	- Well, I said this is needed, but you can use `Visual Studio 17 2022` for CMake Generator below.
+>   - Well, I said this is needed, but you can use `Visual Studio 17 2022` for CMake Generator below.
 > - Install [Visual Studio Code](https://code.visualstudio.com/Download)
-> 	- Install [C/C++ Extension Pack for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack). We can easily configure/generate CMake project.
+>   - Install [C/C++ Extension Pack for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack). We can easily configure/generate CMake project.
 
 ## What is CMake?
 
@@ -36,7 +37,7 @@ Yeah, I know CMake is really weird and difficult when using it for the first tim
 
 Plus, you cannot use Visual Studio for C++ in Mac OSX envrionment, since their Visual Studio is mainly for developing `.NET` programs. Since university assumes every students are working with Windows environment, coding in C/C++ in Mac OSX without Visual Studio IDE was pretty difficult. Going through all of those obstacles helped me learn about build systems in C/C++ world.
 
-Especially in my Computer Graphics class, professor used `WIN32 API + (immediate mode) OpenGL` for the class. He gave us Visual Studio projects for assignments and example codes. In order to try those sample codes in my MacBook, I HAD to learn about build systems. *(Well, I used my Windows desktop at home for assignments tho lol)*
+Especially in my Computer Graphics class, professor used `WIN32 API + (immediate mode) OpenGL` for the class. He gave us Visual Studio projects for assignments and example codes. In order to try those sample codes in my MacBook, I HAD to learn about build systems. _(Well, I used my Windows desktop at home for assignments tho lol)_
 
 These are some of problems I had.
 
@@ -58,7 +59,7 @@ Create an empty folder and open Visual Studio Code from that directory.
 
 ![cmake-20240814200545](./attachments/cmake-20240814200545.png)
 
-In VS Code settings, search `generator` and use `Ninja` for `Cmake:Generator`. We are going to generate Ninja build script for our C++ project. You can use other build systems if you want. 
+In VS Code settings, search `generator` and use `Ninja` for `Cmake:Generator`. We are going to generate Ninja build script for our C++ project. You can use other build systems if you want.
 
 > [List of cmake-generators](https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html)
 
@@ -81,7 +82,7 @@ project("My First Project")
 
 ![cmake extension icon](./attachments/cmake-20240814193126.png)
 
-After creating `CMakeLists.txt`, check the sidebar. If you don't see CMake extension icon, try closing VS Code and reopen it. 
+After creating `CMakeLists.txt`, check the sidebar. If you don't see CMake extension icon, try closing VS Code and reopen it.
 
 ![change kit menu](./attachments/cmake-20240814193332.png)
 
@@ -133,7 +134,7 @@ Inside `build/` directory, our build output `main.exe` will be built. Then try r
 
 > Using commandline for building
 > The command `cmake --build build` from project's root will also build our project.
-{: .prompt-tip }
+> {: .prompt-tip }
 
 ### 5. 😏Extra: VS Code Intellisense
 
@@ -160,7 +161,7 @@ To configure Intellisense(Autocompletion), press `Win32` button at the right bot
 
 Make sure you have `"configurationProvider": "ms-vscode.cmake-tools"` in the JSON file. This will enable more accurate Intellisense based on CMake project rather than default C/C++ Extension Intellisense.
 
-#### Alternative: clangd 
+#### Alternative: clangd
 
 You can use [clangd VS Code Extention](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd) intellisense instead of C/C++ extension's one. Although you need to install `clangd`. Check [clangd installation](https://clangd.llvm.org/installation).
 

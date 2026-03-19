@@ -127,7 +127,9 @@ _출력 결과_
 [Pastebin 보러가기](https://pastebin.com/UHKBB5mU)
 
 ## ⭐정리
+
 - 선형 큐의 문제를 개선한 원형 큐에 대해 알아보았다.
 
 ---
+
 참고서적 : C언어로 쉽게 풀어쓴 자료구조 (개정 3판), 천인국·공용해·하상호, 생능출판 - [Yes24바로가기](https://www.yes24.com/Product/Goods/69750539)

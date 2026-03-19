@@ -3,7 +3,7 @@ title: 02. 동적 크기 스택
 description: 스택을 동적 할당을 사용하여 구현해보야요.
 pubDate: 2023-06-26 20:02 +0900
 categories:
-- Data structure with C
+  - Data structure with C
 tags: [c, data-structure]
 ---
 
@@ -23,7 +23,7 @@ void* realloc(
 )
 ```
 
-`realloc()`은 `malloc()` 함수와 마찬가지로 힙 공간에 접근하는 함수이다. 새로운 크기로 만들 배열과 새로운 크기를 매개변수로 받아, 새로운 크기로 할당한 공간을 리턴해준다. 
+`realloc()`은 `malloc()` 함수와 마찬가지로 힙 공간에 접근하는 함수이다. 새로운 크기로 만들 배열과 새로운 크기를 매개변수로 받아, 새로운 크기로 할당한 공간을 리턴해준다.
 
 ```c
 // ...push 연산에서 포화상태라면
@@ -46,20 +46,20 @@ if (stack->arr == NULL)
 
 ```yaml nocollapse
 변수:
-    - 동적 할당을 받을 배열의 포인터 변수 
-    - 배열의 최대 크기 (용량)
-    - 현재 top 요소가 들어있는 인덱스
+  - 동적 할당을 받을 배열의 포인터 변수
+  - 배열의 최대 크기 (용량)
+  - 현재 top 요소가 들어있는 인덱스
 
 주요 연산:
-    - push() # 스택에 데이터를 삽입
-    - pop()  # 스택에 데이터를 제거 후 그 데이터를 리턴
-    - peek() # 스택에서 데이터를 제거하지 않고 읽어오기
+  - push() # 스택에 데이터를 삽입
+  - pop() # 스택에 데이터를 제거 후 그 데이터를 리턴
+  - peek() # 스택에서 데이터를 제거하지 않고 읽어오기
 
 기타 연산:
-    - init()     # 스택 초기화
-    - is_empty() # 스택이 다 비어있는가?
-    - is_full()  # 스택이 다 찼는가? (포화상태가 되기 전까지는 크기가 고정된 배열과 똑같다.)
-    - print()    # 스택 전체 모습을 출력
+  - init() # 스택 초기화
+  - is_empty() # 스택이 다 비어있는가?
+  - is_full() # 스택이 다 찼는가? (포화상태가 되기 전까지는 크기가 고정된 배열과 똑같다.)
+  - print() # 스택 전체 모습을 출력
 ```
 
 기존의 스택 추상 자료형과 비슷하다. 정적 크기 스택과 다르게 스택으로 사용할 배열의 포인터, 그리고 배열의 최대 크기를 관리할 수 있는 `capacity` 변수를 추가한다.
@@ -88,7 +88,7 @@ void stack_init(DynStack* s)
     s->top = -1;     // 빈 스택의 top 인덱스는 -1
 
     // 최대 용량 4개 만큼 메모리 동적 할당
-    s->arr = malloc(s->capacity * sizeof(element)); 
+    s->arr = malloc(s->capacity * sizeof(element));
     if (s->arr == NULL) // malloc 실패 여부 검사
     {
         fprintf(stderr, "malloc failure! exiting...\n");
@@ -209,7 +209,8 @@ _실행 결과_
 
 <a href="/examples/data-structure/02-dynamic-stack.c">📃소스코드 보기</a>
 
-- `<stdlib.h>` 헤더 파일 내의 `malloc(), realloc()` 함수를 이용하여 배열의 크기를 조정하고, 이를 통해 동적 크기의 스택을 만들 수 있다.  
+- `<stdlib.h>` 헤더 파일 내의 `malloc(), realloc()` 함수를 이용하여 배열의 크기를 조정하고, 이를 통해 동적 크기의 스택을 만들 수 있다.
 
 ---
+
 참고서적 : C언어로 쉽게 풀어쓴 자료구조 (개정 3판), 천인국·공용해·하상호, 생능출판 - [Yes24바로가기](https://www.yes24.com/Product/Goods/69750539)

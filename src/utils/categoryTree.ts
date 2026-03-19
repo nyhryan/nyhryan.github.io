@@ -7,7 +7,9 @@ export interface CategoryNode {
   postCount: number;
 }
 
-export const buildCategoryTree = async (posts: Array<CollectionEntry<"blog">>) => {
+export const buildCategoryTree = async (
+  posts: Array<CollectionEntry<"blog">>,
+) => {
   const root: Record<string, CategoryNode> = {};
 
   posts.forEach((post) => {
@@ -23,7 +25,7 @@ export const buildCategoryTree = async (posts: Array<CollectionEntry<"blog">>) =
           name: segment,
           fullPath: pathAcc,
           children: {},
-          postCount: 0
+          postCount: 0,
         };
       }
       curr[segment].postCount++;
