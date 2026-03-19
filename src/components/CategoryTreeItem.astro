@@ -58,7 +58,7 @@ const hasChildren = Object.keys(node.children).length > 0;
     }
   }
 
-  .cat-recursive-item .cat-recursive-item:not(+.cat-item) {
+  .cat-recursive-item .cat-recursive-item:not(.cat-item:last-child) {
     &::before {
       @apply absolute z-1 border-none;
       content: "";
