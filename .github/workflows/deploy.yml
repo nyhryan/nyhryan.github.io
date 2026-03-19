@@ -15,10 +15,10 @@ jobs:
     steps:
       - name: Checkout Git repository
         uses: actions/checkout@v5
-      - name: Build and upload website
-        uses: withastro/action@v5
       - name: Setup IndexNow Key
         run: echo ${{ secrets.INDEXNOW_KEY }} > dist/${{ secrets.INDEXNOW_KEY }}.txt
+      - name: Build and upload website
+        uses: withastro/action@v5
   deploy:
     needs: build
     runs-on: ubuntu-latest
