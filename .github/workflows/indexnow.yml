@@ -14,3 +14,4 @@ jobs:
         with:
           sitemap-location: 'https://blog.ataidev.cc/sitemap-0.xml'
           key: ${{ secrets.INDEXNOW_KEY }}
+          lastmod-required: false
