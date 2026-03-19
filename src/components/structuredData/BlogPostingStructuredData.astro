@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { SITE_TITLE } from "../../consts";
+
+type Props = CollectionEntry<"blog">["data"];
+
+const props = Astro.props;
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site);
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  name: SITE_TITLE,
+  url: pageUrl,
+  author: [{
+    "@type": "Person",
+    name: "YunHyeok Nam",
+    url: "https://github.com/nyhryan"
+  }],
+  datePublished: props.pubDate.toISOString(),
+  dateModified: props.updatedDate?.toISOString() ?? props.pubDate.toISOString(),
+  headline: props.title,
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

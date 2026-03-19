@@ -1,0 +1,102 @@
+---
+title: 06. 덱(Deque)
+description: 덱 자료구조에 대해 알아보아요.
+pubDate: 2023-07-25 13:38 +0900
+tags: [c, data-structure]
+---
+
+## 🔍 덱이란?
+
+![Deque1](./attachments/deque1.png)
+_덱의 기능들_
+
+덱(Deque - Double ended queue)은 이름에서 알 수 있듯이, 큐이긴 큐인데 양쪽을 쓸 수 있는 큐이다. 뒤쪽에서 넣고, 앞쪽에서 빼는 큐의 기능에다가, 앞쪽에서 넣고, 뒤에서 빼는 추가적인 기능이 존재한다. 잘 생각해보면, 스택의 기능도 가지고 있다. 뒤쪽에 넣고 뺴는 연산은 스택의 push, pop 연산과 똑같다. 따라서 덱 자료구조는 큐에 여러 기능을 더한 조금 더 융통성 있는 자료구조라 볼 수 있다.
+
+## 🧮 덱의 연산
+
+```yaml
+변수:
+  - 크기가 고정된 배열
+  - 큐의 맨 앞을 가르키는 변수
+  - 큐의 맨 뒤를 가르키는 변수
+
+연산:
+  - 뒤에 삽입 (Enqueue와 동일)
+  - 앞에 제거 (Dequeue와 동일)
+  - 뒤에 제거
+    - rear자리에 있는 값을 리턴;
+    - rear를 앞으로 한칸 땡긴다.
+    - rear = (rear - 1 + 배열 크기) % 배열 크기;
+  - 앞에 삽입
+    - front자리에 값을 삽입;
+    - front를 앞으로 한칸 땡긴다.
+    - front = (front - 1 + 배열 크기) % 배열 크기;
+
+기타연산:
+  - 출력
+  - rear 엿보기 (peek 연산)
+  - front 엿보기 (peek 연산)
+```
+
+뒤에 삽입하는 `insert_rear()`연산은 삽입하고 `rear`를 하나 뒤로 땡겨야한다. 따라서 공식은 `rear = (rear + 1) % MAX_QUEUE_SIZE`이다. (`MAX_QUEUE_SIZE`는 배열의 크기)
+
+마찬가지로 앞을 제거하는 `remove_front()` 연산은 하나 제거하고 `front`를 뒤로 땡겨야한다. 따라서 공식은 `front = (front + 1) % MAX_QUEUE_SIZE`이다.
+
+뒤를 제거하는 `remove_rear()`를 생각해보자. `rear`자리에 있는 값을 리턴해주고, `rear`를 앞으로 한칸 땡겨야한다. 따라서 공식은 `rear = (rear - 1) % MAX_QUEUE_SIZE`라고 생각할 수 있다. 하지만 현재 원형큐를 사용하고 있기 때문에 `rear`은 `0`이 될 수도 있다. 이러면 `rear = -1 % MAX_QUEUE_SIZE`가 되버린다. 나머지연산 `%`은 나누는 수를 더하고 나머지를 취해도 그 값은 똑같다. 예를 들면 `3 % 8 = 11 % 8 = 3`이다. 따라서 음수를 양수로 바꾸기위해 공식을 살짝 변형해서 쓰면 된다. `rear = (rear - 1  + MAX_QUEUE_SIZE) % MAX_QUEUE_SIZE`이다.
+
+마찬가지로 앞에 삽입하는 `insert_front()`연산을 생각해보자. `front`자리에 새 요소를 저장하고, `front`를 앞으로 한칸 땡겨야한다. 위에 설명한 `remove_rear()`의 경우와 똑같이, `front = (front - 1 + MAX_QUEUE_SIZE) % MAX_QUEUE_SIZE`를 해서 땡겨주면 된다.
+
+## 💡 덱의 구현
+
+```c title="main.c"
+void Deque_InsertFront(Deque* dq, element e)
+{
+    if (Deque_IsFull(dq))
+    {
+        fprintf(stderr, "Cannot insert rear : Deque is full!\n");
+        exit(1);
+    }
+    // 현재 front자리에 새 요소 저장
+    dq->arr[dq->front] = e;
+
+    // front를 앞으로 한칸 땡기기
+    dq->front = (dq->front - 1 + MAX_QUEUE_SIZE) % MAX_QUEUE_SIZE;
+}
+
+element Deque_RemoveRear(Deque* dq)
+{
+    if (Deque_IsEmpty(dq))
+    {
+        fprintf(stderr, "Cannot remove front : Deque is empty!\n");
+        exit(1);
+    }
+    // 현재 rear 자리에 있는 요소를 임시 저장
+    element temp = dq->arr[dq->rear];
+
+    // rear를 앞으로 한칸 땡기기
+    dq->rear = (dq->rear - 1 + MAX_QUEUE_SIZE) % MAX_QUEUE_SIZE;
+
+    // 임시 저장한 rear값 리턴
+    return temp;
+}
+```
+
+덱의 구현은 지난시간에 배운 원형큐를 응용하면 쉽게 할 수 있다. 사실은 코드를 그대로 쓰면 된다. 거기에 `insert_front(), remove_rear()` 연산만 추가하면 된다.
+
+## 💻 코드 전체
+
+[pastebin 보러가기](https://pastebin.com/kzDM3DqK)
+
+![output](./attachments/deque2.png)
+_실행결과_
+
+![explanation](./attachments/deque3.png)
+_숫자는 실행 순서를 말한다._
+
+⭐정리
+
+- 큐를 개선한 덱 자료구조에 대해 알아보았다.
+
+---
+
+참고서적 : C언어로 쉽게 풀어쓴 자료구조 (개정 3판), 천인국·공용해·하상호, 생능출판 - [Yes24바로가기](https://www.yes24.com/Product/Goods/69750539)

@@ -1,0 +1,51 @@
+{
+  "name": "ataidev-astro",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "npm run clean && npm run astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "clean": "powershell \"(remove-item -path \".astro\", \"dist\" -recurse -force -erroraction ignore)\""
+  },
+  "devDependencies": {
+    "@catppuccin/tailwindcss": "^1.0.0",
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/bun": "latest",
+    "@typescript-eslint/parser": "^8.57.0",
+    "eslint": "^10.0.3",
+    "eslint-plugin-astro": "^1.6.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "typescript-eslint": "^8.57.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@astro-community/astro-embed-youtube": "^0.5.10",
+    "@astrojs/check": "^0.9.8",
+    "@astrojs/mdx": "^5.0.1",
+    "@astrojs/sitemap": "^3.7.1",
+    "@astrojs/ts-plugin": "^1.10.7",
+    "@r4ai/remark-callout": "^0.6.2",
+    "@tailwindcss/vite": "^4.2.1",
+    "astro": "^5.18.1",
+    "astro-expressive-code": "^0.41.7",
+    "expressive-code-collapsible": "^0.1.0",
+    "mdast": "^3.0.0",
+    "nanostores": "^1.2.0",
+    "rehype-external-links": "^3.0.0",
+    "rehype-mathjax": "^7.1.0",
+    "remark-cjk-friendly": "^2.0.1",
+    "remark-cjk-friendly-gfm-strikethrough": "^2.0.1",
+    "remark-math": "^6.0.0",
+    "tailwindcss": "^4.2.1",
+    "unified": "^11.0.5"
+  }
+}
