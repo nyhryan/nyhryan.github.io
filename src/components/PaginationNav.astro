@@ -3,7 +3,7 @@ import type { Page } from "astro";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  pages?: Page<CollectionEntry<"blog">>;
+  pages?: Page<CollectionEntry<"blog">> | null;
 }
 
 const { pages } = Astro.props;

@@ -7,10 +7,9 @@ const tags = [...new Set(allPosts.flatMap(post => post.data.tags))];
 
 interface Props {
   currentCategory?: string;
-  currentTag?: string;
 }
 
-const { currentCategory, currentTag } = Astro.props;
+const { currentCategory } = Astro.props;
 ---
 
 <aside class="w-full flex flex-col gap-4 font-chiron">

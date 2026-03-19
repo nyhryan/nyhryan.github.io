@@ -1,11 +1,10 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { Image } from "astro:assets";
 
 type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
-const { title, description, pubDate, bannerImage, tags } = post.data;
+const { title, description, pubDate, tags } = post.data;
 const category = post.id.split("/").slice(0, -1).join("/");
 ---
 
@@ -46,7 +45,7 @@ const category = post.id.split("/").slice(0, -1).join("/");
         <ul class="flex flex-row flex-wrap gap-1 items-center">
           { tags.map((tag, index) => (
             <li>
-              <a href="#" class="no-underline hover:underline hover:text-ctp-lavender">{tag}</a>
+              <a href={`/tag/${tag}/`} class="no-underline hover:underline hover:text-ctp-lavender">{tag}</a>
               { index !== tags.length - 1 && <span class="cursor-default">/</span>}
             </li>
           )) }
