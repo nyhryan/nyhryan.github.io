@@ -3,7 +3,9 @@ import type { GetStaticPaths } from "astro";
 import { getCollection, render } from "astro:content";
 import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
 import PrevNextPostNav from "@components/PrevNextPostNav.astro";
-import type { BlogPost } from "../../utils/types.ts";
+import type { BlogPost } from "../../utils/types";
+import BaseHead from "@components/BaseHead.astro";
+import BlogPostingStructuredData from "@components/structuredData/BlogPostingStructuredData.astro";
 
 interface Props {
   post: BlogPost;
@@ -38,67 +40,35 @@ export const getStaticPaths = (async () => {
 
 const { post, prev, next } = Astro.props;
 const { Content } = await render(post);
-// <div id="image-modal" style={{ display: "none" }} class="fixed z-999 left-0 top-0 w-screen h-screen bg-ctp-subtext1/70 backdrop-blur-sm flex justify-center items-center">
-// <div class="flex flex-col-reverse justify-center items-center lg:items-start lg:flex-row gap-4 px-2 lg:px-8 lg:w-[66%] max-h-[66%]">
-// <div class="bg-ctp-base rounded-md p-4">
-// <img class="z-999 w-full rounded-md">
-// <p class="text-2xl pt-2 text-center text-ctp-text"></p>
-//   </div>
-//   <span class="cursor-pointer">
-// <svg xmlns="http://www.w3.org/2000/svg" class="rounded-md fill-ctp-base w-[32px] hover:fill-ctp-overlay2" viewBox="0 0 16 16">
-// <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-//   </svg>
-//   </span>
-//   </div>
-//   </div>
-// <script>
-// const modal = document.querySelector("#image-modal") as HTMLDivElement;
-// const modalWrapper = document.querySelector("#image-modal > div") as HTMLDivElement;
-// const modalImage = document.querySelector("#image-modal img") as HTMLImageElement;
-// const imageDescription = document.querySelector("#image-modal img+p") as HTMLParagraphElement;
-// const closeButton = document.querySelector("#image-modal span") as HTMLSpanElement;
-// document.querySelectorAll(".prose-catppuccin img[data-image-component='true']").values()
-//   .forEach((image) => {
-//     if (!(image instanceof HTMLImageElement)) return;
-//     image.addEventListener("click", () => {
-//       modalImage.src = image.src;
-//       modalImage.alt = image.alt;
-//       modal.style.display = "flex";
-//       imageDescription.innerText = image.alt ?? "Image description";
-//     });
-//   });
-// const hideModal = () => {
-//   modal.style.display = "none";
-//   imageDescription.innerText = "";
-// };
-// modalWrapper.addEventListener("click", hideModal);
-// closeButton.addEventListener("click", hideModal);
-// modalImage.addEventListener("click", hideModal);
-// window.addEventListener("click", (e) => {
-//   if (e.target === modal) {
-//     hideModal();
-//   }
-// });
-// </script>
 ---
 
-<BaseBlogLayout>
-  <main class="bg-ctp-base p-6 rounded-(--card-radius)">
-    <h1 class="text-4xl font-bold">{post.data.title}</h1>
-    <div class="flex flex-row items-center gap-2">
-      <svg class="w-(--text-sm) fill-ctp-subtext0 rounded-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
-        <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5z"/>
-      </svg>
-      <time class="text-ctp-subtext0 text-sm" datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString()}</time>
-    </div>
-    <div class="prose-catppuccin">
-      <Content />
-    </div>
-    <PrevNextPostNav prev={prev} next={next} />
-    <div class="giscus"></div>
-  </main>
-</BaseBlogLayout>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={post.data.title} description={post.data.description}/>
+    <BlogPostingStructuredData {...post.data} />
+  </head>
+  <body>
+    <BaseBlogLayout>
+      <main class="bg-ctp-base p-6 rounded-(--card-radius)">
+        <h1 class="text-4xl font-bold">{post.data.title}</h1>
+        <div class="flex flex-row items-center gap-2">
+          <svg class="w-(--text-sm) fill-ctp-subtext0 rounded-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
+            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5z"/>
+          </svg>
+          <time class="text-ctp-subtext0 text-sm" datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString()}</time>
+        </div>
+        <div class="prose-catppuccin">
+          <Content />
+        </div>
+        <PrevNextPostNav prev={prev} next={next} />
+        <div class="giscus"></div>
+      </main>
+    </BaseBlogLayout>
+  </body>
+</html>
+
 
 <script src="https://giscus.app/client.js"
   data-repo="nyhryan/nyhryan.github.io"

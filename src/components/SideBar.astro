@@ -12,7 +12,7 @@ interface Props {
 const { currentCategory } = Astro.props;
 ---
 
-<aside class="w-full flex flex-col gap-4 font-chiron">
+<div class="w-full flex flex-col gap-4 font-chiron">
   <div id="sidebar__category" class="bg-ctp-base rounded-(--card-radius) p-4">
     <details open>
       <summary>
@@ -35,7 +35,7 @@ const { currentCategory } = Astro.props;
       </ul>
     </details>
   </div>
-</aside>
+</div>
 
 <style>
   @reference "@styles/global.css";

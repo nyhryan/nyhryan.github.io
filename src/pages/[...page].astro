@@ -1,8 +1,12 @@
 ---
+import "@styles/global.css";
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
 import PostCardItem from "@components/PostCardItem.astro";
+import BaseHead from "@components/BaseHead.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import WebSiteStructuredData from "@components/structuredData/WebSiteStructuredData.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = (await getCollection("blog"))
@@ -13,10 +17,19 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 ---
 
-<BaseBlogLayout pages={page}>
-  {
-    page.data.map(post => (
-      <PostCardItem {...post} />
-    ))
-  }
-</BaseBlogLayout>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION}/>
+    <WebSiteStructuredData />
+  </head>
+  <body>
+    <BaseBlogLayout pages={page}>
+      {
+        page.data.map(post => (
+          <PostCardItem {...post} />
+        ))
+      }
+    </BaseBlogLayout>
+  </body>
+</html>

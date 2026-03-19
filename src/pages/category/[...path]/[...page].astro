@@ -3,7 +3,9 @@ import type { GetStaticPaths, Page } from "astro";
 import { getCollection } from "astro:content";
 import PostCardItem from "@components/PostCardItem.astro";
 import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
-import type { BlogPost } from "../../../utils/types.ts";
+import type { BlogPost } from "../../../utils/types";
+import BaseHead from "@components/BaseHead.astro";
+import WebSiteStructuredData from "@components/structuredData/WebSiteStructuredData.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const allPosts = (await getCollection("blog"))
@@ -41,14 +43,24 @@ interface Props {
 const { page, categoryName, fullCategoryPath } = Astro.props;
 ---
 
-<BaseBlogLayout currentCategory={categoryName} pages={page}>
-  <h3 class="text-4xl font-chiron font-black text-center">
-    Showing category:
-    <span class="font-bold underline">`{fullCategoryPath}`</span>
-  </h3>
-  {
-    page.data.map(post => (
-      <PostCardItem {...post} />
-    ))
-  }
-</BaseBlogLayout>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead />
+    <WebSiteStructuredData />
+  </head>
+  <body>
+    <BaseBlogLayout currentCategory={categoryName} pages={page}>
+      <h3 class="text-4xl font-chiron font-black text-center">
+        Showing category:
+        <span class="font-bold underline">`{fullCategoryPath}`</span>
+      </h3>
+      {
+        page.data.map(post => (
+          <PostCardItem {...post} />
+        ))
+      }
+    </BaseBlogLayout>
+  </body>
+</html>
+
