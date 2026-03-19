@@ -16,7 +16,7 @@ jobs:
       - name: Checkout Git repository
         uses: actions/checkout@v5
       - name: Setup IndexNow Key
-        run: echo ${{ secrets.INDEXNOW_KEY }} > ${{ secrets.INDEXNOW_KEY }}.txt
+        run: mkdir -p dist && echo ${{ secrets.INDEXNOW_KEY }} > dist/${{ secrets.INDEXNOW_KEY }}.txt
       - name: Build and upload website
         uses: withastro/action@v5
   deploy:
