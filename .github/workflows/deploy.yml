@@ -15,10 +15,19 @@ jobs:
     steps:
       - name: Checkout Git repository
         uses: actions/checkout@v5
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: latest
+      - name: Install and build
+        shell: bash
+        run: bun install && bunx astro build
       - name: Setup IndexNow Key
-        run: mkdir -p ${{ github.workspace }}/dist && echo ${{ secrets.INDEXNOW_KEY }} > ${{ github.workspace }}/dist/${{ secrets.INDEXNOW_KEY }}.txt
-      - name: Build and upload website
-        uses: withastro/action@v5
+        run: echo ${{ secrets.INDEXNOW_KEY }} > ./dist/${{ secrets.INDEXNOW_KEY }}.txt
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
