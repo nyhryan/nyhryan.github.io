@@ -3,10 +3,11 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "astro dev",
+    "dev": "npm run clear && npm run astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "clear": "pwsh -C {'remove-item -path .astro,dist -recurse -force -erroraction ignore -verbose'}"
   },
   "devDependencies": {
     "@catppuccin/tailwindcss": "^1.0.0",
