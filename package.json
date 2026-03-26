@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "clean": "powershell \"(remove-item -path \".astro\", \"dist\" -recurse -force -erroraction ignore)\""
+    "clean": "powershell \"(remove-item -path \".astro\", \"dist\" -recurse -force -erroraction ignore -verbose)\""
   },
   "devDependencies": {
     "@catppuccin/tailwindcss": "^1.0.0",
@@ -37,9 +37,9 @@
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^5.18.1",
     "astro-expressive-code": "^0.41.7",
+    "astro-seo": "^1.1.0",
     "expressive-code-collapsible": "^0.1.0",
     "mdast": "^3.0.0",
-    "nanostores": "^1.2.0",
     "rehype-external-links": "^3.0.0",
     "rehype-mathjax": "^7.1.0",
     "remark-cjk-friendly": "^2.0.1",

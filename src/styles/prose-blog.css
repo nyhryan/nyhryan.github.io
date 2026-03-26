@@ -25,10 +25,10 @@
     --tw-prose-td-borders: var(--catppuccin-color-surface0);
   }
 
-  @apply prose text-lg/8 lg:text-base/8 text-ctp-text;
+  @apply prose text-lg/8 lg:text-base/8 text-ctp-text text-pretty;
 
   /* Headings */
-  @apply prose-headings:font-black;
+  @apply prose-headings:font-black prose-headings:text-balance;
   @apply prose-h1:before:content-["#"] prose-h1:before:mr-1 prose-h1:before:text-ctp-surface2/70;
   @apply prose-h2:before:content-["##"] prose-h2:before:mr-1 prose-h2:before:text-ctp-surface2/70;
   @apply prose-h3:before:content-["###"] prose-h3:before:mr-1 prose-h3:before:text-ctp-surface2/70;

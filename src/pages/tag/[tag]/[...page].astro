@@ -1,20 +1,15 @@
 ---
-import type { GetStaticPaths, Page } from "astro";
+import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import type { BlogPost } from "../../../utils/types";
-import PostCardItem from "@components/PostCardItem.astro";
+import PostCardItem from "@components/common/PostCardItem.astro";
 import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
 import BaseHead from "@components/BaseHead.astro";
 import WebSiteStructuredData from "@components/structuredData/WebSiteStructuredData.astro";
 
-interface Props {
-  page: Page<BlogPost>;
-  tag: string;
-}
-
 export const getStaticPaths = (async ({ paginate }) => {
   const allPosts = (await getCollection("blog"))
-    .sort((a, b) => b.data.pubDate - a.data.pubDate);
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
   const tagPostRecord = allPosts.reduce(
     (acc, post) => {
@@ -35,7 +30,7 @@ export const getStaticPaths = (async ({ paginate }) => {
   return Object.entries(tagPostRecord)
     .flatMap(([tag, posts]) => (
       paginate(posts, {
-        pageSize: 5,
+        pageSize: 10,
         params: { tag }
       })
     ));
@@ -48,7 +43,7 @@ const { page } = Astro.props;
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <BaseHead />
+    <BaseHead noindex={true}/>
     <WebSiteStructuredData />
   </head>
   <body>

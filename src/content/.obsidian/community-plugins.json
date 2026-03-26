@@ -1,4 +1,6 @@
 [
   "better-markdown-links",
-  "consistent-attachments-and-links"
+  "consistent-attachments-and-links",
+  "templater-obsidian",
+  "mdx-as-md-obsidian"
 ]

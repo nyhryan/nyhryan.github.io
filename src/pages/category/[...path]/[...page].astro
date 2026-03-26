@@ -1,15 +1,16 @@
 ---
-import type { GetStaticPaths, Page } from "astro";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import { getCollection } from "astro:content";
-import PostCardItem from "@components/PostCardItem.astro";
+import PostCardItem from "@components/common/PostCardItem.astro";
 import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
 import type { BlogPost } from "../../../utils/types";
 import BaseHead from "@components/BaseHead.astro";
 import WebSiteStructuredData from "@components/structuredData/WebSiteStructuredData.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const allPosts = (await getCollection("blog"))
-    .sort((a, b) => b.data.pubDate - a.data.pubDate);
+  const allPosts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
   const pathMap = new Map<string, Array<BlogPost>>();
 
   allPosts.forEach((post) => {
@@ -24,29 +25,27 @@ export const getStaticPaths = (async ({ paginate }) => {
     });
   });
 
-  return Array.from(pathMap.entries()).flatMap(([categoryPath, posts]) => paginate(posts, {
-    pageSize: 5,
-    params: { path: categoryPath },
-    props: {
-      categoryName: categoryPath.split("/").pop(),
-      fullCategoryPath: categoryPath
-    }
-  }));
+  return Array.from(pathMap.entries()).flatMap(([categoryPath, posts]) =>
+    paginate(posts, {
+      pageSize: 10,
+      params: { path: categoryPath },
+      props: {
+        categoryName: categoryPath.split("/").pop(),
+        fullCategoryPath: categoryPath,
+      },
+    }),
+  );
 }) satisfies GetStaticPaths;
 
-interface Props {
-  page: Page<BlogPost>;
-  categoryName: string;
-  fullCategoryPath: string;
-}
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { page, categoryName, fullCategoryPath } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <BaseHead />
+    <BaseHead noindex={true}/>
     <WebSiteStructuredData />
   </head>
   <body>
@@ -55,12 +54,7 @@ const { page, categoryName, fullCategoryPath } = Astro.props;
         Showing category:
         <span class="font-bold underline">`{fullCategoryPath}`</span>
       </h3>
-      {
-        page.data.map(post => (
-          <PostCardItem {...post} />
-        ))
-      }
+      {page.data.map((post) => <PostCardItem {...post} />)}
     </BaseBlogLayout>
   </body>
 </html>
-

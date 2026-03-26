@@ -10,7 +10,8 @@
       "@components/*": ["./src/components/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@styles/*": ["./src/styles/*"],
-      "@attachments/*": ["./src/content/attachments/*"]
+      "@attachments/*": ["./src/content/attachments/*"],
+      "@consts": ["./src/consts.ts"],
     },
     "verbatimModuleSyntax": true
   }

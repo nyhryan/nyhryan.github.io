@@ -1,0 +1,65 @@
+---
+import type { BlogPost } from "../../utils/types";
+
+type Props = {
+  prev: BlogPost | null;
+  next: BlogPost | null;
+}
+
+const { prev, next } = Astro.props;
+
+---
+
+<section class="w-full flex flex-col sm:flex-row sm:justify-between gap-4 pb-4">
+  <!-- Next post -->
+  {
+    <div class=`relative w-full flex-1 p-2 pl-4 min-h-24 rounded-sm flex flex-col items-start border ${next ? "border-ctp-overlay2" : "border-ctp-surface0"} ${next ? "cursor-pointer" : "cursor-default"}`>
+      {
+        next ? (
+          <strong>Next</strong>
+          <a class="mt-auto text-left" href={`/blog/${next.id}`}>
+            <p>{next.data.title}</p>
+            <p class="text-sm/5 text-ctp-subtext0"><time datetime={next.data.pubDate.toISOString()}>{next.data.pubDate.toLocaleDateString()}</time></p>
+          </a>
+        ) : (<strong class="text-ctp-surface0">Next</strong>)
+      }
+    </div>
+  }
+
+  <!-- Previous Post -->
+  {
+    <div class=`relative w-full flex-1 p-2 pr-4 min-h-24 rounded-sm flex flex-col items-end border ${prev ? "border-ctp-overlay2" : "border-ctp-surface0"} ${prev ? "cursor-pointer" : "cursor-default"}`>
+      {
+        prev ? (
+          <strong>Previous</strong>
+          <a class="mt-auto text-right" href={`/blog/${prev.id}`}>
+            <p>{prev.data.title}</p>
+            <p class="text-sm/5 text-ctp-subtext0"><time datetime={prev.data.pubDate.toISOString()}>{prev.data.pubDate.toLocaleDateString()}</time></p>
+          </a>
+        ) : (<strong class="text-ctp-surface0">prev</strong>)
+      }
+    </div>
+  }
+</section>
+
+<style>
+  @reference "@styles/global.css";
+
+  section > div > a {
+    &::before {
+      content: "";
+      @apply absolute inset-0 z-1 cursor-pointer rounded-sm border-2 border-transparent;
+      transition: border-color 200ms;
+    }
+
+    &:hover::before,
+    &:focus::before {
+      @apply border-ctp-lavender/50;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+</style>
+

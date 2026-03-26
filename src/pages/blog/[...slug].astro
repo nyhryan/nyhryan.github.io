@@ -1,76 +1,81 @@
 ---
-import type { GetStaticPaths } from "astro";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import { getCollection, render } from "astro:content";
 import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
-import PrevNextPostNav from "@components/PrevNextPostNav.astro";
-import type { BlogPost } from "../../utils/types";
+import PrevNextPostNav from "@components/common/PrevNextPostNav.astro";
 import BaseHead from "@components/BaseHead.astro";
 import BlogPostingStructuredData from "@components/structuredData/BlogPostingStructuredData.astro";
 
-interface Props {
-  post: BlogPost;
-  prev?: BlogPost;
-  next?: BlogPost;
-}
-
 export const getStaticPaths = (async () => {
   return (await getCollection("blog"))
-    .sort((a, b) => a.data.pubDate - b.data.pubDate)
+    .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
     .map((post, i, arr) => {
       if (i > 0 || i < arr.length - 1) {
         return {
           params: { slug: post.id },
-          props: { post, prev: arr[i - 1], next: arr[i + 1] }
+          props: { post, prev: arr[i - 1], next: arr[i + 1] },
         };
-      }
-      else if (i == 0) {
+      } else if (i == 0) {
         return {
           params: { slug: post.id },
-          props: { post, prev: null, next: arr[i + 1] }
+          props: { post, prev: null, next: arr[i + 1] },
         };
-      }
-      else {
+      } else {
         return {
           params: { slug: post.id },
-          props: { post, prev: arr[i - 1], next: null }
+          props: { post, prev: arr[i - 1], next: null },
         };
       }
     });
 }) satisfies GetStaticPaths;
 
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
 const { post, prev, next } = Astro.props;
 const { Content } = await render(post);
+
+const updatedDate =
+  post.data.updatedDate ?? post.data.pubDate;
 ---
 
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang={post.data.locale}>
   <head>
-    <BaseHead title={post.data.title} description={post.data.description}/>
+    <BaseHead title={post.data.title} description={post.data.description} />
     <BlogPostingStructuredData {...post.data} />
   </head>
   <body>
     <BaseBlogLayout>
-      <main class="bg-ctp-base p-6 rounded-(--card-radius)">
-        <h1 class="text-4xl font-bold">{post.data.title}</h1>
-        <div class="flex flex-row items-center gap-2">
-          <svg class="w-(--text-sm) fill-ctp-subtext0 rounded-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
-            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5z"/>
-          </svg>
-          <time class="text-ctp-subtext0 text-sm" datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString()}</time>
+      <div class="bg-ctp-base p-4 sm:p-6 rounded-(--card-radius)">
+        <h1 class="text-4xl font-bold mb-2">{post.data.title}</h1>
+        <div class="flex flex-col items-end gap-1 text-ctp-subtext0 text-sm/tight">
+          <div>
+            <span>Published: </span>
+            <time datetime={post.data.pubDate.toISOString()}
+              >{post.data.pubDate.toLocaleDateString()}</time
+            >
+          </div>
+          <div>
+            <span>Last update: </span>
+            <time
+              datetime={updatedDate.toISOString()}
+              >{updatedDate.toLocaleDateString()}</time
+            >
+          </div>
         </div>
         <div class="prose-catppuccin">
           <Content />
         </div>
+        <hr class="my-4 text-ctp-surface0"/>
         <PrevNextPostNav prev={prev} next={next} />
         <div class="giscus"></div>
-      </main>
+      </div>
     </BaseBlogLayout>
   </body>
 </html>
 
-
-<script src="https://giscus.app/client.js"
+<script
+  src="https://giscus.app/client.js"
   data-repo="nyhryan/nyhryan.github.io"
   data-repo-id="R_kgDOPpedIQ"
   data-category="General"
@@ -83,5 +88,4 @@ const { Content } = await render(post);
   data-theme="catppuccin_frappe"
   data-lang="en"
   crossorigin="anonymous"
-  async>
-</script>
+  async></script>

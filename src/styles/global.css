@@ -2,15 +2,12 @@
 @import "@catppuccin/tailwindcss/frappe.css";
 @import "./fonts.css";
 @import "./prose-blog.css";
+@import "./callout.css";
 
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-sans:
-    Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
-    "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
-    "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-    sans-serif;
+  --font-sans: Pretendard, sans-serif;
   --font-mono: "Cascadia Code", Menlo, Monaco, "Courier New", monospace;
   --font-chiron: "Chiron GoRound TC", sans-serif;
 
@@ -25,6 +22,6 @@
     @apply scheme-light dark:scheme-dark latte:scheme-light;
   }
   body {
-    @apply text-lg lg:text-base text-ctp-text bg-ctp-crust;
+    @apply text-ctp-text bg-ctp-crust;
   }
 }

@@ -1,0 +1,21 @@
+---
+import "@styles/global.css";
+import BaseHead from "@components/BaseHead.astro";
+import BaseBlogLayout from "./BaseBlogLayout.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title="About me" description="Get to know about me." />
+  </head>
+  <body>
+    <BaseBlogLayout>
+      <div class="bg-ctp-base p-4 sm:p-6 rounded-(--card-radius)">
+        <div class="prose-catppuccin">
+          <slot />
+        </div>
+      </div>
+    </BaseBlogLayout>
+  </body>
+</html>

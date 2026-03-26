@@ -1,0 +1,104 @@
+---
+type Props = {
+  title: string;
+  open?: boolean;
+  class?: string;
+}
+
+const { title, open = false, class: className } = Astro.props;
+---
+
+<div class=`accordion-container bg-ctp-base rounded-(--card-radius) p-4 ${className}`>
+  <details open={open} class="group">
+    <summary
+      class="flex items-center justify-between cursor-pointer list-none list-image-none"
+    >
+      <span class="text-xl font-bold hover:text-ctp-lavender hover:underline select-none">{title}</span>
+      <svg
+        class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-ctp-lavender"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </summary>
+
+    <div
+      class="accordion-content overflow-hidden transition-[height,opacity] duration-300 ease-in-out opacity-0"
+    >
+      <div class="pt-4">
+        <slot />
+      </div>
+    </div>
+  </details>
+</div>
+
+<style>
+  @reference "@styles/global.css";
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details[open] .accordion-content {
+    opacity: 1;
+  }
+
+  .accordion-content {
+    height: 0;
+  }
+</style>
+
+<script>
+  function initAccordions() {
+    const accordions = document.querySelectorAll(".accordion-container");
+    accordions.forEach((container) => {
+      const details = container.querySelector<HTMLDetailsElement>("details");
+      const summary = container.querySelector<HTMLElement>("summary");
+      const content =
+        container.querySelector<HTMLElement>(".accordion-content");
+
+      if (!details || !summary || !content) return;
+
+      if (details.open) {
+        content.style.height = "auto";
+        content.style.opacity = "1";
+      }
+
+      summary.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        if (details.open) {
+          // Closing
+          content.style.height = `${content.scrollHeight}px`;
+          content.offsetHeight;
+          content.style.height = '0px';
+          content.style.opacity = '0';
+
+          setTimeout(() => {
+            details.open = false;
+          }, 300);
+        }
+        else {
+          // Opening
+          details.open = true;
+          content.style.height = "0px";
+          content.style.opacity = "0";
+          content.offsetHeight;
+          content.style.height = `${content.scrollHeight}px`;
+          content.style.opacity = "1";
+
+          setTimeout(() => {
+            content.style.height = "auto";
+          }, 300);
+        }
+      });
+    });
+  }
+
+  initAccordions();
+  document.addEventListener("astro:after-swap", initAccordions);
+</script>

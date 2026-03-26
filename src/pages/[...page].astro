@@ -3,15 +3,15 @@ import "@styles/global.css";
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
-import PostCardItem from "@components/PostCardItem.astro";
+import PostCardItem from "@components/common/PostCardItem.astro";
 import BaseHead from "@components/BaseHead.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { SITE_TITLE, SITE_DESCRIPTION } from  "@consts";
 import WebSiteStructuredData from "@components/structuredData/WebSiteStructuredData.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = (await getCollection("blog"))
-    .sort((a, b) => b.data.pubDate - a.data.pubDate);
-  return paginate(posts, { pageSize: 5 });
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  return paginate(posts, { pageSize: 10 });
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
@@ -20,7 +20,7 @@ const { page } = Astro.props;
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION}/>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} noindex={page.currentPage !== 1}/>
     <WebSiteStructuredData />
   </head>
   <body>
