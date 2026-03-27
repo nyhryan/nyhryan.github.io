@@ -11,7 +11,9 @@ import BaseBlogLayout from "./BaseBlogLayout.astro";
   </head>
   <body>
     <BaseBlogLayout>
-      <div class="bg-ctp-base p-4 sm:p-6 rounded-(--card-radius)">
+      <div
+        slot="main-content"
+        class="bg-ctp-base rounded-(--card-radius) p-4 sm:p-6">
         <div class="prose-catppuccin">
           <slot />
         </div>

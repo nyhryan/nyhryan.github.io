@@ -9,10 +9,11 @@ layout: ../layouts/MarkdownLayout.astro
 Hi, this is the 'about' page of me. I usually go with the nickname 'ATAI' in online.
 
 ### Academic background
+
 - 2022~2026:  
   Computer science barchelor's degree @ Hansung University, Seoul, S.Korea.
   - 2024~2025: Two-year full scholarship from KOSAF(**국가우수장학금(이공계)**). [Details(Korean)](https://www.kosaf.go.kr/ko/scholar.do?pg=scholarship05_06_01&naviParam=JH,04,03,11)
-  - Final GPA: *4.46/4.5*
+  - Final GPA: _4.46/4.5_
 - 2026~:  
   🚧 Building experiences... 🚧
 
@@ -23,7 +24,6 @@ Hi, this is the 'about' page of me. I usually go with the nickname 'ATAI' in onl
 - Language skills
   - English: ~~TOEIC 945~~ (Expired since 2021)
   - Japanese: JLPT N1 (2022.01)
-
 
 ### Interests
 

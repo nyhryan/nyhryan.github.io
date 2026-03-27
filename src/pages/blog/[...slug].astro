@@ -34,8 +34,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { post, prev, next } = Astro.props;
 const { Content } = await render(post);
 
-const updatedDate =
-  post.data.updatedDate ?? post.data.pubDate;
+const updatedDate = post.data.updatedDate ?? post.data.pubDate;
 ---
 
 <!doctype html>
@@ -46,46 +45,66 @@ const updatedDate =
   </head>
   <body>
     <BaseBlogLayout>
-      <div class="bg-ctp-base p-4 sm:p-6 rounded-(--card-radius)">
-        <h1 class="text-4xl font-bold mb-2">{post.data.title}</h1>
-        <div class="flex flex-col items-end gap-1 text-ctp-subtext0 text-sm/tight">
+      <div slot="main-content" class="bg-ctp-base rounded-(--card-radius) p-4 sm:p-6">
+        <h1 class="mb-2 text-4xl font-bold">{post.data.title}</h1>
+        <div class="text-ctp-subtext0 flex flex-col items-end gap-1 text-sm/tight">
           <div>
             <span>Published: </span>
-            <time datetime={post.data.pubDate.toISOString()}
-              >{post.data.pubDate.toLocaleDateString()}</time
-            >
+            <time datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate.toLocaleDateString()}
+            </time>
           </div>
           <div>
             <span>Last update: </span>
-            <time
-              datetime={updatedDate.toISOString()}
-              >{updatedDate.toLocaleDateString()}</time
-            >
+            <time datetime={updatedDate.toISOString()}>
+              {updatedDate.toLocaleDateString()}
+            </time>
           </div>
         </div>
         <div class="prose-catppuccin">
           <Content />
         </div>
-        <hr class="my-4 text-ctp-surface0"/>
+      </div>
+      <div slot="after-main">
+        <hr class="text-ctp-surface0 my-4" />
         <PrevNextPostNav prev={prev} next={next} />
-        <div class="giscus"></div>
+        <div class="giscus">
+          <script is:inline>
+            {
+              let localTheme = localStorage.getItem("theme");
+              const defaultTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+
+              const theme =
+                localTheme === "light"
+                  ? "catppuccin_latte"
+                  : localTheme === "dark"
+                    ? "catppuccin_frappe"
+                    : defaultTheme === "light"
+                      ? "catppuccin_latte"
+                      : "catppuccin_frappe";
+
+              const script = document.createElement("script");
+              script.src = "https://giscus.app/client.js";
+              script.dataset.repo = "nyhryan/nyhryan.github.io";
+              script.dataset.repoId = "R_kgDOPpedIQ";
+              script.dataset.category = "General";
+              script.dataset.categoryId = "DIC_kwDOPpedIc4CvCAo";
+              script.dataset.mapping = "pathname";
+              script.dataset.strict = "0";
+              script.dataset.reactionsEnabled = "1";
+              script.dataset.emitMetadata = "1";
+              script.dataset.inputPosition = "top";
+              script.dataset.theme = theme;
+              script.dataset.lang = "en";
+              script.dataset.loading = "lazy";
+              script.setAttribute("crossorigin", "anonymous");
+              script.async = true;
+
+              document.querySelector("div.giscus").appendChild(script);
+            }
+          </script>
+        </div>
       </div>
     </BaseBlogLayout>
   </body>
 </html>
-
-<script
-  src="https://giscus.app/client.js"
-  data-repo="nyhryan/nyhryan.github.io"
-  data-repo-id="R_kgDOPpedIQ"
-  data-category="General"
-  data-category-id="DIC_kwDOPpedIc4CvCAo"
-  data-mapping="pathname"
-  data-strict="0"
-  data-reactions-enabled="1"
-  data-emit-metadata="1"
-  data-input-position="top"
-  data-theme="catppuccin_frappe"
-  data-lang="en"
-  crossorigin="anonymous"
-  async></script>

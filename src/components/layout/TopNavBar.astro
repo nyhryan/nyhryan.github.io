@@ -1,28 +1,48 @@
 ---
 import DarkModeSwitch from "@components/common/DarkModeSwitch.astro";
-
 ---
 
-<nav class="bg-ctp-mantle font-chiron font-bold text-3xl p-4 relative w-full flex flex-row justify-between items-center gap-2 rounded-b-(--card-radius) transition-[border-radius] duration-500 ease-out">
+<nav
+  class="bg-ctp-mantle font-chiron relative flex w-full flex-row items-center justify-between gap-2 rounded-b-(--card-radius) p-4 text-3xl font-bold transition-[border-radius] duration-500 ease-out">
   <a href="/" class="flex-1">
     <span class="sr-only">ATAI Dev blog</span>
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-[30px] fill-ctp-text transition duration-300 hover:scale-110 hover:-rotate-12 hover:fill-ctp-lavender" viewBox="0 0 16 16">
-      <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="fill-ctp-text hover:fill-ctp-lavender w-[30px] transition duration-300 hover:scale-110 hover:-rotate-12"
+      viewBox="0 0 16 16">
+      <path
+        d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"
+      ></path>
     </svg>
   </a>
-  <input type="checkbox" id="nav-open" class="hidden"/>
-  <ul class="overflow-hidden max-h-0 absolute w-full top-full bg-ctp-mantle left-0 transition-[max-height] duration-200 ease-linear rounded-b-(--card-radius) md:max-h-none md:relative md:flex md:flex-row md:justify-center md:gap-x-4">
+  <input type="checkbox" id="nav-open" class="hidden" />
+  <ul
+    class="bg-ctp-mantle absolute top-full left-0 max-h-0 w-full overflow-hidden rounded-b-(--card-radius) transition-[max-height] duration-200 ease-linear md:relative md:flex md:max-h-none md:flex-row md:justify-center md:gap-x-4">
     <li>
-      <a href="/" class="px-4 py-3 text-ctp-text block hover:underline hover:decoration-ctp-lavender md:inline">Home</a>
+      <a
+        href="/"
+        class="text-ctp-text hover:decoration-ctp-lavender block px-4 py-3 hover:underline md:inline"
+        >Home</a
+      >
     </li>
     <li>
-      <a href="/about" class="px-4 py-3 text-ctp-text block hover:underline hover:decoration-ctp-lavender md:inline">About</a>
+      <a
+        href="/about"
+        class="text-ctp-text hover:decoration-ctp-lavender block px-4 py-3 hover:underline md:inline"
+        >About</a
+      >
     </li>
   </ul>
-  <label for="nav-open" class="cursor-pointer relative select-none md:hidden">
+  <label for="nav-open" class="relative cursor-pointer select-none md:hidden">
     <span class="sr-only">Toggle navigation menu</span>
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-[2rem] fill-ctp-text" viewBox="0 0 16 16">
-      <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="fill-ctp-text w-[2rem]"
+      viewBox="0 0 16 16">
+      <path
+        fill-rule="evenodd"
+        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+      ></path>
     </svg>
   </label>
   <div>

@@ -1,0 +1,45 @@
+---
+
+---
+
+<script>
+  import {
+    getCurrentTheme,
+    loadTheme,
+    initGiscusThemeSync,
+    updateGiscus,
+  } from "../../utils/themeManager";
+
+  function init() {
+    loadTheme();
+
+    // initialize giscus in blog post page
+    if (document.querySelector("div.giscus")) {
+      initGiscusThemeSync();
+    }
+  }
+
+  function bindInit() {
+    init();
+    window.swup.hooks.on("page:view", () => init);
+  }
+
+  if (window.swup) {
+    bindInit();
+  } else {
+    document.addEventListener(
+      "swup:enable",
+      bindInit,
+      { once: true }
+    );
+  }
+
+  window.addEventListener("message", (event) => {
+    if (event.origin !== "https://giscus.app") return;
+    if (!(typeof event.data === "object" && event.data.giscus)) return;
+
+    // force load theme for giscus
+    const theme = getCurrentTheme();
+    updateGiscus(theme);
+  });
+</script>

@@ -1,5 +1,5 @@
 ---
-import { SITE_TITLE } from  "@consts";
+import { SITE_TITLE } from "@consts";
 
 const pageUrl = new URL(Astro.url.pathname, Astro.site);
 
@@ -8,12 +8,18 @@ const structuredData = {
   "@type": "WebSite",
   name: SITE_TITLE,
   url: pageUrl,
-  author: [{
-    "@type": "Person",
-    name: "YunHyeok Nam",
-    url: "https://github.com/nyhryan"
-  }],
+  author: [
+    {
+      "@type": "Person",
+      name: "YunHyeok Nam",
+      url: "https://github.com/nyhryan",
+    },
+  ],
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(structuredData)}
+/>

@@ -25,14 +25,14 @@
     --tw-prose-td-borders: var(--catppuccin-color-surface0);
   }
 
-  @apply prose text-lg/8 lg:text-base/8 text-ctp-text text-pretty;
+  @apply prose text-ctp-text text-lg/8 text-pretty lg:text-base/8;
 
   /* Headings */
   @apply prose-headings:font-black prose-headings:text-balance;
-  @apply prose-h1:before:content-["#"] prose-h1:before:mr-1 prose-h1:before:text-ctp-surface2/70;
-  @apply prose-h2:before:content-["##"] prose-h2:before:mr-1 prose-h2:before:text-ctp-surface2/70;
-  @apply prose-h3:before:content-["###"] prose-h3:before:mr-1 prose-h3:before:text-ctp-surface2/70;
-  @apply prose-h4:before:content-["####"] prose-h4:before:mr-1 prose-h4:before:text-ctp-surface2/70;
+  @apply prose-h1:before:content-["#"] prose-h1:before:mr-1 prose-h1:before:text-ctp-overlay0/70;
+  @apply prose-h2:before:content-["##"] prose-h2:before:mr-1 prose-h2:before:text-ctp-overlay0/70;
+  @apply prose-h3:before:content-["###"] prose-h3:before:mr-1 prose-h3:before:text-ctp-overlay0/70;
+  @apply prose-h4:before:content-["####"] prose-h4:before:mr-1 prose-h4:before:text-ctp-overlay0/70;
 
   /* Texts */
   @apply prose-strong:font-bold prose-a:text-ctp-lavender-600;
@@ -52,7 +52,7 @@
 
   /* Caption under image using italics */
   [data-image-component="true"] + em {
-    @apply -mt-4 block text-center text-sm text-ctp-subtext0;
+    @apply text-ctp-subtext0 -mt-4 block text-center text-sm;
   }
 
   /* Italic text */

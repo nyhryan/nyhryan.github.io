@@ -13,15 +13,21 @@ const structuredData = {
   "@type": "BlogPosting",
   name: SITE_TITLE,
   url: pageUrl,
-  author: [{
-    "@type": "Person",
-    name: "YunHyeok Nam",
-    url: "https://github.com/nyhryan"
-  }],
+  author: [
+    {
+      "@type": "Person",
+      name: "YunHyeok Nam",
+      url: "https://github.com/nyhryan",
+    },
+  ],
   datePublished: props.pubDate.toISOString(),
   dateModified: props.updatedDate?.toISOString() ?? props.pubDate.toISOString(),
   headline: props.title,
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(structuredData)}
+/>

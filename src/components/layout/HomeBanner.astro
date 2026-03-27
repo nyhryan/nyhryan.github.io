@@ -1,23 +1,42 @@
 ---
-
 import bannerImage from "../../assets/banner.jpg";
 import { Image } from "astro:assets";
 ---
 
 <>
-  <Image class="object-top object-cover w-full h-full" src={bannerImage} alt="Blog banner" />
-  <svg class="absolute bottom-0 left-0 right-0 w-full h-[75px] fill-ctp-mantle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+  <Image
+    class="h-full w-full object-cover object-top"
+    src={bannerImage}
+    alt="Blog banner"
+  />
+  <svg
+    class="fill-ctp-mantle absolute right-0 bottom-0 left-0 h-[75px] w-full"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 24 150 28"
+    preserveAspectRatio="none"
+    shape-rendering="auto">
     <!-- Defining SVG element for waves -->
     <defs>
       <!-- Defining the wave path once to reuse it for creating multiple wave layers -->
-      <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+      <path
+        id="gentle-wave"
+        d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+      ></path>
     </defs>
     <g class="wave-parallax">
       <!-- Group of waves that will move at different speeds to create a parallax effect -->
-      <use xlink:href="#gentle-wave" x="48" y="0" class="fill-ctp-crust/70" /> <!-- First wave layer -->
-      <use xlink:href="#gentle-wave" x="48" y="3" class="fill-ctp-crust/50" /> <!-- Second wave layer -->
-      <use xlink:href="#gentle-wave" x="48" y="5" class="fill-ctp-crust/30" /> <!-- Third wave layer -->
-      <use xlink:href="#gentle-wave" x="48" y="7" class="fill-ctp-crust" /> <!-- Fourth wave layer -->
+      <use xlink:href="#gentle-wave" x="48" y="0" class="fill-ctp-crust/70"
+      ></use>
+      <!-- First wave layer -->
+      <use xlink:href="#gentle-wave" x="48" y="3" class="fill-ctp-crust/50"
+      ></use>
+      <!-- Second wave layer -->
+      <use xlink:href="#gentle-wave" x="48" y="5" class="fill-ctp-crust/30"
+      ></use>
+      <!-- Third wave layer -->
+      <use xlink:href="#gentle-wave" x="48" y="7" class="fill-ctp-crust"></use>
+      <!-- Fourth wave layer -->
     </g>
   </svg>
 </>

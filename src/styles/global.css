@@ -19,7 +19,7 @@
 
 @layer base {
   html {
-    @apply scheme-light dark:scheme-dark latte:scheme-light;
+    @apply latte:scheme-light scheme-light dark:scheme-dark;
   }
   body {
     @apply text-ctp-text bg-ctp-crust;

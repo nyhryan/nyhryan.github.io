@@ -12,6 +12,7 @@ import rehypeMathJaxChtml from "rehype-mathjax/chtml";
 import rehypeExternalLinks from "rehype-external-links";
 import { remarkObsidianLink } from "./src/libs/remarkObsidianLink";
 import mdx from "@astrojs/mdx";
+import swup from "@swup/astro";
 
 export default defineConfig({
   site: "https://blog.ataidev.cc",
@@ -23,6 +24,11 @@ export default defineConfig({
       plugins: [
         pluginCollapsible({ previewLines: 16 }),
       ],
+    }),
+    swup({
+      containers: ["#main-swup-container", "#sidebar"],
+      globalInstance: true,
+      debug: true
     }),
     sitemap({
       filter: (page) => (

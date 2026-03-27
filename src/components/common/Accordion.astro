@@ -3,19 +3,20 @@ type Props = {
   title: string;
   open?: boolean;
   class?: string;
-}
+  storageKey: string;
+};
 
-const { title, open = false, class: className } = Astro.props;
+const { title, open = false, class: className, storageKey } = Astro.props;
 ---
 
-<div class=`accordion-container bg-ctp-base rounded-(--card-radius) p-4 ${className}`>
-  <details open={open} class="group">
-    <summary
-      class="flex items-center justify-between cursor-pointer list-none list-image-none"
-    >
-      <span class="text-xl font-bold hover:text-ctp-lavender hover:underline select-none">{title}</span>
+<div class={className} data-storage-key={storageKey}>
+  <details open={open} class="group" data-acc-open={open ? "true" : "false"}>
+    <summary class="flex cursor-pointer list-none list-image-none items-center justify-between">
+      <span class="hover:text-ctp-lavender text-xl font-bold select-none hover:underline">
+        {title}
+      </span>
       <svg
-        class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-ctp-lavender"
+        class="accordion-chevron text-ctp-lavender h-5 w-5 transition-transform duration-300"
         viewBox="0 0 20 20"
         fill="currentColor"
       >
@@ -26,9 +27,7 @@ const { title, open = false, class: className } = Astro.props;
       </svg>
     </summary>
 
-    <div
-      class="accordion-content overflow-hidden transition-[height,opacity] duration-300 ease-in-out opacity-0"
-    >
+    <div class="accordion-content overflow-hidden opacity-0 transition-[height,opacity] duration-300 ease-in-out">
       <div class="pt-4">
         <slot />
       </div>
@@ -50,44 +49,88 @@ const { title, open = false, class: className } = Astro.props;
   .accordion-content {
     height: 0;
   }
+
+  details[data-acc-open="true"] .accordion-chevron {
+    transform: rotate(180deg);
+  }
+
+  details[data-acc-restoring="true"] .accordion-chevron {
+    transition: none;
+  }
 </style>
 
 <script>
+  import { initAccordionStore, getAccordionOpen, setAccordionOpen } from "@/utils/store.accordion";
+
+  function applyAccordionVisualState(details: HTMLDetailsElement, content: HTMLElement, isOpen: boolean, suppressAnimation = false) {
+    if (suppressAnimation) {
+      details.setAttribute("data-acc-restoring", "true");
+      content.style.transition = "none";
+    }
+
+    if (isOpen) {
+      details.open = true;
+      details.setAttribute("data-acc-open", "true");
+      content.style.height = "auto";
+      content.style.opacity = "1";
+    } else {
+      details.open = false;
+      details.setAttribute("data-acc-open", "false");
+      content.style.height = "0px";
+      content.style.opacity = "0";
+    }
+
+    if (suppressAnimation) {
+      void content.offsetHeight;
+      content.style.transition = "";
+      requestAnimationFrame(() => {
+        details.removeAttribute("data-acc-restoring");
+      });
+    }
+  }
+
   function initAccordions() {
     const accordions = document.querySelectorAll(".accordion-container");
-    accordions.forEach((container) => {
+    accordions.forEach((container, i) => {
+      const key = container.getAttribute("data-storage-key") ?? `accordion-${i}`;
+
       const details = container.querySelector<HTMLDetailsElement>("details");
       const summary = container.querySelector<HTMLElement>("summary");
-      const content =
-        container.querySelector<HTMLElement>(".accordion-content");
+      const content = container.querySelector<HTMLElement>(".accordion-content");
 
       if (!details || !summary || !content) return;
 
-      if (details.open) {
-        content.style.height = "auto";
-        content.style.opacity = "1";
-      }
+      // Restore open state
+      const restoredOpen = getAccordionOpen(key, details.open);
+      applyAccordionVisualState(details, content, restoredOpen, true);
+
+      if (summary.hasAttribute("data-acc-hook")) return;
 
       summary.addEventListener("click", (e) => {
         e.preventDefault();
+        const isCurrentlyOpen = details.open;
+        const nextOpen = !isCurrentlyOpen;
+        setAccordionOpen(key, nextOpen);
 
-        if (details.open) {
-          // Closing
+        // Closing
+        if (!nextOpen) {
+          details.setAttribute("data-acc-open", "false");
           content.style.height = `${content.scrollHeight}px`;
-          content.offsetHeight;
-          content.style.height = '0px';
-          content.style.opacity = '0';
+          void content.offsetHeight;
+          content.style.height = "0px";
+          content.style.opacity = "0";
 
           setTimeout(() => {
             details.open = false;
           }, 300);
-        }
+        } 
+        // Opening
         else {
-          // Opening
           details.open = true;
+          details.setAttribute("data-acc-open", "true");
           content.style.height = "0px";
           content.style.opacity = "0";
-          content.offsetHeight;
+          void content.offsetHeight;
           content.style.height = `${content.scrollHeight}px`;
           content.style.opacity = "1";
 
@@ -96,9 +139,21 @@ const { title, open = false, class: className } = Astro.props;
           }, 300);
         }
       });
+      summary.setAttribute("data-acc-hook", "true");
     });
   }
 
-  initAccordions();
-  document.addEventListener("astro:after-swap", initAccordions);
+  function bindAccordionHook() {
+    initAccordionStore();
+    initAccordions();
+    window.swup.hooks.on("page:view", () => {
+      initAccordions();
+    });
+  }
+
+  if (window.swup) {
+    bindAccordionHook();
+  } else {
+    document.addEventListener("swup:enable", bindAccordionHook, { once: true });
+  }
 </script>

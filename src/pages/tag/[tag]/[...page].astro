@@ -6,10 +6,10 @@ import PostCardItem from "@components/common/PostCardItem.astro";
 import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
 import BaseHead from "@components/BaseHead.astro";
 import WebSiteStructuredData from "@components/structuredData/WebSiteStructuredData.astro";
+import PaginationNav from "@components/common/PaginationNav.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const allPosts = (await getCollection("blog"))
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  const allPosts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
   const tagPostRecord = allPosts.reduce(
     (acc, post) => {
@@ -17,46 +17,47 @@ export const getStaticPaths = (async ({ paginate }) => {
       tags.forEach((t) => {
         if (t in acc) {
           acc[t].push(post);
-        }
-        else {
+        } else {
           acc[t] = [post];
         }
       });
       return acc;
     },
-    {} as Record<string, Array<BlogPost>>
+    {} as Record<string, Array<BlogPost>>,
   );
 
-  return Object.entries(tagPostRecord)
-    .flatMap(([tag, posts]) => (
-      paginate(posts, {
-        pageSize: 10,
-        params: { tag }
-      })
-    ));
+  return Object.entries(tagPostRecord).flatMap(([tag, posts]) =>
+    paginate(posts, {
+      pageSize: 10,
+      params: { tag },
+    }),
+  );
 }) satisfies GetStaticPaths;
 
 const { tag } = Astro.params;
 const { page } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <BaseHead noindex={true}/>
+    <BaseHead noindex={true} />
     <WebSiteStructuredData />
   </head>
   <body>
-    <BaseBlogLayout pages={page}>
-      <h3 class="text-4xl font-chiron font-black text-center">
-        Showing tag:
-        <span class="font-bold underline">`{tag}`</span>
-      </h3>
-      {
-        page.data.map(post => (
-          <PostCardItem {...post} />
-        ))
-      }
+    <BaseBlogLayout>
+      <div slot="main-content">
+        <h3 class="font-chiron mb-4 text-center text-4xl font-black">
+          Showing tag:
+          <span class="font-bold underline">`{tag}`</span>
+        </h3>
+        <div class=`mb-4 flex flex-col gap-y-4`>
+          {page.data.map((post) => <PostCardItem {...post} />)}
+        </div>
+      </div>
+      <div slot="after-main">
+        <PaginationNav pages={page} />
+      </div>
     </BaseBlogLayout>
   </body>
 </html>

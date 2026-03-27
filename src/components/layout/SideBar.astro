@@ -4,7 +4,7 @@ import CategoryTree from "@components/common/CategoryTree.astro";
 import Accordion from "@components/common/Accordion.astro";
 
 const allPosts = await getCollection("blog");
-const tags = [...new Set(allPosts.flatMap(post => post.data.tags))];
+const tags = [...new Set(allPosts.flatMap((post) => post.data.tags))];
 
 interface Props {
   currentCategory?: string;
@@ -13,20 +13,26 @@ interface Props {
 const { currentCategory } = Astro.props;
 ---
 
-<div class="flex flex-col items-stretch md:flex-row md:items-start lg:flex-col lg:items-stretch gap-4 font-chiron">
-  <Accordion title="Category" open={true} class={"flex-1"}>
-      <CategoryTree {currentCategory} />
+<div id="sidebar"
+  class="font-chiron flex flex-col items-stretch gap-4 md:flex-row md:items-start lg:flex-col lg:items-stretch">
+  <Accordion title="Category" 
+             open={true} 
+             class="flex-1 accordion-container bg-ctp-base rounded-(--card-radius) p-4"
+             storageKey="sidebar-category">
+    <CategoryTree currentCategory={currentCategory} />
   </Accordion>
-  <Accordion title="Tags" open={false}  class={"flex-1"}>
-    <ul class="flex flex-wrap flex-row gap-1.5 justify-start">
-        {
-          tags.map(tag => (
-            <li class="px-2 py-1 text-base/tight rounded-md bg-ctp-surface0/50 hover:bg-ctp-lavender/70 hover:underline hover:text-ctp-base transition duration-100 ease-out">
-              <a href={`/tag/${tag}`}>{tag}</a>
-            </li>
-          ))
-        }
-      </ul>
+  <Accordion title="Tags" 
+             open={false} 
+             class="flex-1 accordion-container bg-ctp-base rounded-(--card-radius) p-4"
+             storageKey="sidebar-tags">
+    <ul class="flex flex-row flex-wrap justify-start gap-1.5">
+      {
+        tags.map((tag) => (
+          <li class="bg-ctp-surface0/50 hover:bg-ctp-lavender/70 hover:text-ctp-base rounded-md px-2 py-1 text-base/tight transition duration-100 ease-out hover:underline">
+            <a href={`/tag/${tag}`}>{tag}</a>
+          </li>
+        ))
+      }
+    </ul>
   </Accordion>
 </div>
-

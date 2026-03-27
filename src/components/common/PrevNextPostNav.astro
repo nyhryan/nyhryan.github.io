@@ -1,65 +1,85 @@
 ---
-import type { BlogPost } from "../../utils/types";
+import type { BlogPost } from "@/utils/types";
 
 type Props = {
   prev: BlogPost | null;
   next: BlogPost | null;
-}
+};
 
 const { prev, next } = Astro.props;
-
 ---
 
-<section class="w-full flex flex-col sm:flex-row sm:justify-between gap-4 pb-4">
+<nav class="flex w-full flex-col gap-4 pb-4 sm:flex-row sm:justify-between">
   <!-- Next post -->
   {
-    <div class=`relative w-full flex-1 p-2 pl-4 min-h-24 rounded-sm flex flex-col items-start border ${next ? "border-ctp-overlay2" : "border-ctp-surface0"} ${next ? "cursor-pointer" : "cursor-default"}`>
-      {
-        next ? (
-          <strong>Next</strong>
+    <div
+      class:list={[
+        "relative grid min-h-24 w-full flex-1 grid-rows-[1fr_auto_auto] rounded-sm p-4",
+        { "border-ctp-overlay0 bg-ctp-base cursor-pointer border": next },
+        { "bg-ctp-mantle cursor-default": !next },
+      ]}>
+      <strong class:list={["text-xl text-left", { "text-ctp-surface0": !next }]}>Next</strong>
+      {next && (
+        <Fragment>
           <a class="mt-auto text-left" href={`/blog/${next.id}`}>
-            <p>{next.data.title}</p>
-            <p class="text-sm/5 text-ctp-subtext0"><time datetime={next.data.pubDate.toISOString()}>{next.data.pubDate.toLocaleDateString()}</time></p>
+            <p class="overflow-hidden text-nowrap text-ellipsis">{next.data.title}</p>
           </a>
-        ) : (<strong class="text-ctp-surface0">Next</strong>)
-      }
+          <p class="text-ctp-subtext0 text-sm/5 text-left">
+            <time datetime={next.data.pubDate.toISOString()}>
+              {next.data.pubDate.toLocaleDateString()}
+            </time>
+          </p>
+        </Fragment>
+      )}
     </div>
   }
 
   <!-- Previous Post -->
   {
-    <div class=`relative w-full flex-1 p-2 pr-4 min-h-24 rounded-sm flex flex-col items-end border ${prev ? "border-ctp-overlay2" : "border-ctp-surface0"} ${prev ? "cursor-pointer" : "cursor-default"}`>
-      {
-        prev ? (
-          <strong>Previous</strong>
+    <div
+      class:list={[
+        "relative grid min-h-24 w-full flex-1 grid-rows-[1fr_auto_auto] rounded-sm p-4",
+        { "border-ctp-overlay0 bg-ctp-base cursor-pointer border": prev },
+        { "border-ctp-surface0 cursor-default": !prev },
+      ]}>
+      <strong class:list={["text-xl text-right", { "text-ctp-surface0": !prev }]}>
+        Previous
+      </strong>
+      {prev && (
+        <Fragment>
           <a class="mt-auto text-right" href={`/blog/${prev.id}`}>
-            <p>{prev.data.title}</p>
-            <p class="text-sm/5 text-ctp-subtext0"><time datetime={prev.data.pubDate.toISOString()}>{prev.data.pubDate.toLocaleDateString()}</time></p>
+            <p class="overflow-hidden text-nowrap text-ellipsis">
+              {prev.data.title}
+            </p>
           </a>
-        ) : (<strong class="text-ctp-surface0">prev</strong>)
-      }
+          <p class="text-ctp-subtext0 text-right text-sm/5">
+            <time datetime={prev.data.pubDate.toISOString()}>
+              {prev.data.pubDate.toLocaleDateString()}
+            </time>
+          </p>
+        </Fragment>
+      )}
     </div>
   }
-</section>
+</nav>
 
 <style>
   @reference "@styles/global.css";
 
-  section > div > a {
+  a {
     &::before {
       content: "";
-      @apply absolute inset-0 z-1 cursor-pointer rounded-sm border-2 border-transparent;
-      transition: border-color 200ms;
+      @apply absolute inset-0 z-1 cursor-pointer rounded-sm border-2 border-transparent transition-[border-color] duration-200;
     }
 
     &:hover::before,
-    &:focus::before {
-      @apply border-ctp-lavender/50;
+    &:focus-visible::before {
+      @apply border-ctp-sky;
     }
 
-    &:focus {
+    &:hover,
+    &:focus-visible {
       outline: none;
     }
   }
 </style>
-

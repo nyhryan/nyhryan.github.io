@@ -8,29 +8,21 @@ const { title, description, pubDate, tags } = post.data;
 const category = post.id.split("/").slice(0, -1).join("/");
 ---
 
-<article class="w-full bg-ctp-base relative p-6 rounded-(--card-radius)">
+<article
+  class="bg-ctp-base relative h-40 w-full content-center rounded-(--card-radius) px-6 py-4 text-nowrap">
   <!-- Post title -->
-  <a href={`/blog/${post.id}`} class="mb-4 flex items-center">
-    <h3 class="font-black text-3xl inline">{title}</h3>
-    <svg
-      class="inline w-[var(--text-2xl)] align-middle fill-ctp-lavender opacity-0 transition-opacity duration-200 ease-out"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 16 16"
-    >
-      <path
-        fill-rule="evenodd"
-        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
-      ></path>
-    </svg>
+  <a href={`/blog/${post.id}`} class="mb-4 block">
+    <h3 class="overflow-hidden text-3xl font-black text-ellipsis">{title}</h3>
   </a>
   <!-- Post description -->
-  <p class="text-sm leading-tight pl-4 mb-4">{description}</p>
+  <p class="mb-4 overflow-hidden pl-4 text-sm leading-tight text-ellipsis">
+    {description}
+  </p>
   <!-- Post metadata(pubdate, tags, category) -->
   <div
-    class="pl-4 w-full flex flex-row gap-4 justify-start text-ctp-overlay1 text-sm"
-  >
+    class="text-ctp-overlay1 flex w-full flex-row justify-start gap-4 pl-4 text-sm">
     <!-- Pub date -->
-    <div class="flex gap-1 items-center">
+    <div class="flex items-center gap-1">
       <span class="sr-only">Published on</span>
       <div class="meta-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
@@ -47,7 +39,7 @@ const category = post.id.split("/").slice(0, -1).join("/");
       >
     </div>
     <!-- Tags -->
-    <div class="relative z-2 hidden md:flex flex-row gap-2 items-center">
+    <div class="relative z-2 hidden flex-row items-center gap-2 md:flex">
       <span class="sr-only">Tags</span>
       <div class="meta-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
@@ -56,14 +48,13 @@ const category = post.id.split("/").slice(0, -1).join("/");
           ></path>
         </svg>
       </div>
-      <ul class="flex flex-row flex-wrap gap-1 items-center">
+      <ul class="flex flex-row flex-wrap items-center gap-1">
         {
           tags.map((tag, index) => (
             <li>
               <a
                 href={`/tag/${tag}/`}
-                class="no-underline hover:underline hover:text-ctp-lavender"
-              >
+                class="hover:text-ctp-lavender no-underline hover:underline">
                 {tag}
               </a>
               {index !== tags.length - 1 && (
@@ -75,7 +66,7 @@ const category = post.id.split("/").slice(0, -1).join("/");
       </ul>
     </div>
     <!-- Category -->
-    <div class="relative z-2 flex flex-row gap-2 items-center">
+    <div class="relative z-2 flex flex-row items-center gap-2">
       <span class="sr-only">Category of {category}</span>
       <div class="meta-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
@@ -86,7 +77,7 @@ const category = post.id.split("/").slice(0, -1).join("/");
       </div>
       <a
         href={`/category/${category}/`}
-        class="no-underline hover:underline hover:text-ctp-lavender"
+        class="hover:text-ctp-lavender no-underline hover:underline"
         >{category}</a
       >
     </div>
@@ -114,9 +105,9 @@ const category = post.id.split("/").slice(0, -1).join("/");
   }
 
   .meta-icon {
-    @apply p-1 bg-ctp-lavender/10 rounded-sm;
+    @apply bg-ctp-lavender/10 rounded-sm p-1;
     svg {
-      @apply w-(--text-sm) fill-ctp-lavender;
+      @apply fill-ctp-lavender w-(--text-sm);
     }
   }
 </style>
