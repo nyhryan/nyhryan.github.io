@@ -1,3 +1,4 @@
 {
-  "origins": ["https://giscus.app", "http://localhost:4321"]
+  "origins": ["https://giscus.app"],
+  "originsRegex": ["http://localhost:[0-9]+"]
 }
