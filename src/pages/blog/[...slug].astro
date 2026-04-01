@@ -3,108 +3,70 @@ import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import { getCollection, render } from "astro:content";
 import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
 import PrevNextPostNav from "@components/common/PrevNextPostNav.astro";
-import BaseHead from "@components/BaseHead.astro";
 import BlogPostingStructuredData from "@components/structuredData/BlogPostingStructuredData.astro";
+import FallbackImage from "../../assets/fallback.jpg";
+
+import { sortPost } from "@utils/content";
 
 export const getStaticPaths = (async () => {
-  return (await getCollection("blog"))
-    .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
-    .map((post, i, arr) => {
-      if (i > 0 || i < arr.length - 1) {
-        return {
-          params: { slug: post.id },
-          props: { post, prev: arr[i - 1], next: arr[i + 1] },
-        };
-      } else if (i == 0) {
-        return {
-          params: { slug: post.id },
-          props: { post, prev: null, next: arr[i + 1] },
-        };
-      } else {
-        return {
-          params: { slug: post.id },
-          props: { post, prev: arr[i - 1], next: null },
-        };
-      }
-    });
+  return sortPost(await getCollection("blog"), "asc").map((post, i, arr) => {
+    return {
+      params: { slug: post.id },
+      props: {
+        post,
+        prev: i == 0 ? null : arr[i - 1],
+        next: i < arr.length - 1 ? arr[i + 1] : null,
+      },
+    };
+  });
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { post, prev, next } = Astro.props;
+const { title, description, locale, bannerImage = FallbackImage } = post.data;
 const { Content } = await render(post);
 
 const updatedDate = post.data.updatedDate ?? post.data.pubDate;
 ---
 
-<!doctype html>
-<html lang={post.data.locale}>
-  <head>
-    <BaseHead title={post.data.title} description={post.data.description} />
-    <BlogPostingStructuredData {...post.data} />
-  </head>
-  <body>
-    <BaseBlogLayout>
-      <div slot="main-content" class="bg-ctp-base rounded-(--card-radius) p-4 sm:p-6">
-        <h1 class="mb-2 text-4xl font-bold">{post.data.title}</h1>
-        <div class="text-ctp-subtext0 flex flex-col items-end gap-1 text-sm/tight">
-          <div>
-            <span>Published: </span>
-            <time datetime={post.data.pubDate.toISOString()}>
-              {post.data.pubDate.toLocaleDateString()}
-            </time>
-          </div>
-          <div>
-            <span>Last update: </span>
-            <time datetime={updatedDate.toISOString()}>
-              {updatedDate.toLocaleDateString()}
-            </time>
-          </div>
+<BaseBlogLayout 
+  title={title} 
+  description={description} 
+  locale={locale}
+  image={bannerImage}
+>
+  <BlogPostingStructuredData slot="structured-data" {...post.data} />
+  <div slot="main-content" class="rounded-(--card-radius) bg-(--card-color) p-4 font-ibm-plex-sans-kr sm:p-6 space-y-4 shadow-sm/40">
+    <header>
+      <!-- Title of the post -->
+      <h1 class="mb-2 text-4xl font-bold">{title}</h1>
+      <!-- Publication and update dates -->
+      <div class="flex flex-col items-end gap-1 text-sm/tight text-ctp-subtext0">
+        <div>
+          <span>Published:</span>
+          <time datetime={post.data.pubDate.toISOString()}>
+            {post.data.pubDate.toLocaleDateString()}
+          </time>
         </div>
-        <div class="prose-catppuccin">
-          <Content />
+        <div>
+          <span>Last update:</span>
+          <time datetime={updatedDate.toISOString()}>
+            {updatedDate.toLocaleDateString()}
+          </time>
         </div>
       </div>
-      <div slot="after-main">
-        <hr class="text-ctp-surface0 my-4" />
-        <PrevNextPostNav prev={prev} next={next} />
-        <div class="giscus">
-          <script is:inline>
-            {
-              let localTheme = localStorage.getItem("theme");
-              const defaultTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-
-              const theme =
-                localTheme === "light"
-                  ? "catppuccin_latte"
-                  : localTheme === "dark"
-                    ? "catppuccin_frappe"
-                    : defaultTheme === "light"
-                      ? "catppuccin_latte"
-                      : "catppuccin_frappe";
-
-              const script = document.createElement("script");
-              script.src = "https://giscus.app/client.js";
-              script.dataset.repo = "nyhryan/nyhryan.github.io";
-              script.dataset.repoId = "R_kgDOPpedIQ";
-              script.dataset.category = "General";
-              script.dataset.categoryId = "DIC_kwDOPpedIc4CvCAo";
-              script.dataset.mapping = "pathname";
-              script.dataset.strict = "0";
-              script.dataset.reactionsEnabled = "1";
-              script.dataset.emitMetadata = "1";
-              script.dataset.inputPosition = "top";
-              script.dataset.theme = theme;
-              script.dataset.lang = "en";
-              script.dataset.loading = "lazy";
-              script.setAttribute("crossorigin", "anonymous");
-              script.async = true;
-
-              document.querySelector("div.giscus").appendChild(script);
-            }
-          </script>
-        </div>
-      </div>
-    </BaseBlogLayout>
-  </body>
-</html>
+    </header>
+    
+    <!-- Main post content -->
+    <div class="prose prose-catppuccin">
+      <Content />
+    </div>
+  </div>
+  
+  <!-- After main content -->
+  <div slot="after-main">
+    <hr class="my-4 text-ctp-surface0" />
+    <PrevNextPostNav prev={prev} next={next} />
+  </div>
+</BaseBlogLayout>

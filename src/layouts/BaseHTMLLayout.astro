@@ -1,0 +1,19 @@
+---
+import "@styles/global.css";
+
+type Props = {
+  locale?: "en" | "ko";
+};
+
+const { locale = "en" } = Astro.props;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <slot name="head" />
+  </head>
+  <body>
+    <slot name="body" />
+  </body>
+</html>

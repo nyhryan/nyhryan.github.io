@@ -8,13 +8,12 @@ export default defineConfig([
   globalIgnores([".astro", ".idea", "dist", "node_modules", "public", ".obsidian"]),
   eslint.configs.recommended,
   tseslint.configs.recommended,
-  // stylistic.configs.customize({
-  //   indent: 2,
-  //   quotes: "double",
-  //   semi: true,
-  //   jsx: false,
-  //   commaDangle: "only-multiline",
-  // }),
+  stylistic.configs.customize({
+    indent: 2,
+    quotes:"double",
+    semi: true,
+    jsx: true,
+  }),
   eslintPluginAstro.configs.recommended,
   eslintPluginAstro.configs["jsx-a11y-recommended"],
 ]);

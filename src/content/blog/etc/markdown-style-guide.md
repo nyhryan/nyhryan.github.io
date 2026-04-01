@@ -35,9 +35,22 @@ Bold: **This is bold**
 
 Italic: _This is italic_
 
+
 Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.
 
 Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.
+
+## Image
+
+```markdown
+![Image](./attachments/fallback.jpg)
+_Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat._
+```
+
+### Output
+![Image](./attachments/fallback.jpg)
+_Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat._
+
 
 ## Callouts
 
@@ -126,14 +139,17 @@ Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sap
 
 > [!note]
 > Lorem ipsum dolor sit amet
+> **BOLD** text and *italic* text
 
 > [!abstract]
 > Lorem ipsum dolor sit amet
+> ## heading in callout
+> some content
 
-> [!summary]
+> [!summary] With title
 > Lorem ipsum dolor sit amet
 
-> [!tldr]
+> [!tldr] With **BOLD** and *italic* title
 > Lorem ipsum dolor sit amet
 
 > [!info]
@@ -251,8 +267,19 @@ The blockquote element represents content that is quoted from another source, op
 
 [^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest, November 18, 2015.
 
-> [!note] Note here
-> body here
+## Footnotes
+
+```markdown
+According to something[^2], ...
+
+[^2]: Something happened at 2026.
+```
+
+### Output
+
+According to something[^2], ...
+
+[^2]: Something happened at 2026.
 
 ## Tables
 
@@ -304,6 +331,83 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
     <p>Test</p>
   </body>
 </html>
+```
+
+### Expressive Code
+
+Documentation: [Expressive Code](https://expressive-code.com/key-features/syntax-highlighting/)
+
+#### Diff example
+
+````markdown
+```diff lang="js"
+  function thisIsJavaScript() {
+    // This entire block gets highlighted as JavaScript,
+    // and we can still add diff markers to it!
+-   console.log('Old code to be removed')
++   console.log('New and shiny code!')
+  }
+```
+````
+
+#### Output
+
+```diff lang="js"
+  function thisIsJavaScript() {
+    // This entire block gets highlighted as JavaScript,
+    // and we can still add diff markers to it!
+-   console.log('Old code to be removed')
++   console.log('New and shiny code!')
+  }
+```
+
+### Collapsible codeblock
+
+Used [Expressive Code Collapsible plugin](https://frostybee.github.io/expressive-code-collapsible/)
+
+````markdown nocollapse {1} ins="collapse" frame="none"
+```c collapse
+// code/game/q_math.c
+float Q_rsqrt( float number )
+{
+	long i;
+	float x2, y;
+	const float threehalfs = 1.5F;
+
+	x2 = number * 0.5F;
+	y  = number;
+	i  = * ( long * ) &y;                       // evil floating point bit level hacking
+	i  = 0x5f3759df - ( i >> 1 );               // what the fuck?
+	y  = * ( float * ) &i;
+	y  = y * ( threehalfs - ( x2 * y * y ) );   // 1st iteration
+//	y  = y * ( threehalfs - ( x2 * y * y ) );   // 2nd iteration, this can be removed
+
+	return y;
+}
+```
+````
+
+Add `collapse` keyword to force-fold the codeblock.
+
+### Output
+
+```c collapse
+float Q_rsqrt( float number )
+{
+	long i;
+	float x2, y;
+	const float threehalfs = 1.5F;
+
+	x2 = number * 0.5F;
+	y  = number;
+	i  = * ( long * ) &y;                       // evil floating point bit level hacking
+	i  = 0x5f3759df - ( i >> 1 );               // what the fuck?
+	y  = * ( float * ) &i;
+	y  = y * ( threehalfs - ( x2 * y * y ) );   // 1st iteration
+//	y  = y * ( threehalfs - ( x2 * y * y ) );   // 2nd iteration, this can be removed
+
+	return y;
+}
 ```
 
 ## List Types

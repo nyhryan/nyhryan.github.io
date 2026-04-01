@@ -1,5 +1,5 @@
 ---
-import type { BlogPost } from "@/utils/types";
+import type { BlogPost } from "@utils/types";
 
 type Props = {
   prev: BlogPost | null;
@@ -9,22 +9,22 @@ type Props = {
 const { prev, next } = Astro.props;
 ---
 
-<nav class="flex w-full flex-col gap-4 pb-4 sm:flex-row sm:justify-between">
+<nav class="flex w-full flex-col gap-4 pb-4 sm:flex-row sm:justify-between" aria-label="Navigate post">
   <!-- Next post -->
   {
     <div
       class:list={[
-        "relative grid min-h-24 w-full flex-1 grid-rows-[1fr_auto_auto] rounded-sm p-4",
-        { "border-ctp-overlay0 bg-ctp-base cursor-pointer border": next },
+        "relative grid min-h-24 w-full flex-1 grid-rows-[1fr_auto_auto] rounded-(--card-radius) p-4 shadow-sm/40",
+        { "cursor-pointer bg-ctp-base": next },
         { "bg-ctp-mantle cursor-default": !next },
       ]}>
-      <strong class:list={["text-xl text-left", { "text-ctp-surface0": !next }]}>Next</strong>
+      <strong class:list={["text-left text-xl", { "text-ctp-surface0": !next }]}>Next</strong>
       {next && (
         <Fragment>
           <a class="mt-auto text-left" href={`/blog/${next.id}`}>
             <p class="overflow-hidden text-nowrap text-ellipsis">{next.data.title}</p>
           </a>
-          <p class="text-ctp-subtext0 text-sm/5 text-left">
+          <p class="text-left text-sm/5 text-ctp-subtext0">
             <time datetime={next.data.pubDate.toISOString()}>
               {next.data.pubDate.toLocaleDateString()}
             </time>
@@ -38,13 +38,11 @@ const { prev, next } = Astro.props;
   {
     <div
       class:list={[
-        "relative grid min-h-24 w-full flex-1 grid-rows-[1fr_auto_auto] rounded-sm p-4",
-        { "border-ctp-overlay0 bg-ctp-base cursor-pointer border": prev },
-        { "border-ctp-surface0 cursor-default": !prev },
+        "relative grid min-h-24 w-full flex-1 grid-rows-[1fr_auto_auto] rounded-(--card-radius) p-4 shadow-sm/40",
+        { "cursor-pointer bg-ctp-base": prev },
+        { "cursor-default border-ctp-surface0": !prev },
       ]}>
-      <strong class:list={["text-xl text-right", { "text-ctp-surface0": !prev }]}>
-        Previous
-      </strong>
+      <strong class:list={["text-right text-xl", { "text-ctp-surface0": !prev }]}>Previous</strong>
       {prev && (
         <Fragment>
           <a class="mt-auto text-right" href={`/blog/${prev.id}`}>
@@ -52,7 +50,7 @@ const { prev, next } = Astro.props;
               {prev.data.title}
             </p>
           </a>
-          <p class="text-ctp-subtext0 text-right text-sm/5">
+          <p class="text-right text-sm/5 text-ctp-subtext0">
             <time datetime={prev.data.pubDate.toISOString()}>
               {prev.data.pubDate.toLocaleDateString()}
             </time>
@@ -68,18 +66,17 @@ const { prev, next } = Astro.props;
 
   a {
     &::before {
-      content: "";
-      @apply absolute inset-0 z-1 cursor-pointer rounded-sm border-2 border-transparent transition-[border-color] duration-200;
+      @apply absolute inset-0 z-1 cursor-pointer rounded-(--card-radius) outline-2 outline-transparent transition-[outline-color] duration-200 content-[""];
     }
 
     &:hover::before,
     &:focus-visible::before {
-      @apply border-ctp-sky;
+      @apply outline-(--color-primary);
     }
 
     &:hover,
     &:focus-visible {
-      outline: none;
+      @apply outline-none;
     }
   }
 </style>

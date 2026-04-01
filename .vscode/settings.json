@@ -1,5 +1,7 @@
 {
   "files.associations": {
     "*.css": "tailwindcss"
-  }
+  },
+  "todo-tree.tree.showBadges": true,
+  "todo-tree.tree.disableCompactFolders": true
 }

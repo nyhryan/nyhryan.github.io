@@ -1,36 +1,25 @@
 ---
-import "@styles/global.css";
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
-import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
 import PostCardItem from "@components/common/PostCardItem.astro";
-import BaseHead from "@components/BaseHead.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "@consts";
-import WebSiteStructuredData from "@components/structuredData/WebSiteStructuredData.astro";
 import PaginationNav from "@components/common/PaginationNav.astro";
+import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
+import { sortPost } from "@utils/content";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  const posts = sortPost(await getCollection("blog"), "desc");
   return paginate(posts, { pageSize: 10 });
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} noindex={page.currentPage !== 1} />
-    <WebSiteStructuredData />
-  </head>
-  <body>
-    <BaseBlogLayout>
-      <div slot="main-content" class=`mb-4 flex flex-col gap-y-4`>
-        {page.data.map((post) => <PostCardItem {...post} />)}
-      </div>
-      <div slot="after-main">
-        <PaginationNav pages={page} />
-      </div>
-    </BaseBlogLayout>
-  </body>
-</html>
+<BaseBlogLayout noindex={page.currentPage !== 1} currentCategory={null} currentTag={null}>
+  <div slot="main-content" class="mb-4 flex flex-col gap-y-4">
+    <h1 class="sr-only">List of all posts</h1>
+    {page.data.map((post) => <PostCardItem {...post} />)}
+  </div>
+  <div slot="after-main">
+    <PaginationNav pages={page} />
+  </div>
+</BaseBlogLayout>

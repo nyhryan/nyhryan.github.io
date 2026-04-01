@@ -1,0 +1,22 @@
+---
+import BaseHead from "@components/layout/BaseHead.astro";
+import BaseHTMLLayout from "@layouts/BaseHTMLLayout.astro";
+import "@styles/global.css";
+import { image } from "astro:config/server";
+---
+
+<BaseHTMLLayout>
+  <BaseHead slot="head" />
+
+  <div slot="body" class="flex flex-col gap-2 m-4 p-1 rounded-md min-w-32 min-h-32 bg-(--color-background-light) border">
+    <p class="text-(--color-text)">Normal text</p>
+    <p class="text-(--color-text-dim)">Dimmed text</p>
+    <p class="text-(--color-primary)"><strong>Primary color</strong></p>
+    <p class="text-(--color-secondary)"><em>Secondary color</em></p>
+    <p class="bg-(--color-accent) text-ctp-base">Accent color</p>
+    <p class="bg-(--color-text) text-(--color-text-inverse)">inverse</p>
+    <p>
+      Visit here: <a class="anchor-link" href="#">Hover underline</a>
+    </p>
+  </div>
+</BaseHTMLLayout>

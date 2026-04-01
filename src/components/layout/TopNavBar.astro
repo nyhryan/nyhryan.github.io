@@ -1,66 +1,110 @@
 ---
-import DarkModeSwitch from "@components/common/DarkModeSwitch.astro";
+import LightModeToggleButton from "@components/common/LightModeToggleButton.astro";
+
+const page = Astro.url;
+function isAriaCurrent(path: string): "page" | undefined {
+  if (path === Astro.url.pathname) return "page"
+  else return undefined;
+}
 ---
 
 <nav
-  class="bg-ctp-mantle font-chiron relative flex w-full flex-row items-center justify-between gap-2 rounded-b-(--card-radius) p-4 text-3xl font-bold transition-[border-radius] duration-500 ease-out">
-  <a href="/" class="flex-1">
+  id="primary-nav"
+  aria-label="Primary nav"
+  class="p-3 sm:px-8 sm:py-2 relative flex flex-row items-center justify-between bg-(--color-background-light) transition-[border-radius] duration-100 sm:rounded-b-(--card-radius) gap-x-4"
+  x-bind:class="open ? 'rounded-b-0' : 'rounded-b-(--card-radius)'"
+  x-data={`{
+    open:false,
+    toggle() {
+      this.open = !this.open;
+    }
+  }`}
+>
+  <!-- Home button -->
+  <a href="/" class="w-8 h-8 grid flex-1 sm:flex-none">
     <span class="sr-only">ATAI Dev blog</span>
     <svg
+      class="fill-ctp-text w-7.5 transition duration-300 hover:scale-110 hover:-rotate-12 hover:fill-(--color-primary)"
       xmlns="http://www.w3.org/2000/svg"
-      class="fill-ctp-text hover:fill-ctp-lavender w-[30px] transition duration-300 hover:scale-110 hover:-rotate-12"
-      viewBox="0 0 16 16">
+      viewBox="0 0 16 16"
+      aria-hidden="true"
+    >
       <path
         d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"
       ></path>
     </svg>
   </a>
-  <input type="checkbox" id="nav-open" class="hidden" />
-  <ul
-    class="bg-ctp-mantle absolute top-full left-0 max-h-0 w-full overflow-hidden rounded-b-(--card-radius) transition-[max-height] duration-200 ease-linear md:relative md:flex md:max-h-none md:flex-row md:justify-center md:gap-x-4">
-    <li>
-      <a
-        href="/"
-        class="text-ctp-text hover:decoration-ctp-lavender block px-4 py-3 hover:underline md:inline"
-        >Home</a
+
+  <!-- Hidden hamburger toggle checkbox -->
+  <button
+    aria-controls="topnav-menu"
+    class="relative cursor-pointer transition-all duration-200 ease-in-out select-none sm:hidden"
+    x-bind:aria-expanded="open"
+    x-bind:class="open ? 'rotate-90' : 'rotate-0'"
+    x-on:click.debounce.100ms="toggle()"
+  >
+    <!-- Hamburger menu icon -->
+    <div class="flex h-8 w-8 items-center justify-center" x-show="!open">
+      <span class="sr-only">Open navigation menu</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="fill-ctp-text w-[2rem]"
+        viewBox="0 0 16 16"
       >
-    </li>
-    <li>
-      <a
-        href="/about"
-        class="text-ctp-text hover:decoration-ctp-lavender block px-4 py-3 hover:underline md:inline"
-        >About</a
+        <path
+          fill-rule="evenodd"
+          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+        ></path>
+      </svg>
+    </div>
+    <!-- Close button -->
+    <div class="flex h-8 w-8 items-center justify-center" x-show="open" x-cloak>
+      <span class="sr-only">Close navigation menu</span>
+      <svg
+        class="fill-ctp-text w-[1.5rem]"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 16 16"
       >
-    </li>
-  </ul>
-  <label for="nav-open" class="relative cursor-pointer select-none md:hidden">
-    <span class="sr-only">Toggle navigation menu</span>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="fill-ctp-text w-[2rem]"
-      viewBox="0 0 16 16">
-      <path
-        fill-rule="evenodd"
-        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-      ></path>
-    </svg>
-  </label>
-  <div>
-    <DarkModeSwitch />
+        <path
+          d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+        ></path>
+      </svg>
+    </div>
+  </button>
+
+  <!-- Menu(home, about) -->
+  <div
+    id="topnav-menu-mobile"
+    class="absolute top-full left-0 -z-1 w-full bg-(--color-background-light) border-t-2 border-t-ctp-surface0 sm:static sm:block! sm:z-auto sm:border-t-0 sm:w-auto rounded-b-(--card-radius)"
+    x-show="open"
+    x-cloak
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="-translate-y-full"
+    x-transition:enter-end="translate-y-0"
+    x-transition:leave="transition ease-in duration-300"
+    x-transition:leave-start="translate-y-0"
+    x-transition:leave-end="-translate-y-full"
+  >
+    <ul class="sm:flex sm:flex-row sm:justify-center sm:gap-x-24 text-2xl sm:text-3xl font-black">
+      <li class="p-2 hover:bg-(--color-item-hover) hover:text-(--color-primary) sm:hover:underline sm:hover:underline-(--color-primary) sm:hover:bg-transparent transition-colors duration-200">
+        <a href="/" aria-current={isAriaCurrent("/")} class="aria-[current='page']:underline">Home</a>
+      </li>
+      <li class="p-2 hover:bg-(--color-item-hover) hover:text-(--color-primary) sm:hover:underline sm:hover:underline-(--color-primary) sm:hover:bg-transparent transition-colors duration-200">
+        <a href="/about" aria-current={isAriaCurrent("/about")} class="aria-[current='page']:underline">About</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Light mode toggle button -->
+  <div class="w-8 h-8 grid">
+    <LightModeToggleButton />
   </div>
 </nav>
 
 <style>
   @reference "@styles/global.css";
 
-  #nav-open:checked {
-    & ~ ul {
-      max-height: 240px !important;
-    }
-  }
-
-  nav:has(#nav-open:checked) {
-    border-radius: 0;
-    @apply transition-[border-radius] duration-200 ease-out;
+  [x-cloak] {
+    display: none !important;
   }
 </style>

@@ -7,7 +7,7 @@ export interface CategoryNode {
   postCount: number;
 }
 
-export const buildCategoryTree = async (
+export const buildCategoryTree = (
   posts: Array<CollectionEntry<"blog">>,
 ) => {
   const root: Record<string, CategoryNode> = {};

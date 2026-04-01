@@ -1,0 +1,13 @@
+---
+
+---
+
+{/* Load light/darkmode after DOMcontent is loaded */}
+<script>
+  import { loadTheme } from "@utils/themeManager";
+
+  document.addEventListener("DOMContentLoaded", ({ target }) => {
+    const doc = (target instanceof Document) ? target : document;
+    loadTheme(doc);
+  });
+</script>

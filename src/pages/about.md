@@ -47,6 +47,8 @@ This blog is built with the following tools.
 
 - [Astro framework](https://astro.build/)
 - [tailwindcss](https://tailwindcss.com/)
+- [Alpine.js - Your new, lightweight, JavaScript framework.](https://alpinejs.dev/)
+- [swup - Versatile and extensible page transition library for server-rendered websites](https://swup.js.org/)
 - [Bun](https://bun.com/)
 
 You can check the project repository [here](https://github.com/nyhryan/nyhryan.github.io/).

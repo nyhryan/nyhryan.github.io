@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { SITE_TITLE } from "@consts";
+import { SITE_TITLE, SITE_CONFIG } from "@consts";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -16,8 +16,8 @@ const structuredData = {
   author: [
     {
       "@type": "Person",
-      name: "YunHyeok Nam",
-      url: "https://github.com/nyhryan",
+      name: SITE_CONFIG.social.name,
+      url: SITE_CONFIG.social.github,
     },
   ],
   datePublished: props.pubDate.toISOString(),

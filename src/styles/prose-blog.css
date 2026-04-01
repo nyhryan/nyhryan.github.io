@@ -1,75 +1,108 @@
 @utility prose-catppuccin {
   /* https://github.com/catppuccin/tailwindcss/pull/45/changes */
-  & > * {
-    --tw-prose-body: var(--catppuccin-color-text);
-    --tw-prose-headings: var(--catppuccin-color-text);
+  &.prose {
+    --tw-prose-body: var(--color-text);
+    --tw-prose-headings: var(--color-text);
     --tw-prose-lead: var(--catppuccin-color-overlay2);
-    --tw-prose-links: var(--catppuccin-color-blue);
-    --tw-prose-bold: var(--catppuccin-color-text);
+    --tw-prose-links: var(--color-primary);
+    --tw-prose-bold: var(--color-text);
     --tw-prose-counters: var(--catppuccin-color-overlay0);
     --tw-prose-bullets: var(--catppuccin-color-surface2);
     --tw-prose-hr: var(--catppuccin-color-surface1);
     --tw-prose-quotes: var(--catppuccin-color-subtext0);
     --tw-prose-quote-borders: var(--catppuccin-color-overlay2);
-    --tw-prose-captions: var(--catppuccin-color-text);
+    --tw-prose-captions: var(--color-text);
     --tw-prose-kbd: var(--catppuccin-color-overlay2);
     --tw-prose-kbd-shadows: color-mix(
       in oklab,
       var(--catppuccin-color-overlay2) 50%,
       transparent
     );
-    --tw-prose-code: var(--catppuccin-color-text);
+    --tw-prose-code: var(--color-text);
     /* --tw-prose-pre-code: var(--catppuccin-color-subtext1); */
     /* --tw-prose-pre-bg: var(--catppuccin-color-mantle); */
     --tw-prose-th-borders: var(--catppuccin-color-surface2);
     --tw-prose-td-borders: var(--catppuccin-color-surface0);
   }
 
-  @apply prose text-ctp-text text-lg/8 text-pretty lg:text-base/8;
+  @apply text-base/7 text-pretty lg:text-base/8 font-ibm-plex-sans-kr;
 
   /* Headings */
-  @apply prose-headings:font-black prose-headings:text-balance;
-  @apply prose-h1:before:content-["#"] prose-h1:before:mr-1 prose-h1:before:text-ctp-overlay0/70;
-  @apply prose-h2:before:content-["##"] prose-h2:before:mr-1 prose-h2:before:text-ctp-overlay0/70;
-  @apply prose-h3:before:content-["###"] prose-h3:before:mr-1 prose-h3:before:text-ctp-overlay0/70;
-  @apply prose-h4:before:content-["####"] prose-h4:before:mr-1 prose-h4:before:text-ctp-overlay0/70;
-
-  /* Texts */
-  @apply prose-strong:font-bold prose-a:text-ctp-lavender-600;
-  @apply prose-p:break-keep prose-p:wrap-break-word;
-
-  ul,
-  ol,
-  li {
-    margin: 0;
+  @apply prose-headings:font-bold prose-headings:text-pretty;
+  /* Add hashes before headings */
+  & :is(h1,h2,h3,h4) {
+    &::before {
+      @apply mr-1 text-(--color-text-dim)/30;
+    }
+  }
+  @apply prose-h1:before:content-["#"];
+  @apply prose-h2:before:content-["##"];
+  @apply prose-h3:before:content-["###"];
+  /* But not for callouts */
+  & [data-callout] :is(h1,h2,h3,h4) {
+    @apply before:content-none;
   }
 
-  table {
+  /* Texts */
+  @apply prose-p:break-keep prose-p:wrap-break-word;
+  & p a {
+    @apply anchor-link;
+  }
+
+  /* Lists */
+  @apply prose-li:break-keep prose-li:wrap-break-word;
+  & :is(ul,ol) {
+    & li, & :is(ul,ol) {
+      @apply my-0;
+    }
+  }
+
+  & table {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
   }
 
   /* Caption under image using italics */
-  [data-image-component="true"] + em {
-    @apply text-ctp-subtext0 -mt-4 block text-center text-sm;
-  }
-
-  /* Italic text */
-  em {
-    @apply text-ctp-teal italic;
-
-    &:not([data-image-component="true"] + &)&:not([data-callout] &) {
-      @apply bg-ctp-teal/10 rounded-sm pr-1.5 pl-1;
+  & [data-image-component="true"] + em {
+    @apply -mt-4 block text-center text-sm/6 text-(--color-text-dim);
+    &::before {
+      content: open-quote;
+    }
+    &::after {
+      content: close-quote;
     }
   }
 
   /* Bold text */
-  strong {
-    @apply text-ctp-maroon font-bold;
+  & strong {
+    @apply font-bold text-(--color-primary);
 
     &:not([data-callout] *) {
-      @apply bg-ctp-maroon/10 rounded-sm px-1;
+      @apply rounded-sm bg-(--color-primary)/10 px-1;
+    }
+  }
+
+  /* Italic text */
+  & em {
+    @apply text-(--color-secondary) italic;
+
+    &:not([data-image-component="true"] + &)&:not([data-callout] &) {
+      @apply rounded-sm bg-(--color-secondary)/10 pr-1.5 pl-1;
+    }
+  }
+
+  /* Reset bold, italics for callout */
+  & [data-callout] strong,
+  & [data-callout] em {
+    @apply text-current;
+  }
+
+  /* Footnotes link */
+  & p sup:has(a) {
+    @apply before:content-none after:content-none;
+    a {
+      @apply text-sm before:content-["["] after:content-["]"];
     }
   }
 
@@ -78,11 +111,11 @@
 
   /* Inline code */
   & :not(pre) > code {
-    @apply bg-ctp-subtext0/10 rounded px-1 py-0.5 font-normal;
+    @apply rounded bg-ctp-subtext0/10 px-1 py-0.5 font-normal before:content-none after:content-none;
+  }
 
-    &::before,
-    &::after {
-      content: "";
-    }
+  /* MathJax */
+  & mjx-container.MathJax[jax="CHTML"][display="true"] {
+    @apply overflow-scroll pb-4;
   }
 }

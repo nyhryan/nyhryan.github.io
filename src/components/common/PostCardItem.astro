@@ -3,111 +3,119 @@ import type { CollectionEntry } from "astro:content";
 
 type Props = CollectionEntry<"blog">;
 
-const post = Astro.props;
-const { title, description, pubDate, tags } = post.data;
-const category = post.id.split("/").slice(0, -1).join("/");
+const {
+  id,
+  data: { title, description, pubDate, tags },
+} = Astro.props;
+const category = id.split("/").slice(0, -1).join("/");
 ---
 
-<article
-  class="bg-ctp-base relative h-40 w-full content-center rounded-(--card-radius) px-6 py-4 text-nowrap">
+<article class="relative min-h-40 grid h-auto w-full grid-rows-[auto_1fr_auto] content-center rounded-(--card-radius) bg-ctp-base font-chiron gap-2 shadow-sm/40">
   <!-- Post title -->
-  <a href={`/blog/${post.id}`} class="mb-4 block">
-    <h3 class="overflow-hidden text-3xl font-black text-ellipsis">{title}</h3>
-  </a>
+  <header class="self-center overflow-hidden px-6 py-4">
+    <a href={`/blog/${id}`} class="w-full block card-link ">
+      <h2 class="text-3xl font-black truncate">{title}</h2>
+    </a>
+  </header>
+
   <!-- Post description -->
-  <p class="mb-4 overflow-hidden pl-4 text-sm leading-tight text-ellipsis">
-    {description}
-  </p>
+  <div 
+    class="flex w-full flex-col gap-2 self-start justify-self-start px-6 pb-2 text-base/tight"
+  >
+    <span>{description}</span>
+  </div>
+
   <!-- Post metadata(pubdate, tags, category) -->
-  <div
-    class="text-ctp-overlay1 flex w-full flex-row justify-start gap-4 pl-4 text-sm">
+  <footer
+    class="flex w-full flex-row justify-start text-sm bg-ctp-surface0/30 border-t-2 border-dashed border-ctp-surface0 px-6 py-3 mt-auto rounded-b-(--card-radius)"
+    aria-label={`Article '${title}' metadata`}
+  >
     <!-- Pub date -->
-    <div class="flex items-center gap-1">
+    <div class="flex items-center gap-1" aria-label="published date">
       <span class="sr-only">Published on</span>
       <div class="meta-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-          <path
-            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"
-          ></path>
-          <path
-            d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5z"
-          ></path>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" role="img">
+          <title>Calendar icon</title>
+          <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z" />
+          <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5z" />
         </svg>
       </div>
-      <time datetime={pubDate.toISOString()} class="text-nowrap"
-        >{pubDate.toLocaleDateString()}</time
-      >
+      <time datetime={pubDate.toISOString()} class="text-nowrap">{pubDate.toLocaleDateString()}</time>
     </div>
+
     <!-- Tags -->
-    <div class="relative z-2 hidden flex-row items-center gap-2 md:flex">
-      <span class="sr-only">Tags</span>
+    <div class="relative z-2 hidden flex-row items-center gap-2 sm:flex" aria-label="tags">
       <div class="meta-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-          <path
-            d="M8.39 12.648a1 1 0 0 0-.015.18c0 .305.21.508.5.508.266 0 .492-.172.555-.477l.554-2.703h1.204c.421 0 .617-.234.617-.547 0-.312-.188-.53-.617-.53h-.985l.516-2.524h1.265c.43 0 .618-.227.618-.547 0-.313-.188-.524-.618-.524h-1.046l.476-2.304a1 1 0 0 0 .016-.164.51.51 0 0 0-.516-.516.54.54 0 0 0-.539.43l-.523 2.554H7.617l.477-2.304c.008-.04.015-.118.015-.164a.51.51 0 0 0-.523-.516.54.54 0 0 0-.531.43L6.53 5.484H5.414c-.43 0-.617.22-.617.532s.187.539.617.539h.906l-.515 2.523H4.609c-.421 0-.609.219-.609.531s.188.547.61.547h.976l-.516 2.492c-.008.04-.015.125-.015.18 0 .305.21.508.5.508.265 0 .492-.172.554-.477l.555-2.703h2.242zm-1-6.109h2.266l-.515 2.563H6.859l.532-2.563z"
-          ></path>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-[20px]! h-[20px]!"  role="img">
+          <title>Hash icon</title>
+          <path d="M8.39 12.648a1 1 0 0 0-.015.18c0 .305.21.508.5.508.266 0 .492-.172.555-.477l.554-2.703h1.204c.421 0 .617-.234.617-.547 0-.312-.188-.53-.617-.53h-.985l.516-2.524h1.265c.43 0 .618-.227.618-.547 0-.313-.188-.524-.618-.524h-1.046l.476-2.304a1 1 0 0 0 .016-.164.51.51 0 0 0-.516-.516.54.54 0 0 0-.539.43l-.523 2.554H7.617l.477-2.304c.008-.04.015-.118.015-.164a.51.51 0 0 0-.523-.516.54.54 0 0 0-.531.43L6.53 5.484H5.414c-.43 0-.617.22-.617.532s.187.539.617.539h.906l-.515 2.523H4.609c-.421 0-.609.219-.609.531s.188.547.61.547h.976l-.516 2.492c-.008.04-.015.125-.015.18 0 .305.21.508.5.508.265 0 .492-.172.554-.477l.555-2.703h2.242zm-1-6.109h2.266l-.515 2.563H6.859l.532-2.563z" />
         </svg>
       </div>
-      <ul class="flex flex-row flex-wrap items-center gap-1">
+      <ul 
+        class="flex flex-row flex-wrap gap-1.5" 
+        aria-label="tag list"
+        aria-description={`List of tags for the article '${title}'`}
+      >
         {
-          tags.map((tag, index) => (
+          tags.map((tag) => (
             <li>
-              <a
-                href={`/tag/${tag}/`}
-                class="hover:text-ctp-lavender no-underline hover:underline">
-                {tag}
+              <a href={`/tag/${tag}/`} class="min-w-[3ch] rounded-md px-2 py-0.5 bg-ctp-overlay0/10 outline outline-ctp-overlay0/80 hover:bg-(--color-primary)/10 hover:text-(--color-primary) hover:outline-2 hover:outline-(--color-primary)/40 transition-colors duration-200">
+                <span>{tag}</span>
               </a>
-              {index !== tags.length - 1 && (
-                <span class="cursor-default">/</span>
-              )}
             </li>
           ))
         }
       </ul>
     </div>
+
     <!-- Category -->
-    <div class="relative z-2 flex flex-row items-center gap-2">
-      <span class="sr-only">Category of {category}</span>
+    <div class="relative z-2 flex flex-row items-center gap-2" aria-label="category">
       <div class="meta-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-          <path
-            d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a2 2 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139q.323-.119.684-.12h5.396z"
-          ></path>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-[18px]! h-[18px]!" role="img">
+          <title>Folder icon</title>
+          <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a2 2 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139q.323-.119.684-.12h5.396z" />
         </svg>
       </div>
-      <a
-        href={`/category/${category}/`}
-        class="hover:text-ctp-lavender no-underline hover:underline"
-        >{category}</a
-      >
+      <a href={`/category/${category}/`} class="group flex flex-row gap-1 items-center justify-center border-b hover:text-(--color-secondary) hover:bg-(--color-secondary)/10 transition duration-200">
+        <span>{category}</span>
+        <div class="opacity-0 hidden group-hover:block group-hover:opacity-100 ">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 fill-current" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+          </svg>
+        </div>
+      </a>
     </div>
-  </div>
+  </footer>
 </article>
 
 <style>
   @reference "@styles/global.css";
 
-  article > a {
+  footer > *:not(:last-child) {
+    &::after {
+      @apply content-[""] border-r-2 border-ctp-surface0 h-full mx-2;
+    }
+  }
+
+  .card-link {
     &::before {
-      content: "";
-      @apply absolute inset-0 z-1 cursor-pointer rounded-(--card-radius) border-2 border-transparent;
-      transition: border-color 200ms;
+      @apply absolute inset-0 z-1 cursor-pointer rounded-(--card-radius) border-2 border-transparent transition-[border-color] duration-200 content-[""];
     }
 
     &:hover::before,
     &:focus::before {
-      @apply border-ctp-lavender;
+      @apply border-(--color-primary);
     }
 
     &:focus {
-      outline: none;
+      @apply outline-none;
     }
   }
 
   .meta-icon {
-    @apply bg-ctp-lavender/10 rounded-sm p-1;
+    @apply grid;
     svg {
-      @apply fill-ctp-lavender w-(--text-sm);
+      @apply fill-(--color-text) w-4;
     }
   }
 </style>

@@ -2,14 +2,14 @@
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import { getCollection } from "astro:content";
 import PostCardItem from "@components/common/PostCardItem.astro";
-import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
-import type { BlogPost } from "../../../utils/types";
-import BaseHead from "@components/BaseHead.astro";
-import WebSiteStructuredData from "@components/structuredData/WebSiteStructuredData.astro";
+import type { BlogPost } from "@utils/types";
 import PaginationNav from "@components/common/PaginationNav.astro";
 
+import { sortPost } from "@utils/content";
+import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
+
 export const getStaticPaths = (async ({ paginate }) => {
-  const allPosts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  const allPosts = sortPost(await getCollection("blog"), "desc");
   const pathMap = new Map<string, Array<BlogPost>>();
 
   allPosts.forEach((post) => {
@@ -29,7 +29,7 @@ export const getStaticPaths = (async ({ paginate }) => {
       pageSize: 10,
       params: { path: categoryPath },
       props: {
-        categoryName: categoryPath.split("/").pop(),
+        categoryName: categoryPath.split("/").pop() ?? "no-category",
         fullCategoryPath: categoryPath,
       },
     }),
@@ -41,26 +41,20 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page, categoryName, fullCategoryPath } = Astro.props;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead noindex={true} />
-    <WebSiteStructuredData />
-  </head>
-  <body>
-    <BaseBlogLayout currentCategory={categoryName}>
-      <div slot="main-content">
-        <h3 class="font-chiron mb-4 text-center text-4xl font-black">
-          Showing category:
-          <span class="font-bold underline">`{fullCategoryPath}`</span>
-        </h3>
-        <div class=`mb-4 flex flex-col gap-y-4`>
-          {page.data.map((post) => <PostCardItem {...post} />)}
-        </div>
-      </div>
-      <div slot="after-main">
-        <PaginationNav pages={page} />
-      </div>
-    </BaseBlogLayout>
-  </body>
-</html>
+<BaseBlogLayout noindex={true} currentCategory={categoryName}>
+  <div slot="main-content">
+    <!-- Category title -->
+    <h1 class="mb-4 text-center font-chiron text-4xl font-black">
+      Showing category:
+      <span class="font-bold underline">`{fullCategoryPath}`</span>
+    </h1>
+    <!-- Category post cards -->
+    <div class="mb-4 flex flex-col gap-y-4">
+      {page.data.map((post) => <PostCardItem {...post} />)}
+    </div>
+  </div>
+  
+  <div slot="after-main">
+    <PaginationNav pages={page} />
+  </div>
+</BaseBlogLayout>

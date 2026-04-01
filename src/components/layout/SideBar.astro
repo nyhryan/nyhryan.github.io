@@ -7,28 +7,46 @@ const allPosts = await getCollection("blog");
 const tags = [...new Set(allPosts.flatMap((post) => post.data.tags))];
 
 interface Props {
-  currentCategory?: string;
+  currentCategory?: string | null;
+  currentTag?: string | null;
 }
 
-const { currentCategory } = Astro.props;
+const { currentCategory, currentTag } = Astro.props;
 ---
 
-<div id="sidebar"
-  class="font-chiron flex flex-col items-stretch gap-4 md:flex-row md:items-start lg:flex-col lg:items-stretch">
-  <Accordion title="Category" 
-             open={true} 
-             class="flex-1 accordion-container bg-ctp-base rounded-(--card-radius) p-4"
-             storageKey="sidebar-category">
-    <CategoryTree currentCategory={currentCategory} />
+<div
+  id="sidebar-swup-container"
+  class="flex flex-col items-stretch gap-4 font-chiron sm:flex-row sm:items-start lg:flex-col lg:items-stretch"
+>
+  <!-- Category accordion -->
+  <Accordion
+    title="Category"
+    id="categoryAccordion"
+    open={true}
+    class="flex-1 shadow-sm/40"
+  >
+    <CategoryTree currentCategory={currentCategory} isHome={currentCategory === null && currentTag === null}/>
   </Accordion>
-  <Accordion title="Tags" 
-             open={false} 
-             class="flex-1 accordion-container bg-ctp-base rounded-(--card-radius) p-4"
-             storageKey="sidebar-tags">
-    <ul class="flex flex-row flex-wrap justify-start gap-1.5">
+
+  <!-- Tag accordion -->
+  <Accordion
+    title="Tags"
+    id="tagAccordion"
+    open={false}
+    class="flex-1 shadow-sm/40"
+  >
+    <ul class="flex flex-row flex-wrap justify-between gap-2">
       {
-        tags.map((tag) => (
-          <li class="bg-ctp-surface0/50 hover:bg-ctp-lavender/70 hover:text-ctp-base rounded-md px-2 py-1 text-base/tight transition duration-100 ease-out hover:underline">
+        tags.sort((a, b) => a.localeCompare(b, "en"))
+        .map((tag) => (
+          <li
+            class:list={[
+              "block min-w-[3ch] text-center flex-grow rounded-md px-2 py-0.5 text-base/tight transition duration-100 outline outline-ctp-overlay0/40 bg-ctp-overlay0/10 hover:bg-(--color-primary)/10 hover:text-(--color-primary) hover:outline-2 hover:outline-(--color-primary)/40",
+              { "bg-(--color-primary) text-(--color-text-inverse)": tag === currentTag },
+              { "bg-ctp-surface0/50": tag !== currentTag },
+            ]}
+            aria-current={tag === currentTag ? "page" : undefined}
+          >
             <a href={`/tag/${tag}`}>{tag}</a>
           </li>
         ))

@@ -1,27 +1,64 @@
 @import "tailwindcss";
 @import "@catppuccin/tailwindcss/frappe.css";
-@import "./fonts.css";
 @import "./prose-blog.css";
 @import "./callout.css";
 
 @plugin "@tailwindcss/typography";
 
-@theme {
-  --font-sans: Pretendard, sans-serif;
-  --font-mono: "Cascadia Code", Menlo, Monaco, "Courier New", monospace;
-  --font-chiron: "Chiron GoRound TC", sans-serif;
+@theme inline {
+  --font-chiron: var(--font-chiron-go-round-tc), sans-serif;
+  --font-ibm-plex-sans-kr: var(--font-ibm-plex-sans-kr), sans-serif;
+  
+  --font-sans: var( --font-chiron), sans-serif;
+  --font-mono: var(--font-cascadia-code), 'GulimChe', monospace;
 
-  --page-width: 75rem;
-  --sidebar-width: 17.5rem;
-  --banner-height: 32rem;
+  --color-background-dark: oklch(from var(--catppuccin-color-crust) calc(l - 0.01) c h);
+  --color-background: var(--catppuccin-color-mantle);
+  --color-background-light: var(--catppuccin-color-base);
+  /* --color-background-light: var(--catppuccin-color-peach); */
+
+  --color-text: var(--catppuccin-color-text);
+  --color-text-inverse: var(--catppuccin-color-base);
+  --color-text-dim: var(--catppuccin-color-subtext0);
+
+  --color-item-hover: color-mix(in oklab, var(--catppuccin-color-surface0) 50%, transparent);
+
+  --color-primary: var(--catppuccin-color-sky);
+  --color-primary-light: var(--catppuccin-color-sky-300);
+
+  --color-secondary: var(--catppuccin-color-peach);
+  --color-accent: var(--catppuccin-color-mauve-400);
+
   --card-radius: var(--radius-xl);
+  --card-color: var(--color-background-light);
+}
+
+@layer components {
+}
+
+@utility anchor-link {
+  @apply text-(--color-primary) underline cursor-pointer;
+
+  &:visited {
+    @apply text-(--color-accent) decoration-(--color-accent);
+  }
+
+  &:hover, &:focus {
+    @apply text-(--color-secondary) decoration-(--color-secondary);
+  }
+
+  &:active {
+    @apply text-(--color-primary-light) bg-(--color-primary-light)/10 no-underline;
+  }
 }
 
 @layer base {
-  html {
-    @apply latte:scheme-light scheme-light dark:scheme-dark;
-  }
   body {
-    @apply text-ctp-text bg-ctp-crust;
+    @apply text-(--color-text) bg-(--color-background-dark);
   }
+}
+
+.expressive-code {
+  /* Block fake italics in code block (for Korean fallback font) */
+  font-synthesis-style: none;
 }

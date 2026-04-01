@@ -1,5 +1,5 @@
 ---
-import { SITE_TITLE } from "@consts";
+import { SITE_CONFIG, SITE_TITLE } from "@consts";
 
 const pageUrl = new URL(Astro.url.pathname, Astro.site);
 
@@ -11,8 +11,8 @@ const structuredData = {
   author: [
     {
       "@type": "Person",
-      name: "YunHyeok Nam",
-      url: "https://github.com/nyhryan",
+      name: SITE_CONFIG.social.name,
+      url: SITE_CONFIG.social.github,
     },
   ],
 };

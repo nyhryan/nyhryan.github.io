@@ -3,15 +3,19 @@
  * @type {import("prettier").Config}
  */
 export default {
-  plugins: ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  plugins: [
+    // "prettier-plugin-astro",
+    "prettier-plugin-tailwindcss"
+  ],
   overrides: [
-    {
-      files: "*.astro",
-      options: {
-        parser: "astro",
-        bracketSameLine: false,
-        printWidth: 120,
-      },
-    },
+    // {
+    //   files: "*.astro",
+    //   options: {
+    //     parser: "astro",
+    //     bracketSameLine: false,
+    //     printWidth: 120,
+    //     htmlWhitespaceSensitivity: "ignore"
+    //   },
+    // },
   ],
 };

@@ -1,159 +1,80 @@
 ---
 type Props = {
   title: string;
+  id: string;
   open?: boolean;
   class?: string;
-  storageKey: string;
 };
 
-const { title, open = false, class: className, storageKey } = Astro.props;
+const { title, id, open = false, class: className } = Astro.props;
 ---
 
-<div class={className} data-storage-key={storageKey}>
-  <details open={open} class="group" data-acc-open={open ? "true" : "false"}>
-    <summary class="flex cursor-pointer list-none list-image-none items-center justify-between">
-      <span class="hover:text-ctp-lavender text-xl font-bold select-none hover:underline">
-        {title}
-      </span>
-      <svg
-        class="accordion-chevron text-ctp-lavender h-5 w-5 transition-transform duration-300"
-        viewBox="0 0 20 20"
-        fill="currentColor"
+<div 
+  id={id} 
+  class:list={[
+    className, 
+    "accordion-wrapper",
+    "rounded-(--card-radius) bg-(--color-background-light)"
+  ]} 
+  data-default-open={open ? true : undefined} 
+  x-data
+>
+  <button 
+    type="button"
+    x-bind:class={`\
+      $store.${id}.open\
+      ? 'border-b border-ctp-surface0 rounded-[var(--card-radius)_var(--card-radius)_0_0]'\
+      : 'border-b border-transparent rounded-[var(--card-radius)_var(--card-radius)_var(--card-radius)_var(--card-radius)]'`}
+    x-on:click.debounce.100ms={`$store.${id}.toggle()`}
+    class="flex w-full cursor-pointer justify-between p-4  bg-(--color-background-light) transition-[background-color,color,border-radius,border-color] duration-100 hover:outline hover:outline-(--color-primary)/40 hover:bg-(--color-primary)/10! hover:text-(--color-primary)!" 
+    x-bind:aria-expanded={`$store.${id}.open ? 'true' : 'false'`}
+    aria-controls={`accordion-${id}-content`}
+    >
+    <span class="text-xl font-bold">{title}</span>
+    <svg
+      x-bind:class={`$store.${id}.open ? 'rotate-180' : ''`}
+      class="my-auto block h-5 w-5 fill-current transition-transform"
+      viewBox="0 0 20 20"
+      role="img"
+    >
+      <title>Open or close accordion</title>
+      <path
+        fill-rule="evenodd"
+        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+        clip-rule="evenodd"
       >
-        <path
-          fill-rule="evenodd"
-          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-          clip-rule="evenodd"></path>
-      </svg>
-    </summary>
+      </path>
+    </svg>
+  </button>
 
-    <div class="accordion-content overflow-hidden opacity-0 transition-[height,opacity] duration-300 ease-in-out">
-      <div class="pt-4">
-        <slot />
-      </div>
+  <div id={`accordion-${id}-content`} x-show={`$store.${id}.open`} x-collapse x-cloak>
+    <div class="p-4">
+      <slot />
     </div>
-  </details>
+  </div>
 </div>
 
-<style>
-  @reference "@styles/global.css";
-
-  summary::-webkit-details-marker {
-    display: none;
-  }
-
-  details[open] .accordion-content {
-    opacity: 1;
-  }
-
-  .accordion-content {
-    height: 0;
-  }
-
-  details[data-acc-open="true"] .accordion-chevron {
-    transform: rotate(180deg);
-  }
-
-  details[data-acc-restoring="true"] .accordion-chevron {
-    transition: none;
+<style is:global>
+  [x-cloak] {
+    display: none !important;
   }
 </style>
 
 <script>
-  import { initAccordionStore, getAccordionOpen, setAccordionOpen } from "@/utils/store.accordion";
-
-  function applyAccordionVisualState(details: HTMLDetailsElement, content: HTMLElement, isOpen: boolean, suppressAnimation = false) {
-    if (suppressAnimation) {
-      details.setAttribute("data-acc-restoring", "true");
-      content.style.transition = "none";
-    }
-
-    if (isOpen) {
-      details.open = true;
-      details.setAttribute("data-acc-open", "true");
-      content.style.height = "auto";
-      content.style.opacity = "1";
-    } else {
-      details.open = false;
-      details.setAttribute("data-acc-open", "false");
-      content.style.height = "0px";
-      content.style.opacity = "0";
-    }
-
-    if (suppressAnimation) {
-      void content.offsetHeight;
-      content.style.transition = "";
-      requestAnimationFrame(() => {
-        details.removeAttribute("data-acc-restoring");
-      });
-    }
-  }
+  import Alpine from "alpinejs";
 
   function initAccordions() {
-    const accordions = document.querySelectorAll(".accordion-container");
-    accordions.forEach((container, i) => {
-      const key = container.getAttribute("data-storage-key") ?? `accordion-${i}`;
-
-      const details = container.querySelector<HTMLDetailsElement>("details");
-      const summary = container.querySelector<HTMLElement>("summary");
-      const content = container.querySelector<HTMLElement>(".accordion-content");
-
-      if (!details || !summary || !content) return;
-
-      // Restore open state
-      const restoredOpen = getAccordionOpen(key, details.open);
-      applyAccordionVisualState(details, content, restoredOpen, true);
-
-      if (summary.hasAttribute("data-acc-hook")) return;
-
-      summary.addEventListener("click", (e) => {
-        e.preventDefault();
-        const isCurrentlyOpen = details.open;
-        const nextOpen = !isCurrentlyOpen;
-        setAccordionOpen(key, nextOpen);
-
-        // Closing
-        if (!nextOpen) {
-          details.setAttribute("data-acc-open", "false");
-          content.style.height = `${content.scrollHeight}px`;
-          void content.offsetHeight;
-          content.style.height = "0px";
-          content.style.opacity = "0";
-
-          setTimeout(() => {
-            details.open = false;
-          }, 300);
-        } 
-        // Opening
-        else {
-          details.open = true;
-          details.setAttribute("data-acc-open", "true");
-          content.style.height = "0px";
-          content.style.opacity = "0";
-          void content.offsetHeight;
-          content.style.height = `${content.scrollHeight}px`;
-          content.style.opacity = "1";
-
-          setTimeout(() => {
-            content.style.height = "auto";
-          }, 300);
-        }
-      });
-      summary.setAttribute("data-acc-hook", "true");
+    document.querySelectorAll("div.accordion-wrapper").forEach((accordion) => {
+      // Setup Alpinjs global state for each accordions
+      const data = {
+        open: Boolean(accordion.getAttribute("data-default-open")),
+        toggle() {
+          this.open = !this.open;
+        },
+      };
+      Alpine.store(accordion.id, data);
     });
   }
 
-  function bindAccordionHook() {
-    initAccordionStore();
-    initAccordions();
-    window.swup.hooks.on("page:view", () => {
-      initAccordions();
-    });
-  }
-
-  if (window.swup) {
-    bindAccordionHook();
-  } else {
-    document.addEventListener("swup:enable", bindAccordionHook, { once: true });
-  }
+  document.addEventListener("alpine:init", initAccordions);
 </script>

@@ -11,7 +11,7 @@ class ThemeToggleEvent extends Event {
 }
 
 export function getCurrentTheme(): BlogTheme {
-  let localTheme = localStorage.getItem("theme");
+  const localTheme = localStorage.getItem("theme");
   if (localTheme === "dark" || localTheme === "light") {
     return localTheme;
   }
@@ -22,12 +22,12 @@ export function getCurrentTheme(): BlogTheme {
   return defaultTheme;
 }
 
-export function loadTheme(): void {
+export function loadTheme(d: Document): void {
   const currentTheme = getCurrentTheme();
   if (currentTheme === "light") {
-    document.documentElement.classList.add("latte");
+    d.documentElement.classList.add("latte");
   } else {
-    document.documentElement.classList.remove("latte");
+    d.documentElement.classList.remove("latte");
   }
 }
 
@@ -70,14 +70,14 @@ export function initGiscusThemeSync() {
     }
   });
 
-  const observer = new MutationObserver((_, obs) => {
-    const iframe = document.querySelector<HTMLIFrameElement>("iframe.giscus-frame");
-    if (iframe) {
-      const currentTheme = getCurrentTheme();
-      updateGiscus(currentTheme);
-      obs.disconnect();
-    }
-  });
+  window.addEventListener(
+    "message",
+    (event) => {
+      if (event.origin !== "https://giscus.app") return;
+      if (!(typeof event.data === "object" && event.data.giscus)) return;
 
-  observer.observe(document.body, { childList: true, subtree: true });
+      updateGiscus(getCurrentTheme());
+    },
+    { once: true }
+  );
 }
