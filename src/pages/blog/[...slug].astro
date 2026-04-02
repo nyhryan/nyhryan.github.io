@@ -37,7 +37,7 @@ const updatedDate = post.data.updatedDate ?? post.data.pubDate;
   image={bannerImage}
 >
   <BlogPostingStructuredData slot="structured-data" {...post.data} />
-  <div slot="main-content" class="rounded-(--card-radius) bg-(--card-color) p-4 font-ibm-plex-sans-kr sm:p-6 space-y-4 shadow-sm/40">
+  <div slot="main-content" class="space-y-4 rounded-(--card-radius) bg-(--card-color) p-4 font-ibm-plex-sans-kr shadow-sm/40 sm:p-6">
     <header>
       <!-- Title of the post -->
       <h1 class="mb-2 text-4xl font-bold">{title}</h1>

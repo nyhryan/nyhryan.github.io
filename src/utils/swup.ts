@@ -14,7 +14,7 @@ export function bindSwupHook(
   if (window.swup) {
     window.swup.hooks.on(hook, callback, options);
   } else {
-    document.addEventListener("swup:enable", (e) => {
+    document.addEventListener("swup:enable", () => {
       window.swup.hooks.on(hook, callback, options);
     });
   }

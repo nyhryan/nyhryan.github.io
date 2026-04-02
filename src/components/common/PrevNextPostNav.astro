@@ -14,9 +14,9 @@ const { prev, next } = Astro.props;
   {
     <div
       class:list={[
-        "relative grid min-h-24 w-full flex-1 grid-rows-[1fr_auto_auto] rounded-(--card-radius) p-4 shadow-sm/40",
-        { "cursor-pointer bg-ctp-base": next },
-        { "bg-ctp-mantle cursor-default": !next },
+        "relative grid min-h-24 w-full flex-1 grid-rows-[1fr_auto_auto] rounded-(--card-radius) p-4",
+        { "cursor-pointer bg-(--card-color) shadow-sm/40": next },
+        { "cursor-default bg-ctp-mantle": !next },
       ]}>
       <strong class:list={["text-left text-xl", { "text-ctp-surface0": !next }]}>Next</strong>
       {next && (
@@ -38,9 +38,9 @@ const { prev, next } = Astro.props;
   {
     <div
       class:list={[
-        "relative grid min-h-24 w-full flex-1 grid-rows-[1fr_auto_auto] rounded-(--card-radius) p-4 shadow-sm/40",
-        { "cursor-pointer bg-ctp-base": prev },
-        { "cursor-default border-ctp-surface0": !prev },
+        "relative grid min-h-24 w-full flex-1 grid-rows-[1fr_auto_auto] rounded-(--card-radius) p-4",
+        { "cursor-pointer bg-(--card-color) shadow-sm/40": prev },
+        { "cursor-default bg-ctp-mantle": !prev },
       ]}>
       <strong class:list={["text-right text-xl", { "text-ctp-surface0": !prev }]}>Previous</strong>
       {prev && (
@@ -66,17 +66,17 @@ const { prev, next } = Astro.props;
 
   a {
     &::before {
-      @apply absolute inset-0 z-1 cursor-pointer rounded-(--card-radius) outline-2 outline-transparent transition-[outline-color] duration-200 content-[""];
+      @apply absolute inset-0 z-1 cursor-pointer rounded-(--card-radius) ring-2 ring-transparent transition-shadow duration-200 content-[""];
     }
 
     &:hover::before,
     &:focus-visible::before {
-      @apply outline-(--color-primary);
+      @apply ring-(--color-primary);
     }
 
     &:hover,
     &:focus-visible {
-      @apply outline-none;
+      @apply shadow-none;
     }
   }
 </style>

@@ -41,7 +41,7 @@ const { currentCategory, currentTag } = Astro.props;
         .map((tag) => (
           <li
             class:list={[
-              "block min-w-[3ch] text-center flex-grow rounded-md px-2 py-0.5 text-base/tight transition duration-100 outline outline-ctp-overlay0/40 bg-ctp-overlay0/10 hover:bg-(--color-primary)/10 hover:text-(--color-primary) hover:outline-2 hover:outline-(--color-primary)/40",
+              "block min-w-[3ch] flex-grow rounded-md bg-ctp-overlay0/10 px-2 py-0.5 text-center text-base/tight ring ring-ctp-overlay0/40 transition duration-100 hover:bg-(--color-primary)/10 hover:text-(--color-primary) hover:ring-2 hover:ring-(--color-primary)/40",
               { "bg-(--color-primary) text-(--color-text-inverse)": tag === currentTag },
               { "bg-ctp-surface0/50": tag !== currentTag },
             ]}

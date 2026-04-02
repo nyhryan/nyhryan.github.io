@@ -17,60 +17,52 @@ const isLastPage = pages?.currentPage === pages?.lastPage;
       class="mx-[33%] flex h-8 flex-row items-center justify-center gap-2"
       aria-label="Pagination"
     >
-      <ul class="flex h-[2rem] flex-row items-stretch justify-center gap-2">
+      <ul class="flex h-8 flex-row items-stretch justify-center gap-2">
         <!-- First page -->
         <li>
-          <a
-            href={isFirstPage ? undefined : pages.url.first}
-            aria-disabled={isFirstPage}
-            class:list={[
-              "flex h-full w-[2rem] items-center justify-center rounded-sm p-1 select-none hover:bg-ctp-lavender/20",
-              { "cursor-not-allowed bg-ctp-surface0 opacity-50": isFirstPage },
-            ]}>
-            <span class="sr-only">Go to the first page</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              class:list={[
-                "w-[1rem]",
-                {"fill-ctp-overlay0": isFirstPage },
-                {"fill-ctp-text": !isFirstPage },
-              ]}
-              viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M11.854 3.646a.5.5 0 0 1 0 .708L8.207 8l3.647 3.646a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708 0M4.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5"
-              />
-            </svg>
-          </a>
+          {
+            !isFirstPage && (
+              <a
+                href={pages.url.first}
+                class="flex h-full w-8 items-center justify-center rounded-sm p-1 select-none hover:bg-(--color-primary)/20"
+              >
+                <span class="sr-only">Go to the first page</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  class="w-4 fill-(--color-text)"
+                  viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M11.854 3.646a.5.5 0 0 1 0 .708L8.207 8l3.647 3.646a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708 0M4.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5" />
+                </svg>
+              </a>
+            ) 
+          }
         </li>
 
         <!-- Previous page -->
         <li>
-          <a
-            href={isFirstPage ? undefined : pages.url.prev}
-            aria-disabled={isFirstPage}
-            tabindex={isFirstPage ? -1 : 0}
-            class:list={[
-              "flex h-full w-[2rem] items-center justify-center rounded-sm p-1 select-none hover:bg-ctp-lavender/20",
-              {"bg-ctp-surface0 opacity-50 cursor-not-allowed": isFirstPage}
-            ]}>
-            <span class="sr-only">Go to the previous page</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              class:list={[
-                "w-[1rem]",
-                {"fill-ctp-overlay0": isFirstPage },
-                {"fill-ctp-text": !isFirstPage },
-              ]}
-              viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
-            </svg>
-          </a>
+          {
+            !isFirstPage && (
+              <a
+                href={pages.url.prev}
+                class="flex h-full w-8 items-center justify-center rounded-sm p-1 select-none hover:bg-(--color-primary)/20"
+              >
+                <span class="sr-only">Go to the previous page</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  class="w-4 fill-(--color-text)"
+                  viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
+                </svg>
+              </a>
+            )
+          }
         </li>
 
         <!-- Current page -->
         <li aria-current="page">
-          <span class="flex h-full w-fit min-w-[2rem] cursor-default items-center justify-center rounded-sm p-1 px-2 text-sm">
+          <span class="flex h-full w-fit min-w-8 cursor-default items-center justify-center rounded-sm p-1 px-2 text-sm">
             <span class="sr-only">Page</span>
             {pages.currentPage}/{pages.lastPage}
           </span>
@@ -78,52 +70,44 @@ const isLastPage = pages?.currentPage === pages?.lastPage;
 
         <!-- Next page -->
         <li>
-          <a
-            href={isLastPage ? undefined : pages.url.next}
-            aria-disabled={isLastPage}
-            tabindex={isLastPage ? -1 : 0}
-            class:list={[
-              "flex h-full w-[2rem] items-center justify-center rounded-sm p-1 select-none",
-              { "bg-ctp-surface0 opacity-50 cursor-not-allowed": isLastPage },
-              { "hover:bg-ctp-lavender/20": !isLastPage }
-            ]}>
-            <span class="sr-only">Go to the next page</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              class:list={[
-                "w-[1rem]",
-                {"fill-ctp-overlay0": isLastPage },
-                {"fill-ctp-text": !isLastPage },
-              ]}
-              viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-            </svg>
-          </a>
+          {
+            !isLastPage && (
+              <a
+                href={pages.url.next}
+                class="flex h-full w-8 items-center justify-center rounded-sm p-1 select-none hover:bg-(--color-primary)/20"
+              >
+                <span class="sr-only">Go to the next page</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  class="w-4 fill-(--color-text)"
+                  viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+                </svg>
+              </a>
+            )
+          }
         </li>
 
         <!-- Last page -->
         <li>
-          <a
-            href={isLastPage ? undefined : pages.url.last}
-            class:list={[
-              "flex h-full w-[2rem] items-center justify-center rounded-sm p-1 select-none",
-              { "bg-ctp-surface0 opacity-50 cursor-not-allowed": isLastPage },
-              { "hover:bg-ctp-lavender/20": !isLastPage }
-            ]}>
-            <span class="sr-only">Go to the last page</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              class:list={[
-                "w-[1rem]",
-                {"fill-ctp-overlay0": isLastPage },
-                {"fill-ctp-text": !isLastPage },
-              ]}
-              viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M4.146 3.646a.5.5 0 0 0 0 .708L7.793 8l-3.647 3.646a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708 0M11.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5" />
-            </svg>
-          </a>
+          {
+            !isLastPage && (
+              <a
+                href={pages.url.last}
+                class="flex h-full w-8 items-center justify-center rounded-sm p-1 select-none hover:bg-(--color-primary)/20"
+              >
+                <span class="sr-only">Go to the last page</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  class="w-4 fill-(--color-text)"
+                  viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M4.146 3.646a.5.5 0 0 0 0 .708L7.793 8l-3.647 3.646a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708 0M11.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5" />
+                </svg>
+              </a>
+            )
+          }
         </li>
       </ul>
     </nav>

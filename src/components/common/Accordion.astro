@@ -23,10 +23,10 @@ const { title, id, open = false, class: className } = Astro.props;
     type="button"
     x-bind:class={`\
       $store.${id}.open\
-      ? 'border-b border-ctp-surface0 rounded-[var(--card-radius)_var(--card-radius)_0_0]'\
-      : 'border-b border-transparent rounded-[var(--card-radius)_var(--card-radius)_var(--card-radius)_var(--card-radius)]'`}
+      ? 'rounded-[var(--card-radius)_var(--card-radius)_0_0] border-b border-ctp-surface0'\
+      : 'rounded-[var(--card-radius)_var(--card-radius)_var(--card-radius)_var(--card-radius)] border-b border-transparent'`}
     x-on:click.debounce.100ms={`$store.${id}.toggle()`}
-    class="flex w-full cursor-pointer justify-between p-4  bg-(--color-background-light) transition-[background-color,color,border-radius,border-color] duration-100 hover:outline hover:outline-(--color-primary)/40 hover:bg-(--color-primary)/10! hover:text-(--color-primary)!" 
+    class="flex w-full cursor-pointer justify-between bg-(--color-background-light)  p-4 transition-[background-color,color,border-radius,border-color] duration-100 hover:bg-(--color-primary)/10! hover:text-(--color-primary)! hover:ring hover:ring-(--color-primary)/40" 
     x-bind:aria-expanded={`$store.${id}.open ? 'true' : 'false'`}
     aria-controls={`accordion-${id}-content`}
     >
@@ -38,12 +38,7 @@ const { title, id, open = false, class: className } = Astro.props;
       role="img"
     >
       <title>Open or close accordion</title>
-      <path
-        fill-rule="evenodd"
-        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-        clip-rule="evenodd"
-      >
-      </path>
+      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
     </svg>
   </button>
 
@@ -53,12 +48,6 @@ const { title, id, open = false, class: className } = Astro.props;
     </div>
   </div>
 </div>
-
-<style is:global>
-  [x-cloak] {
-    display: none !important;
-  }
-</style>
 
 <script>
   import Alpine from "alpinejs";

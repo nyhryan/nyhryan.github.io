@@ -10,24 +10,22 @@ const {
 const category = id.split("/").slice(0, -1).join("/");
 ---
 
-<article class="relative min-h-40 grid h-auto w-full grid-rows-[auto_1fr_auto] content-center rounded-(--card-radius) bg-ctp-base font-chiron gap-2 shadow-sm/40">
+<article class="relative grid h-auto min-h-40 w-full grid-rows-[auto_1fr_auto] content-center gap-2 rounded-(--card-radius) bg-ctp-base font-chiron shadow-sm/40">
   <!-- Post title -->
   <header class="self-center overflow-hidden px-6 py-4">
-    <a href={`/blog/${id}`} class="w-full block card-link ">
-      <h2 class="text-3xl font-black truncate">{title}</h2>
+    <a href={`/blog/${id}`} class="card-link block w-full">
+      <h2 class="truncate text-3xl font-black">{title}</h2>
     </a>
   </header>
 
   <!-- Post description -->
-  <div 
-    class="flex w-full flex-col gap-2 self-start justify-self-start px-6 pb-2 text-base/tight"
-  >
+  <div class="flex w-full flex-col gap-2 self-start justify-self-start px-6 pb-2 text-base/tight">
     <span>{description}</span>
   </div>
 
   <!-- Post metadata(pubdate, tags, category) -->
   <footer
-    class="flex w-full flex-row justify-start text-sm bg-ctp-surface0/30 border-t-2 border-dashed border-ctp-surface0 px-6 py-3 mt-auto rounded-b-(--card-radius)"
+    class="mt-auto flex w-full flex-row justify-start rounded-b-(--card-radius) border-t-2 border-dashed border-ctp-surface0 bg-ctp-surface0/30 px-6 py-3 text-sm"
     aria-label={`Article '${title}' metadata`}
   >
     <!-- Pub date -->
@@ -54,13 +52,16 @@ const category = id.split("/").slice(0, -1).join("/");
       <ul 
         class="flex flex-row flex-wrap gap-1.5" 
         aria-label="tag list"
-        aria-description={`List of tags for the article '${title}'`}
       >
         {
           tags.map((tag) => (
             <li>
-              <a href={`/tag/${tag}/`} class="min-w-[3ch] rounded-md px-2 py-0.5 bg-ctp-overlay0/10 outline outline-ctp-overlay0/80 hover:bg-(--color-primary)/10 hover:text-(--color-primary) hover:outline-2 hover:outline-(--color-primary)/40 transition-colors duration-200">
-                <span>{tag}</span>
+              <a href={`/tag/${tag}/`} 
+              class={`\
+              min-w-[3ch] rounded-md bg-ctp-overlay0/10 px-2 py-0.5 ring ring-ctp-overlay0/80 transition-colors duration-200\
+              hover:bg-(--color-primary)/10 hover:text-(--color-primary) hover:ring-2 hover:ring-(--color-primary)/40\
+              `}>
+                {tag}
               </a>
             </li>
           ))
@@ -76,9 +77,9 @@ const category = id.split("/").slice(0, -1).join("/");
           <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a2 2 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139q.323-.119.684-.12h5.396z" />
         </svg>
       </div>
-      <a href={`/category/${category}/`} class="group flex flex-row gap-1 items-center justify-center border-b hover:text-(--color-secondary) hover:bg-(--color-secondary)/10 transition duration-200">
+      <a href={`/category/${category}/`} class="group flex flex-row items-center justify-center gap-1 border-b transition duration-200 hover:bg-(--color-secondary)/10 hover:text-(--color-secondary)">
         <span>{category}</span>
-        <div class="opacity-0 hidden group-hover:block group-hover:opacity-100 ">
+        <div class="hidden opacity-0 group-hover:block group-hover:opacity-100">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 fill-current" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
           </svg>

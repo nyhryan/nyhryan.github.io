@@ -1,7 +1,6 @@
 ---
 import LightModeToggleButton from "@components/common/LightModeToggleButton.astro";
 
-const page = Astro.url;
 function isAriaCurrent(path: string): "page" | undefined {
   if (path === Astro.url.pathname) return "page"
   else return undefined;
@@ -11,7 +10,7 @@ function isAriaCurrent(path: string): "page" | undefined {
 <nav
   id="primary-nav"
   aria-label="Primary nav"
-  class="p-3 sm:px-8 sm:py-2 relative flex flex-row items-center justify-between bg-(--color-background-light) transition-[border-radius] duration-100 sm:rounded-b-(--card-radius) gap-x-4"
+  class="relative flex flex-row items-center justify-between gap-x-4 bg-(--color-background-light) p-3 transition-[border-radius] duration-100 sm:rounded-b-(--card-radius) sm:px-8 sm:py-2"
   x-bind:class="open ? 'rounded-b-0' : 'rounded-b-(--card-radius)'"
   x-data={`{
     open:false,
@@ -21,17 +20,15 @@ function isAriaCurrent(path: string): "page" | undefined {
   }`}
 >
   <!-- Home button -->
-  <a href="/" class="w-8 h-8 grid flex-1 sm:flex-none">
+  <a href="/" class="grid h-8 w-8 flex-1 sm:flex-none">
     <span class="sr-only">ATAI Dev blog</span>
     <svg
-      class="fill-ctp-text w-7.5 transition duration-300 hover:scale-110 hover:-rotate-12 hover:fill-(--color-primary)"
+      class="w-7.5 fill-(--color-text) transition duration-300 hover:scale-110 hover:-rotate-12 hover:fill-(--color-primary)"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 16 16"
       aria-hidden="true"
     >
-      <path
-        d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"
-      ></path>
+      <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z" />
     </svg>
   </a>
 
@@ -51,10 +48,7 @@ function isAriaCurrent(path: string): "page" | undefined {
         class="fill-ctp-text w-[2rem]"
         viewBox="0 0 16 16"
       >
-        <path
-          fill-rule="evenodd"
-          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-        ></path>
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
       </svg>
     </div>
     <!-- Close button -->
@@ -65,9 +59,7 @@ function isAriaCurrent(path: string): "page" | undefined {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 16 16"
       >
-        <path
-          d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
-        ></path>
+        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
       </svg>
     </div>
   </button>
@@ -75,7 +67,7 @@ function isAriaCurrent(path: string): "page" | undefined {
   <!-- Menu(home, about) -->
   <div
     id="topnav-menu-mobile"
-    class="absolute top-full left-0 -z-1 w-full bg-(--color-background-light) border-t-2 border-t-ctp-surface0 sm:static sm:block! sm:z-auto sm:border-t-0 sm:w-auto rounded-b-(--card-radius)"
+    class="absolute top-full left-0 -z-1 w-full rounded-b-(--card-radius) border-t-2 border-t-ctp-surface0 bg-(--color-background-light) sm:static sm:z-auto sm:block! sm:w-auto sm:border-t-0"
     x-show="open"
     x-cloak
     x-transition:enter="transition ease-out duration-300"
@@ -85,26 +77,18 @@ function isAriaCurrent(path: string): "page" | undefined {
     x-transition:leave-start="translate-y-0"
     x-transition:leave-end="-translate-y-full"
   >
-    <ul class="sm:flex sm:flex-row sm:justify-center sm:gap-x-24 text-2xl sm:text-3xl font-black">
-      <li class="p-2 hover:bg-(--color-item-hover) hover:text-(--color-primary) sm:hover:underline sm:hover:underline-(--color-primary) sm:hover:bg-transparent transition-colors duration-200">
+    <ul class="text-2xl font-black sm:flex sm:flex-row sm:justify-center sm:gap-x-24 sm:text-3xl">
+      <li class="sm:hover:underline-(--color-primary) p-2 transition-colors duration-200 hover:bg-(--color-item-hover) hover:text-(--color-primary) sm:hover:bg-transparent sm:hover:underline">
         <a href="/" aria-current={isAriaCurrent("/")} class="aria-[current='page']:underline">Home</a>
       </li>
-      <li class="p-2 hover:bg-(--color-item-hover) hover:text-(--color-primary) sm:hover:underline sm:hover:underline-(--color-primary) sm:hover:bg-transparent transition-colors duration-200">
+      <li class="sm:hover:underline-(--color-primary) p-2 transition-colors duration-200 hover:bg-(--color-item-hover) hover:text-(--color-primary) sm:hover:bg-transparent sm:hover:underline">
         <a href="/about" aria-current={isAriaCurrent("/about")} class="aria-[current='page']:underline">About</a>
       </li>
     </ul>
   </div>
 
   <!-- Light mode toggle button -->
-  <div class="w-8 h-8 grid">
+  <div class="grid h-8 w-8">
     <LightModeToggleButton />
   </div>
 </nav>
-
-<style>
-  @reference "@styles/global.css";
-
-  [x-cloak] {
-    display: none !important;
-  }
-</style>

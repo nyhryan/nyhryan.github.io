@@ -3,7 +3,7 @@ import type { ComponentProps } from "astro/types";
 import { getCollection } from "astro:content";
 import { buildCategoryTree } from "@utils/categoryTree";
 import CategoryTreeItem from "./CategoryTreeItem.astro";
-import SideBar from "../layout/SideBar.astro";
+import SideBar from "@components/layout/SideBar.astro";
 
 const allPosts = await getCollection("blog");
 const tree = buildCategoryTree(allPosts);
@@ -28,7 +28,7 @@ const { currentCategory, isHome } = Astro.props;
       ]}
       aria-current={isHome ? "page" : undefined}
     >
-    <div class="flex flex-row items-center justify-start max-w-fit">
+    <div class="flex max-w-fit flex-row items-center justify-start">
       <div class="z-2 bg-(--card-color)">
         <svg
           class:list={[

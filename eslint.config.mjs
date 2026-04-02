@@ -5,15 +5,15 @@ import stylistic from "@stylistic/eslint-plugin";
 import eslintPluginAstro from "eslint-plugin-astro";
 
 export default defineConfig([
-  globalIgnores([".astro", ".idea", "dist", "node_modules", "public", ".obsidian"]),
+  globalIgnores([".astro", ".idea", "dist", "node_modules", "public", "src/content/.obsidian"]),
   eslint.configs.recommended,
   tseslint.configs.recommended,
-  stylistic.configs.customize({
-    indent: 2,
-    quotes:"double",
-    semi: true,
-    jsx: true,
-  }),
+  // stylistic.configs.customize({
+  //   indent: 2,
+  //   quotes:"double",
+  //   semi: true,
+  //   jsx: true,
+  // }),
   eslintPluginAstro.configs.recommended,
   eslintPluginAstro.configs["jsx-a11y-recommended"],
 ]);

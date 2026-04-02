@@ -1,5 +1,4 @@
 import { defineConfig, fontProviders } from "astro/config";
-
 import sitemap from "@astrojs/sitemap";
 import astroExpressiveCode from "astro-expressive-code";
 import pluginCollapsible from "expressive-code-collapsible";
@@ -12,9 +11,7 @@ import rehypeExternalLinks from "rehype-external-links";
 import { remarkObsidianLink } from "./src/libs/remarkObsidianLink";
 import mdx from "@astrojs/mdx";
 import swup from "@swup/astro";
-
 import tailwindcss from "@tailwindcss/vite";
-
 import alpinejs from "@astrojs/alpinejs";
 
 export default defineConfig({

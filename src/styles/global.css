@@ -62,3 +62,8 @@
   /* Block fake italics in code block (for Korean fallback font) */
   font-synthesis-style: none;
 }
+
+/* Alpine JS styling */
+[x-cloak] {
+  display: none !important;
+}
