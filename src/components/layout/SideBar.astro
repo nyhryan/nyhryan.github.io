@@ -41,13 +41,13 @@ const { currentCategory, currentTag } = Astro.props;
         .map((tag) => (
           <li
             class:list={[
-              "block min-w-[3ch] flex-grow rounded-md bg-ctp-overlay0/10 px-2 py-0.5 text-center text-base/tight ring ring-ctp-overlay0/40 transition duration-100 hover:bg-(--color-primary)/10 hover:text-(--color-primary) hover:ring-2 hover:ring-(--color-primary)/40",
-              { "bg-(--color-primary) text-(--color-text-inverse)": tag === currentTag },
+              "block flex-grow cursor-pointer rounded-md text-center text-base/tight ring ring-ctp-overlay0/40 transition duration-100 hover:bg-(--color-primary)/10 hover:text-(--color-primary) hover:ring-2 hover:ring-(--color-primary)/40",
+              { "bg-(--color-primary)/70 text-(--color-text-inverse)": tag === currentTag },
               { "bg-ctp-surface0/50": tag !== currentTag },
             ]}
             aria-current={tag === currentTag ? "page" : undefined}
           >
-            <a href={`/tag/${tag}`}>{tag}</a>
+            <a href={`/tag/${tag}`} class="block min-w-[3ch] px-2 py-0.5">{tag}</a>
           </li>
         ))
       }
