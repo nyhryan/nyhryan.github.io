@@ -3,7 +3,6 @@ const paths = Astro.url.pathname.split("/");
 const isPost = paths[1] === "blog";
 ---
 
-
 <div class="giscus">
   { isPost && (
     <script is:inline
