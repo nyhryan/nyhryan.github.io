@@ -1,8 +1,10 @@
 ---
 import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
+
+const { title, description } = Astro.props.frontmatter;
 ---
 
-<BaseBlogLayout title="About me" description="You can learn about me in this page.">
+<BaseBlogLayout title={title} description={description}>
   <div slot="main-content" class="rounded-(--card-radius) bg-(--card-color) p-4 shadow-sm/40 sm:p-6">
     <div class="prose prose-catppuccin">
       <slot />

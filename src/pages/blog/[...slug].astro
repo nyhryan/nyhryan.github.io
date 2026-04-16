@@ -1,4 +1,6 @@
 ---
+import "photoswipe/style.css";
+
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import { getCollection, render } from "astro:content";
 import BaseBlogLayout from "@layouts/BaseBlogLayout.astro";
@@ -59,7 +61,7 @@ const updatedDate = post.data.updatedDate ?? post.data.pubDate;
     </header>
     
     <!-- Main post content -->
-    <div class="prose prose-catppuccin">
+    <div id="markdown-content" class="prose prose-catppuccin">
       <Content />
     </div>
   </div>

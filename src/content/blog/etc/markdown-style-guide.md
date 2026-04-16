@@ -40,18 +40,6 @@ Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptio
 
 Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.
 
-## Image
-
-```markdown
-![Image](./attachments/fallback.jpg)
-_Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat._
-```
-
-### Output
-![Image](./attachments/fallback.jpg)
-_Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat._
-
-
 ## Callouts
 
 ```md
@@ -225,13 +213,19 @@ _Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is
 
 ### Syntax
 
-```markdown
-![Alt text](./full/or/relative/path/of/image)
+```markdown ins=/\{data-caption.+\}/
+![Alt text](./relative/path/of/image){data-aption='this is caption'}
 ```
+
+Add a caption below the image by appending `{data-caption='...'}` after image link. Make sure **not to insert any newline or whitespace** between image link and `{data-caption=...}`.
+
+You can click to view the larger image. Powered by [PhotoSwipe - JavaScript image gallery and lightbox](https://photoswipe.com/).
 
 ### Output
 
-asdf
+![Alt text](./attachments/fallback.jpg)         asdfasdfsdaf     Hello
+
+wtf
 
 ## Blockquotes
 

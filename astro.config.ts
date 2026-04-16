@@ -1,18 +1,20 @@
-import { defineConfig, fontProviders } from "astro/config";
-import sitemap from "@astrojs/sitemap";
-import astroExpressiveCode from "astro-expressive-code";
-import pluginCollapsible from "expressive-code-collapsible";
-import remarkMath from "remark-math";
-import { remarkCallout } from "@r4ai/remark-callout";
-import remarkCjkFriendly from "remark-cjk-friendly";
-import remarkGfmStrikethroughCjkFriendly from "remark-cjk-friendly-gfm-strikethrough";
-import rehypeMathJaxChtml from "rehype-mathjax/chtml";
-import rehypeExternalLinks from "rehype-external-links";
-import { remarkObsidianLink } from "./src/libs/remarkObsidianLink";
+import alpinejs from "@astrojs/alpinejs";
 import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
+import { remarkCallout } from "@r4ai/remark-callout";
 import swup from "@swup/astro";
 import tailwindcss from "@tailwindcss/vite";
-import alpinejs from "@astrojs/alpinejs";
+import astroExpressiveCode from "astro-expressive-code";
+import { defineConfig, fontProviders } from "astro/config";
+import pluginCollapsible from "expressive-code-collapsible";
+import rehypeExternalLinks from "rehype-external-links";
+import rehypeMathJaxChtml from "rehype-mathjax/chtml";
+import remarkAttributes from "remark-attributes";
+import remarkCjkFriendly from "remark-cjk-friendly";
+import remarkGfmStrikethroughCjkFriendly from "remark-cjk-friendly-gfm-strikethrough";
+import remarkMath from "remark-math";
+import rehypeImageFigureWrapper from "./src/libs/rehype-image-figure-wrapper";
+import { remarkObsidianLink } from "./src/libs/remark-obsidian-link";
 
 export default defineConfig({
   site: "https://blog.ataidev.cc",
@@ -98,12 +100,10 @@ export default defineConfig({
 
   // trailingSlash: "always",
   integrations: [
-    alpinejs({
-      entrypoint: "./src/alpine.entrypoint.ts",
-    }),
+    alpinejs({ entrypoint: "./src/alpine.entrypoint.ts" }),
     astroExpressiveCode({
       themes: ["catppuccin-mocha"],
-      styleOverrides: { 
+      styleOverrides: {
         uiFontFamily: "'Chiron GoRound TC', sans-serif",
         codeFontFamily: "'Cascadia Code', 'GulimChe', monospace" 
       },
@@ -136,6 +136,7 @@ export default defineConfig({
       remarkCallout,
       remarkCjkFriendly,
       remarkGfmStrikethroughCjkFriendly,
+      remarkAttributes,
     ],
     rehypePlugins: [
       [
@@ -154,10 +155,14 @@ export default defineConfig({
             type: "text",
             value: " 🔗",
           },
+          properties: {
+            "data-external-link": "true",
+          },
           target: "_blank",
           rel: ["noopener", "noreferrer"],
         }
-      ]
+      ],
+      rehypeImageFigureWrapper,
     ],
   },
 

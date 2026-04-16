@@ -1,0 +1,44 @@
+---
+
+---
+
+<script>
+  import { bindSwupHook } from "@utils/swup";
+  import PhotoSwipeLightBox from "photoswipe/lightbox";
+
+  function initPhotoSwipe() {
+    // Only run in markdown content pages
+    if (!document.querySelector("#markdown-content")) return;
+
+    const imageAnchors = document.querySelectorAll<HTMLAnchorElement>("a[data-photo-swipe]");   
+    if (imageAnchors.length === 0) return;
+
+    imageAnchors.forEach((anchor) => {
+      const img = anchor.querySelector("img");
+      if (!img) return;
+
+      // Set photoswipe <a> element's href to the image inside the anchor
+      const w = img.getAttribute("width")!;
+      const h = img.getAttribute("height")!;
+      anchor.setAttribute("href", img.src);
+      anchor.setAttribute("data-pswp-width", w);
+      anchor.setAttribute("data-pswp-height", h);
+    });
+
+    // Initialize PhotoSwipe
+    (new PhotoSwipeLightBox({
+      gallery: "#markdown-content",
+      children: "a[data-photo-swipe]",
+
+      mouseMovePan: true,
+
+      initialZoomLevel: 'fit',
+      secondaryZoomLevel: 1.5,
+      maxZoomLevel: 1,
+
+      pswpModule: () => import("photoswipe")
+    })).init();
+  }
+
+  bindSwupHook("page:view", initPhotoSwipe);
+</script>

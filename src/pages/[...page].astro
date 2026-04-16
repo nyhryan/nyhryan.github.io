@@ -14,7 +14,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 ---
 
-<BaseBlogLayout noindex={page.currentPage !== 1} currentCategory={null} currentTag={null}>
+<BaseBlogLayout title="Blog articles"  noindex={page.currentPage !== 1} currentCategory={null} currentTag={null}>
   <div slot="main-content" class="mb-4 flex flex-col gap-y-4">
     <h1 class="sr-only">List of all posts</h1>
     {page.data.map((post) => <PostCardItem {...post} />)}

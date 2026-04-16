@@ -3,5 +3,6 @@
   "cssTheme": "Minimal",
   "interfaceFontFamily": "Cascadia Mono",
   "monospaceFontFamily": "Cascadia Mono",
-  "baseFontSizeAction": false
+  "baseFontSizeAction": false,
+  "theme": "moonstone"
 }

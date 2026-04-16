@@ -33,9 +33,6 @@
   --card-color: var(--color-background-light);
 }
 
-@layer components {
-}
-
 @utility anchor-link {
   @apply text-(--color-primary) underline cursor-pointer;
 
@@ -60,7 +57,7 @@
 
 .expressive-code {
   /* Block fake italics in code block (for Korean fallback font) */
-  font-synthesis-style: none;
+  font-synthesis-style: none !important;
 }
 
 /* Alpine JS styling */

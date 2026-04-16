@@ -1,4 +1,6 @@
 ---
+import { ChevronDown } from "@lucide/astro";
+
 type Props = {
   title: string;
   id: string;
@@ -26,20 +28,15 @@ const { title, id, open = false, class: className } = Astro.props;
       ? 'rounded-[var(--card-radius)_var(--card-radius)_0_0] border-b border-ctp-surface0'\
       : 'rounded-[var(--card-radius)_var(--card-radius)_var(--card-radius)_var(--card-radius)] border-b border-transparent'`}
     x-on:click.debounce.100ms={`$store.${id}.toggle()`}
-    class="flex w-full cursor-pointer justify-between bg-(--color-background-light)  p-4 transition-[background-color,color,border-radius,border-color] duration-100 hover:bg-(--color-primary)/10! hover:text-(--color-primary)! hover:ring hover:ring-(--color-primary)/40" 
+    class="flex w-full cursor-pointer justify-between bg-(--color-background-light) items-center p-4 transition-[background-color,color,border-radius,border-color] duration-100 hover:bg-(--color-primary)/10! hover:text-(--color-primary)! hover:ring hover:ring-(--color-primary)/40" 
     x-bind:aria-expanded={`$store.${id}.open ? 'true' : 'false'`}
     aria-controls={`accordion-${id}-content`}
     >
     <span class="text-xl font-bold">{title}</span>
-    <svg
+    <ChevronDown 
       x-bind:class={`$store.${id}.open ? 'rotate-180' : ''`}
-      class="my-auto block h-5 w-5 fill-current transition-transform"
-      viewBox="0 0 20 20"
-      role="img"
-    >
-      <title>Open or close accordion</title>
-      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-    </svg>
+      class="size-5 transition-transform"
+    />
   </button>
 
   <div id={`accordion-${id}-content`} x-show={`$store.${id}.open`} x-collapse x-cloak>
@@ -53,7 +50,7 @@ const { title, id, open = false, class: className } = Astro.props;
   import Alpine from "alpinejs";
 
   function initAccordions() {
-    document.querySelectorAll("div.accordion-wrapper").forEach((accordion) => {
+    document.querySelectorAll<HTMLDivElement>("div.accordion-wrapper").forEach((accordion) => {
       // Setup Alpinjs global state for each accordions
       const data = {
         open: Boolean(accordion.getAttribute("data-default-open")),

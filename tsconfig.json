@@ -1,14 +1,16 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "src/env.d.ts", "**/*"],
-  "exclude": ["dist", "public", ".obsidian"],
+  "exclude": ["dist", "public", ".obsidian", ".vscode"],
   "compilerOptions": {
+    "types": ["bun"],
     "plugins": [
       { "name": "@astrojs/ts-plugin" },
     ],
     "paths": {
       "@components/*": ["./src/components/*"],
       "@layouts/*": ["./src/layouts/*"],
+      "@libs/*": ["./src/libs/*"],
       "@styles/*": ["./src/styles/*"],
       "@utils/*": ["./src/utils/*"],
       "@consts": ["./src/consts.ts"],

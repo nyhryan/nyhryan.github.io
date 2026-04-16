@@ -41,7 +41,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page, categoryName, fullCategoryPath } = Astro.props;
 ---
 
-<BaseBlogLayout noindex={true} currentCategory={categoryName}>
+<BaseBlogLayout noindex={true} currentCategory={categoryName} title={`Category:${categoryName}`}>
   <div slot="main-content">
     <!-- Category title -->
     <h1 class="mb-4 text-center font-chiron text-4xl font-black">

@@ -2,14 +2,6 @@ export type BlogTheme = "light" | "dark";
 
 const THEME_TOGGLE_EVENT = "theme-toggle";
 
-class ThemeToggleEvent extends Event {
-  public readonly theme: BlogTheme;
-  constructor(theme: BlogTheme) {
-    super(THEME_TOGGLE_EVENT);
-    this.theme = theme;
-  }
-}
-
 export function getCurrentTheme(): BlogTheme {
   const localTheme = localStorage.getItem("theme");
   if (localTheme === "dark" || localTheme === "light") {
@@ -20,15 +12,6 @@ export function getCurrentTheme(): BlogTheme {
   const defaultTheme = prefersLightScheme ? "light" : "dark";
   localStorage.setItem("theme", defaultTheme);
   return defaultTheme;
-}
-
-export function loadTheme(d: Document): void {
-  const currentTheme = getCurrentTheme();
-  if (currentTheme === "light") {
-    d.documentElement.classList.add("latte");
-  } else {
-    d.documentElement.classList.remove("latte");
-  }
 }
 
 export function toggleTheme(): void {
@@ -42,7 +25,7 @@ export function toggleTheme(): void {
   const newTheme = currentTheme === "dark" ? "light" : "dark"
   localStorage.setItem("theme", newTheme);
 
-  window.dispatchEvent(new ThemeToggleEvent(newTheme));
+  window.dispatchEvent(new CustomEvent(THEME_TOGGLE_EVENT, { detail: { theme: newTheme } }));
 }
 
 export function updateGiscus(theme: BlogTheme) {
@@ -65,8 +48,8 @@ export function updateGiscus(theme: BlogTheme) {
 
 export function initGiscusThemeSync() {
   window.addEventListener(THEME_TOGGLE_EVENT, (event) => {
-    if (event instanceof ThemeToggleEvent) {
-      updateGiscus(event.theme);
+    if (event instanceof CustomEvent) {
+      updateGiscus(event.detail.theme);
     }
   });
 

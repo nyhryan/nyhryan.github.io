@@ -1,9 +1,10 @@
 ---
+import SideBar from "@components/layout/SideBar.astro";
+import { House } from "@lucide/astro";
+import { buildCategoryTree } from "@utils/categoryTree";
 import type { ComponentProps } from "astro/types";
 import { getCollection } from "astro:content";
-import { buildCategoryTree } from "@utils/categoryTree";
 import CategoryTreeItem from "./CategoryTreeItem.astro";
-import SideBar from "@components/layout/SideBar.astro";
 
 const allPosts = await getCollection("blog");
 const tree = buildCategoryTree(allPosts);
@@ -14,40 +15,29 @@ type Props = Pick<ComponentProps<typeof SideBar>, "currentCategory"> & {
 const { currentCategory, isHome } = Astro.props;
 ---
 
-<ul class="ml-4">
+<ul class="">
   <!-- All Posts -->
-  <li class="relative -ml-3">
-    <div class="max-w-fit">
-
+  <li class="relative">
     <a
       href="/"
       class:list={[
-        "group bg-ctp-base hover:text-(--color-primary) hover:underline hover:decoration-(--color-primary)",
+        "group h-6 group flex flex-row items-center justify-start gap-1 bg-ctp-base hover:text-(--color-primary) hover:underline hover:decoration-(--color-primary)",
         { "font-bold text-(--color-primary) underline decoration-(--color-primary)": isHome },
         { "font-normal text-ctp-text no-underline": !isHome },
       ]}
       aria-current={isHome ? "page" : undefined}
     >
-    <div class="flex max-w-fit flex-row items-center justify-start">
-      <div class="z-2 bg-(--card-color)">
-        <svg
-          class:list={[
-            "relative h-4 w-4 group-hover:fill-current", 
-            { "fill-(--color-primary)": isHome }, 
-            { "fill-(--color-text)": !isHome }
-            ]}
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 16 16"
-          aria-hidden="true"
-        >
-          <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
-        </svg>
+      <div class="bg-(--card-color) z-5">
+        <House 
+        class:list={[
+          "relative size-4 group-hover:text-current", 
+          { "text-(--color-primary)": isHome }, 
+          { "text-(--color-text)": !isHome }
+          ]}
+      />
       </div>
       <span>All posts</span>
-    </div>
     </a>
-        </div>
-
   </li>
   <!-- Treelist of category -->
   {

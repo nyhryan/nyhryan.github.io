@@ -37,7 +37,7 @@ const { tag } = Astro.params;
 const { page } = Astro.props;
 ---
 
-<BaseBlogLayout noindex={true} currentTag={tag}>
+<BaseBlogLayout  title={`Tag: ${tag}`}  noindex={true} currentTag={tag}>
   <div slot="main-content">
     <!-- Tag title -->
     <h1 class="mb-4 text-center font-chiron text-4xl font-black">

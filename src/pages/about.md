@@ -1,5 +1,7 @@
 ---
 layout: ../layouts/MarkdownLayout.astro
+title: About
+description: You can learn about me in this page.
 ---
 
 # About

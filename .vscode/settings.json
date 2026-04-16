@@ -2,6 +2,16 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
+  "js/ts.preferences.autoImportFileExcludePatterns": [
+    "@lucide/astro"
+  ],
   "todo-tree.tree.showBadges": true,
-  "todo-tree.tree.disableCompactFolders": true
+  "todo-tree.tree.disableCompactFolders": true,
+  "[javascript][typescript][javascriptreact][typescriptreact]": {
+    "editor.maxTokenizationLineLength": 2500,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always",
+      "source.removeUnusedImports": "always"
+    }
+  }
 }

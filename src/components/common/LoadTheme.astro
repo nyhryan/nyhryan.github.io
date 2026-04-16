@@ -2,12 +2,24 @@
 
 ---
 
-{/* Load light/darkmode after DOMcontent is loaded */}
-<script>
-  import { loadTheme } from "@utils/themeManager";
-
-  document.addEventListener("DOMContentLoaded", ({ target }) => {
-    const doc = (target instanceof Document) ? target : document;
-    loadTheme(doc);
-  });
+{/* Load the theme before the webpage fully loads */}
+<script is:inline>
+  (function() {
+    function getTheme() {
+      const localTheme = localStorage.getItem("theme");
+      if (localTheme === "dark" || localTheme === "light") {
+        return localTheme;
+      }
+  
+      const defaultTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      localStorage.setItem("theme", defaultTheme);
+      return defaultTheme;
+    }
+    const currentTheme = getTheme();
+    if (currentTheme === "light") {
+      document.documentElement.classList.add("latte");
+    } else {
+      document.documentElement.classList.remove("latte");
+    }
+  })();
 </script>
